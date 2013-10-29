@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MobAppDev</string>
+    <string name="ueb01_backbt">Delete</string>
+    <string name="ueb01_1">1</string>
+    <string name="ueb01_2">2</string>
+    <string name="ueb01_3">3</string>
+    <string name="ueb01_4">4</string>
+    <string name="ueb01_5">5</string>
+    <string name="ueb01_6">6</string>
+    <string name="ueb01_7">7</string>
+    <string name="ueb01_8">8</string>
+    <string name="ueb01_9">9</string>
+    <string name="ueb01_0">0</string>
+    <string name="ueb01_komma">.</string>
+    <string name="ueb01_equals">=</string>
+    <string name="ueb01_plus">+</string>
+    <string name="ueb01_minus">-</string>
+    <string name="ueb01_x">x</string>
+    <string name="ueb01_x_calc">*</string>
+    <string name="ueb01_divide">/</string>
+    <string name="ueb01_wrongInput">Eingabe Fehlerhaft!</string>
+
+    
+
+
+</resources>
