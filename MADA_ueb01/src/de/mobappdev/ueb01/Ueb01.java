@@ -1,14 +1,16 @@
 package de.mobappdev.ueb01;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.mobappdev.R;
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class Ueb01 extends Activity {
 
@@ -42,10 +44,13 @@ public class Ueb01 extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		getActionBar().setDisplayShowHomeEnabled(false);
+		setTitle(getString(R.string.app_title));
+		
 		setContentView(R.layout.activity_ueb01);
 
 		referenceViews();
-
 		setListeners();
 		
 		error = false;

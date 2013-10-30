@@ -14,7 +14,7 @@
         android:padding="@dimen/ueb01_calcField"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:maxLines="@string/ueb01_max_lines"
+        android:maxLines="@string/ueb01_max_input_lines"
         android:freezesText="true" />
 
     <RelativeLayout
