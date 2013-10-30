@@ -22,7 +22,7 @@
     <string name="ueb01_divide">/</string>
     <string name="ueb01_wrongInput">Eingabe Fehlerhaft!</string>
 
-    
+    <string name="ueb01_max_lines">3</string>
 
 
 </resources>
