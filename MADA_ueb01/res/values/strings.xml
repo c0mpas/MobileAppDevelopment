@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Calculator</string>
-    <string name="app_title">&#160;&#160;&#160;MobAppDev - Calculator&#160;</string>
     
     <string name="ueb01_max_input_lines">3</string>
     <string name="ueb01_backbt">Delete</string>
