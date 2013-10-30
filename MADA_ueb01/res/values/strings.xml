@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobAppDev</string>
+    <string name="app_name">Calculator</string>
     <string name="app_title">&#160;&#160;&#160;MobAppDev - Calculator&#160;</string>
     
     <string name="ueb01_max_input_lines">3</string>
