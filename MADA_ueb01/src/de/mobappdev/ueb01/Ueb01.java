@@ -45,7 +45,6 @@ public class Ueb01 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		//getActionBar().setDisplayShowHomeEnabled(false);
 		setTitle(getString(R.string.app_title));
 		
 		setContentView(R.layout.activity_ueb01);
