@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,17 +31,58 @@ public class Ueb01 extends Activity {
 	private TextView txt9;
 	private TextView txt0;
 	private TextView txtPlus;
-	private TextView txtMultipli;
+	private TextView txtMul;
 	private TextView txtMinus;
-	private TextView txtDivide;
+	private TextView txtDiv;
 	private TextView txtPoint;
 	private TextView txtEquals;
 	private ImageView backImg;
 	
 	// Fuer die Reaktion auf fehlerhafte Eingaben
 	private boolean error;
-
 	
+	
+	private OnClickListener generalButtonListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+    		switch (v.getId()) {
+	    		case R.id.ueb01_1:		addToCalcField(getString(R.string.ueb01_1));
+	    								break;
+	    		case R.id.ueb01_2:		addToCalcField(getString(R.string.ueb01_2));
+										break;
+	    		case R.id.ueb01_3:		addToCalcField(getString(R.string.ueb01_3));
+										break;
+	    		case R.id.ueb01_4:		addToCalcField(getString(R.string.ueb01_4));
+										break;
+	    		case R.id.ueb01_5:		addToCalcField(getString(R.string.ueb01_5));
+										break;
+	    		case R.id.ueb01_6:		addToCalcField(getString(R.string.ueb01_6));
+										break;
+	    		case R.id.ueb01_7:		addToCalcField(getString(R.string.ueb01_7));
+										break;
+	    		case R.id.ueb01_8:		addToCalcField(getString(R.string.ueb01_8));
+										break;
+	    		case R.id.ueb01_9:		addToCalcField(getString(R.string.ueb01_9));
+										break;
+	    		case R.id.ueb01_0:		addToCalcField(getString(R.string.ueb01_0));
+										break;
+	    		case R.id.ueb01_minus:	addToCalcField(getString(R.string.ueb01_minus));
+										break;
+	    		case R.id.ueb01_plus:	addToCalcField(getString(R.string.ueb01_plus));
+										break;
+	    		case R.id.ueb01_mul:	addToCalcField(getString(R.string.ueb01_mul));
+										break;
+	    		case R.id.ueb01_divide:	addToCalcField(getString(R.string.ueb01_divide));
+										break;
+	    		default:				// Do nothing
+										break;
+	    	}
+		}
+		
+	};
+	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +100,6 @@ public class Ueb01 extends Activity {
 	 *  Referenziert die Java-Variablen mit dem entsprechendem Objekt in der XML-Datei
 	 */
 	private void referenceViews() {
-
 		calcField = (TextView) findViewById(R.id.ueb01_calcTextField);
 		txt1 = (TextView) findViewById(R.id.ueb01_1);
 		txt2 = (TextView) findViewById(R.id.ueb01_2);
@@ -72,12 +113,11 @@ public class Ueb01 extends Activity {
 		txt0 = (TextView) findViewById(R.id.ueb01_0);
 		txtMinus = (TextView) findViewById(R.id.ueb01_minus);
 		txtPlus = (TextView) findViewById(R.id.ueb01_plus);
-		txtMultipli = (TextView) findViewById(R.id.ueb01_x);
-		txtDivide = (TextView) findViewById(R.id.ueb01_divide);
+		txtMul = (TextView) findViewById(R.id.ueb01_mul);
+		txtDiv = (TextView) findViewById(R.id.ueb01_divide);
 		txtPoint = (TextView) findViewById(R.id.ueb01_komma);
 		txtEquals = (TextView) findViewById(R.id.ueb01_equals);
 		backImg = (ImageView) findViewById(R.id.ueb01_backBT);
-
 	}
 
 	/**
@@ -86,123 +126,31 @@ public class Ueb01 extends Activity {
 	 */
 	private void setListeners() {
 
-		txt1.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_1));
-			}
-		});
+		txt1.setOnClickListener(generalButtonListener);
+		txt2.setOnClickListener(generalButtonListener);
+		txt3.setOnClickListener(generalButtonListener);
+		txt4.setOnClickListener(generalButtonListener);
+		txt5.setOnClickListener(generalButtonListener);
+		txt6.setOnClickListener(generalButtonListener);
+		txt7.setOnClickListener(generalButtonListener);
+		txt8.setOnClickListener(generalButtonListener);
+		txt9.setOnClickListener(generalButtonListener);
+		txt0.setOnClickListener(generalButtonListener);
 		
-		txt2.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_2));
-			}
-		});
-		
-		txt3.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_3));
-			}
-		});
-		
-		txt4.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_4));
-			}
-		});
-		
-		txt5.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_5));
-			}
-		});
-		
-		txt6.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_6));
-			}
-		});
-		
-		txt7.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_7));
-			}
-		});
-		
-		txt8.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_8));
-			}
-		});
-		
-		txt9.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_9));
-			}
-		});
-		
-		txt0.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_0));
-			}
-		});
-		
-		txtMinus.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_minus));
-			}
-		});
-		
-		txtPlus.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_plus));
-			}
-		});
-		
-		txtMultipli.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_x));
-			}
-		});
-		
-		txtDivide.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_divide));
-			}
-		});
+		txtMinus.setOnClickListener(generalButtonListener);
+		txtPlus.setOnClickListener(generalButtonListener);
+		txtMul.setOnClickListener(generalButtonListener);
+		txtDiv.setOnClickListener(generalButtonListener);
 		
 		txtPoint.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				addToCalcField(getString(R.string.ueb01_komma));
+				if (calcField.length() < 1) {
+					addToCalcField(getString(R.string.ueb01_0) + getString(R.string.ueb01_komma));
+				} else {
+					addToCalcField(getString(R.string.ueb01_komma));
+				}
 			}
 		});
 
@@ -239,7 +187,7 @@ public class Ueb01 extends Activity {
 				try {
 					// Uebergibt den mathematischen Ausdruck der Calc-Library 
 					calc = new ExpressionBuilder(calcField.getText().toString()
-								.replace(getString(R.string.ueb01_x), getString(R.string.ueb01_x_calc))).build();
+								.replace(getString(R.string.ueb01_mul), getString(R.string.ueb01_mul_calc))).build();
 					Double result = calc.calculate();
 					
 					// Schreibt das Ergebnis in das Ergebnis-Textfeld

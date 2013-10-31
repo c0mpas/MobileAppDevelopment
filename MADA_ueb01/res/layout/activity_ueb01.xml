@@ -126,14 +126,14 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/ueb01_x"
+                android:id="@+id/ueb01_mul"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/ueb01_bt_margin"
                 android:background="@color/ueb01_btClac"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_x"
+                android:text="@string/ueb01_mul"
                 android:textColor="@color/ueb02_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>

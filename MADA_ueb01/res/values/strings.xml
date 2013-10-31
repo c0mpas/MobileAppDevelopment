@@ -19,11 +19,9 @@
     <string name="ueb01_equals">=</string>
     <string name="ueb01_plus">+</string>
     <string name="ueb01_minus">-</string>
-    <string name="ueb01_x">x</string>
-    <string name="ueb01_x_calc">*</string>
+    <string name="ueb01_mul">x</string>
+    <string name="ueb01_mul_calc">*</string>
     <string name="ueb01_divide">/</string>
     <string name="ueb01_wrongInput">Eingabe Fehlerhaft!</string>
-
-
-
+    
 </resources>
