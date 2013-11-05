@@ -22,7 +22,15 @@
     <string name="ueb01_mul">x</string>
     <string name="ueb01_mul_calc">*</string>
     <string name="ueb01_divide">/</string>
-    <string name="ueb01_wrongInput">Eingabe Fehlerhaft!</string>
+    <string name="ueb01_lpar">(</string>
+    <string name="ueb01_rpar">)</string>
+    <string name="ueb01_mod">%</string>
+    <string name="ueb01_pow">^</string>
+    <string name="ueb01_sin">sin</string>
+    <string name="ueb01_cos">cos</string>
+    <string name="ueb01_tan">tan</string>
+    <string name="ueb01_sqrt">sqrt</string>
+    <string name="ueb01_wrongInput">Eingabe fehlerhaft!</string>
     
     <!-- layout -->
     <string name="normal_port">normal-port</string>

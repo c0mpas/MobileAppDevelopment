@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ueb01_btNumber">#CCCCCC</color>
-    <color name="ueb01_btClac">#525454</color>
+    <color name="ueb01_btCalc">#525454</color>
     <color name="ueb01_btEquals">#e76802</color>
     <color name="ueb01_back">#00375A</color>
     <color name="ueb02_btFontWhite">#FFFFFF</color>
