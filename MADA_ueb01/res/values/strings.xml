@@ -24,4 +24,10 @@
     <string name="ueb01_divide">/</string>
     <string name="ueb01_wrongInput">Eingabe Fehlerhaft!</string>
     
+    <!-- layout -->
+    <string name="normal_port">normal-port</string>
+    <string name="normal_land">normal-land</string>
+    <string name="xlarge_port">xlarge-port</string>
+    <string name="xlarge_land">xlarge-land</string>
+    
 </resources>
