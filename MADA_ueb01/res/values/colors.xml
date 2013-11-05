@@ -4,6 +4,7 @@
     <color name="ueb01_btCalc">#525454</color>
     <color name="ueb01_btEquals">#e76802</color>
     <color name="ueb01_back">#00375A</color>
-    <color name="ueb02_btFontWhite">#FFFFFF</color>
+    <color name="ueb01_btFontWhite">#FFFFFF</color>
+    <color name="ueb01_black">#000000</color>
     
 </resources>

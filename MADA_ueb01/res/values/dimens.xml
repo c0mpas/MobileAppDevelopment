@@ -5,6 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="ueb01_padding_bt">8dp</dimen>
     <dimen name="ueb01_bt_margin">2dp</dimen>
-    <dimen name="ueb01_calcField">8dp</dimen>
+    <dimen name="ueb01_calcField">16dp</dimen>
 
 </resources>

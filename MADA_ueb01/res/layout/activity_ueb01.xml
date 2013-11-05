@@ -18,26 +18,35 @@
         android:minLines="2"
         android:freezesText="true" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ueb01_back" >
-
-        <ImageView
-            android:id="@+id/ueb01_backBT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/ueb01_backbt"
-            android:src="@drawable/ueb01_backbt" />
-    
-    </RelativeLayout>
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="*" >
 
+		<TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+		    <TextView
+            android:id="@+id/ueb01_emptyBT_01"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/ueb01_bt_margin"
+            android:background="@color/ueb01_back"
+            android:layout_span="3" />
+		    
+		    <ImageView
+            android:id="@+id/ueb01_backBT"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/ueb01_bt_margin"
+            android:background="@color/ueb01_back"
+            android:contentDescription="@string/ueb01_backbt"
+            android:src="@drawable/ueb01_backbt" />
+		    
+        </TableRow>
+        
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +61,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_lpar"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -64,7 +73,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_rpar"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -76,7 +85,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_mod"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -88,7 +97,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_pow"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
         </TableRow>
@@ -140,7 +149,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_divide"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
         </TableRow>
@@ -192,7 +201,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_mul"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
         </TableRow>
@@ -244,7 +253,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_minus"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
         </TableRow>
@@ -285,7 +294,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_equals"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -297,7 +306,7 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_plus"
-                android:textColor="@color/ueb02_btFontWhite"
+                android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
         </TableRow>

@@ -62,7 +62,7 @@ public class Ueb01 extends Activity {
 		setContentView(R.layout.activity_ueb01);
 		conf = getResources().getConfiguration();
 
-		referenceViews();
+		referenceMainViews();
 		setMainListeners();
 		
 		switch (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
@@ -70,9 +70,11 @@ public class Ueb01 extends Activity {
 															break;
 			case Configuration.SCREENLAYOUT_SIZE_NORMAL:	inflateAdditionalMenu();
 															break;
-			case Configuration.SCREENLAYOUT_SIZE_LARGE:		setAdditionalListeners();
+			case Configuration.SCREENLAYOUT_SIZE_LARGE:		referenceAdditionalViews();
+															setAdditionalListeners();
 															break;
-			case Configuration.SCREENLAYOUT_SIZE_XLARGE:	setAdditionalListeners();
+			case Configuration.SCREENLAYOUT_SIZE_XLARGE:	referenceAdditionalViews();
+															setAdditionalListeners();
 															break;
 			default :										inflateAdditionalMenu();
 															break;
@@ -130,7 +132,6 @@ public class Ueb01 extends Activity {
 	private OnClickListener extendedButtonListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-    		/*
     		switch (v.getId()) {
 	    		case R.id.ueb01_sin:	addToCalcField(getString(R.string.ueb01_sin));
 	    								break;
@@ -143,7 +144,6 @@ public class Ueb01 extends Activity {
 	    		default:				// Do nothing
 										break;
 	    	}
-	    	*/
     		addToCalcField(getString(R.string.ueb01_lpar));
 		}
 	};
@@ -152,7 +152,7 @@ public class Ueb01 extends Activity {
 	/**
 	 *  Referenziert die Java-Variablen mit dem entsprechendem Objekt in der XML-Datei
 	 */
-	private void referenceViews() {
+	private void referenceMainViews() {
 		calcField = (TextView) findViewById(R.id.ueb01_calcTextField);
 		txt1 = (TextView) findViewById(R.id.ueb01_1);
 		txt2 = (TextView) findViewById(R.id.ueb01_2);
@@ -175,6 +175,14 @@ public class Ueb01 extends Activity {
 		txtPoint = (TextView) findViewById(R.id.ueb01_komma);
 		txtEquals = (TextView) findViewById(R.id.ueb01_equals);
 		backImg = (ImageView) findViewById(R.id.ueb01_backBT);
+	}
+	
+	
+	private void referenceAdditionalViews() {
+		txtSin = (TextView) findViewById(R.id.ueb01_sin);
+		txtCos = (TextView) findViewById(R.id.ueb01_cos);
+		txtTan = (TextView) findViewById(R.id.ueb01_tan);
+		txtSqrt = (TextView) findViewById(R.id.ueb01_sqrt);
 	}
 
 

@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/ueb01_bt_margin"
             android:background="@color/ueb01_back"
-            android:layout_span="3" />
+            android:layout_span="4" />
 		    
 		    <ImageView
             android:id="@+id/ueb01_backBT"
@@ -53,6 +53,15 @@
             android:layout_weight="1" >
 
             <TextView
+                android:id="@+id/ueb01_emptyBT_02"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_black"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt" />
+			
+			<TextView
                 android:id="@+id/ueb01_lpar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -63,7 +72,7 @@
                 android:text="@string/ueb01_lpar"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
+			
             <TextView
                 android:id="@+id/ueb01_rpar"
                 android:layout_width="wrap_content"
@@ -107,6 +116,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" >
 
+            <TextView
+                android:id="@+id/ueb01_sin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btNumber"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_sin"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
             <TextView
                 android:id="@+id/ueb01_7"
                 android:layout_width="wrap_content"
@@ -160,6 +180,17 @@
             android:layout_weight="1" >
 
             <TextView
+                android:id="@+id/ueb01_cos"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btNumber"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_cos"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
                 android:id="@+id/ueb01_4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -212,6 +243,17 @@
             android:layout_weight="1" >
 
             <TextView
+                android:id="@+id/ueb01_tan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btNumber"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_tan"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
                 android:id="@+id/ueb01_1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -263,6 +305,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" >
 
+            <TextView
+                android:id="@+id/ueb01_sqrt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btNumber"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_sqrt"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
             <TextView
                 android:id="@+id/ueb01_komma"
                 android:layout_width="wrap_content"
