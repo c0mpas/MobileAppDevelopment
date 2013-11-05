@@ -28,70 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" >
 
-			<TextView
-                android:id="@+id/ueb01_lpar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_lpar"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-			
-            <TextView
-                android:id="@+id/ueb01_rpar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_rpar"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/ueb01_mod"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_mod"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/ueb01_pow"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_pow"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-		    <ImageView
-	            android:id="@+id/ueb01_backBT"
-	            android:layout_width="wrap_content"
-	            android:layout_height="match_parent"
-	            android:layout_margin="@dimen/ueb01_bt_margin"
-	            android:background="@color/ueb01_back"
-	            android:contentDescription="@string/ueb01_backbt"
-	            android:src="@drawable/ueb01_backbt" />
-		    
-        </TableRow>
-        
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
             <TextView
                 android:id="@+id/ueb01_7"
                 android:layout_width="wrap_content"
@@ -125,30 +61,16 @@
                 android:text="@string/ueb01_9"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/ueb01_divide"
+            <ImageView
+                android:id="@+id/ueb01_backBT"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_divide"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:layout_span="4"
+                android:background="@color/ueb01_back"
+                android:contentDescription="@string/ueb01_backbt"
+                android:src="@drawable/ueb01_backbt" />
         
-            <TextView
-                android:id="@+id/ueb01_sin"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/ueb01_bt_margin"
-                android:background="@color/ueb01_btCalc"
-                android:gravity="center"
-                android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_sin"
-                android:textColor="@color/ueb01_btFontWhite"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-            
         </TableRow>
 
         <TableRow
@@ -189,18 +111,42 @@
                 android:text="@string/ueb01_6"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/ueb01_mul"
+			<TextView
+                android:id="@+id/ueb01_lpar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/ueb01_bt_margin"
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_mul"
+                android:text="@string/ueb01_lpar"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-        
+			
+            <TextView
+                android:id="@+id/ueb01_rpar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_rpar"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
+                android:id="@+id/ueb01_sin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_sin"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
             <TextView
                 android:id="@+id/ueb01_cos"
                 android:layout_width="wrap_content"
@@ -266,6 +212,18 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
             <TextView
+                android:id="@+id/ueb01_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_divide"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
                 android:id="@+id/ueb01_tan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -274,6 +232,18 @@
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
                 android:text="@string/ueb01_tan"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <TextView
+                android:id="@+id/ueb01_sqrt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_sqrt"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
             
@@ -331,17 +301,41 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         
             <TextView
-                android:id="@+id/ueb01_sqrt"
+                android:id="@+id/ueb01_mul"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/ueb01_bt_margin"
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
-                android:text="@string/ueb01_sqrt"
+                android:text="@string/ueb01_mul"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-            
+		    
+            <TextView
+                android:id="@+id/ueb01_mod"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_mod"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/ueb01_pow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ueb01_bt_margin"
+                android:background="@color/ueb01_btCalc"
+                android:gravity="center"
+                android:padding="@dimen/ueb01_padding_bt"
+                android:text="@string/ueb01_pow"
+                android:textColor="@color/ueb01_btFontWhite"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        
         </TableRow>
 
     </TableLayout>
