@@ -7,6 +7,7 @@
     <dimen name="ueb01_bt_margin">2dp</dimen>
     <dimen name="ueb01_calcField">16dp</dimen>
     <dimen name="ueb01_calcField_large">32dp</dimen>
+    <dimen name="ueb01_medium_text">32dp</dimen>
     <dimen name="ueb01_large_text">64dp</dimen>
 
 </resources>

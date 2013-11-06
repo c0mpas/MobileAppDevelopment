@@ -37,6 +37,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_7"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -48,6 +49,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_8"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -59,6 +61,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_9"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -87,6 +90,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_4"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -98,6 +102,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_5"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -109,6 +114,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_6"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -120,6 +126,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_lpar"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -132,6 +139,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_rpar"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -144,6 +152,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_sin"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -156,6 +165,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_cos"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -175,6 +185,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_1"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -186,6 +197,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_2"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -197,6 +209,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_3"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -208,6 +221,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_minus"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -220,6 +234,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_divide"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -232,6 +247,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_tan"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -244,6 +260,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_sqrt"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -263,6 +280,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_komma"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -274,6 +292,7 @@
                 android:background="@color/ueb01_btNumber"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_0"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -285,6 +304,7 @@
                 android:background="@color/ueb01_btEquals"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_equals"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -297,6 +317,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_plus"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -309,6 +330,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_mul"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -321,6 +343,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_mod"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -333,6 +356,7 @@
                 android:background="@color/ueb01_btCalc"
                 android:gravity="center"
                 android:padding="@dimen/ueb01_padding_bt"
+                android:textSize="@dimen/ueb01_medium_text"
                 android:text="@string/ueb01_pow"
                 android:textColor="@color/ueb01_btFontWhite"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
