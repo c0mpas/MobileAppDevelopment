@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/menu_item_more"
+        android:title="@string/ueb01_menu_item_more"
+        android:showAsAction="never" >
+    	<menu>
+		    <item
+		        android:id="@+id/menu_item_sin"
+		        android:title="@string/ueb01_menu_item_sin"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_cos"
+		        android:title="@string/ueb01_menu_item_cos"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_tan"
+		        android:title="@string/ueb01_menu_item_tan"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_sqrt"
+		        android:title="@string/ueb01_menu_item_sqrt"
+		        android:showAsAction="never" />
+		    </menu>
+        </item>
+</menu>

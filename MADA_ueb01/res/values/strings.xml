@@ -31,6 +31,11 @@
     <string name="ueb01_tan">tan</string>
     <string name="ueb01_sqrt">sqrt</string>
     <string name="ueb01_wrongInput">Eingabe fehlerhaft!</string>
+    <string name="ueb01_menu_item_more">Weitere Funktionen</string>
+    <string name="ueb01_menu_item_sin">sin</string>
+    <string name="ueb01_menu_item_cos">cos</string>
+    <string name="ueb01_menu_item_tan">tan</string>
+    <string name="ueb01_menu_item_sqrt">sqrt</string>
     
     <!-- layout -->
     <string name="normal_port">normal-port</string>

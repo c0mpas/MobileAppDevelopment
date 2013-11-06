@@ -3,6 +3,9 @@ package de.mobappdev.ueb01;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -21,6 +24,8 @@ public class Ueb01 extends Activity {
 	
 	// Klasse zum auslesen der aktuellen Displaykonfiguration
 	Configuration conf;
+	
+	boolean inflateMenu = false;
 	
 	// Klassen fuer grafische Oberfläche deklarieren
 	private TextView calcField;
@@ -66,18 +71,23 @@ public class Ueb01 extends Activity {
 		setMainListeners();
 		
 		switch (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
-			case Configuration.SCREENLAYOUT_SIZE_SMALL:		inflateAdditionalMenu();
-															break;
-			case Configuration.SCREENLAYOUT_SIZE_NORMAL:	inflateAdditionalMenu();
-															break;
-			case Configuration.SCREENLAYOUT_SIZE_LARGE:		referenceAdditionalViews();
-															setAdditionalListeners();
-															break;
-			case Configuration.SCREENLAYOUT_SIZE_XLARGE:	referenceAdditionalViews();
-															setAdditionalListeners();
-															break;
-			default :										inflateAdditionalMenu();
-															break;
+			case Configuration.SCREENLAYOUT_SIZE_SMALL:
+				inflateAdditionalMenu();
+				break;
+			case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+				inflateAdditionalMenu();
+				break;
+			case Configuration.SCREENLAYOUT_SIZE_LARGE:
+				referenceAdditionalViews();
+				setAdditionalListeners();
+				break;
+			case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+				referenceAdditionalViews();
+				setAdditionalListeners();
+				break;
+			default :
+				inflateAdditionalMenu();
+				break;
 		}
 	}
 
@@ -86,44 +96,63 @@ public class Ueb01 extends Activity {
 		@Override
 		public void onClick(View v) {
     		switch (v.getId()) {
-	    		case R.id.ueb01_1:		addToCalcField(getString(R.string.ueb01_1));
-	    								break;
-	    		case R.id.ueb01_2:		addToCalcField(getString(R.string.ueb01_2));
-										break;
-	    		case R.id.ueb01_3:		addToCalcField(getString(R.string.ueb01_3));
-										break;
-	    		case R.id.ueb01_4:		addToCalcField(getString(R.string.ueb01_4));
-										break;
-	    		case R.id.ueb01_5:		addToCalcField(getString(R.string.ueb01_5));
-										break;
-	    		case R.id.ueb01_6:		addToCalcField(getString(R.string.ueb01_6));
-										break;
-	    		case R.id.ueb01_7:		addToCalcField(getString(R.string.ueb01_7));
-										break;
-	    		case R.id.ueb01_8:		addToCalcField(getString(R.string.ueb01_8));
-										break;
-	    		case R.id.ueb01_9:		addToCalcField(getString(R.string.ueb01_9));
-										break;
-	    		case R.id.ueb01_0:		addToCalcField(getString(R.string.ueb01_0));
-										break;
-	    		case R.id.ueb01_minus:	addToCalcField(getString(R.string.ueb01_minus));
-										break;
-	    		case R.id.ueb01_plus:	addToCalcField(getString(R.string.ueb01_plus));
-										break;
-	    		case R.id.ueb01_mul:	addToCalcField(getString(R.string.ueb01_mul));
-										break;
-	    		case R.id.ueb01_divide:	addToCalcField(getString(R.string.ueb01_divide));
-										break;
-	    		case R.id.ueb01_lpar:	addToCalcField(getString(R.string.ueb01_lpar));
-										break;
-	    		case R.id.ueb01_rpar:	addToCalcField(getString(R.string.ueb01_rpar));
-										break;
-	    		case R.id.ueb01_mod:	addToCalcField(getString(R.string.ueb01_mod));
-										break;
-	    		case R.id.ueb01_pow:	addToCalcField(getString(R.string.ueb01_pow));
-										break;
-	    		default:				// Do nothing
-										break;
+	    		case R.id.ueb01_1:
+	    			addToCalcField(getString(R.string.ueb01_1));
+	    			break;
+	    		case R.id.ueb01_2:
+	    			addToCalcField(getString(R.string.ueb01_2));
+	    			break;
+	    		case R.id.ueb01_3:
+	    			addToCalcField(getString(R.string.ueb01_3));
+	    			break;
+	    		case R.id.ueb01_4:
+	    			addToCalcField(getString(R.string.ueb01_4));
+	    			break;
+	    		case R.id.ueb01_5:
+	    			addToCalcField(getString(R.string.ueb01_5));
+	    			break;
+	    		case R.id.ueb01_6:
+	    			addToCalcField(getString(R.string.ueb01_6));
+	    			break;
+	    		case R.id.ueb01_7:
+	    			addToCalcField(getString(R.string.ueb01_7));
+	    			break;
+	    		case R.id.ueb01_8:
+	    			addToCalcField(getString(R.string.ueb01_8));
+	    			break;
+	    		case R.id.ueb01_9:
+	    			addToCalcField(getString(R.string.ueb01_9));
+	    			break;
+	    		case R.id.ueb01_0:
+	    			addToCalcField(getString(R.string.ueb01_0));
+	    			break;
+	    		case R.id.ueb01_minus:
+	    			addToCalcField(getString(R.string.ueb01_minus));
+	    			break;
+	    		case R.id.ueb01_plus:
+	    			addToCalcField(getString(R.string.ueb01_plus));
+	    			break;
+	    		case R.id.ueb01_mul:
+	    			addToCalcField(getString(R.string.ueb01_mul));
+	    			break;
+	    		case R.id.ueb01_divide:
+	    			addToCalcField(getString(R.string.ueb01_divide));
+	    			break;
+	    		case R.id.ueb01_lpar:
+	    			addToCalcField(getString(R.string.ueb01_lpar));
+	    			break;
+	    		case R.id.ueb01_rpar:
+	    			addToCalcField(getString(R.string.ueb01_rpar));
+	    			break;
+	    		case R.id.ueb01_mod:
+	    			addToCalcField(getString(R.string.ueb01_mod));
+	    			break;
+	    		case R.id.ueb01_pow:
+	    			addToCalcField(getString(R.string.ueb01_pow));
+	    			break;
+	    		default:
+	    			// Do nothing
+	    			break;
 	    	}
 		}
 	};
@@ -133,16 +162,21 @@ public class Ueb01 extends Activity {
 		@Override
 		public void onClick(View v) {
     		switch (v.getId()) {
-	    		case R.id.ueb01_sin:	addToCalcField(getString(R.string.ueb01_sin));
-	    								break;
-	    		case R.id.ueb01_cos:	addToCalcField(getString(R.string.ueb01_cos));
-										break;
-	    		case R.id.ueb01_tan:	addToCalcField(getString(R.string.ueb01_tan));
-										break;
-	    		case R.id.ueb01_sqrt:	addToCalcField(getString(R.string.ueb01_sqrt));
-										break;
-	    		default:				// Do nothing
-										break;
+	    		case R.id.ueb01_sin:
+	    			addToCalcField(getString(R.string.ueb01_sin));
+	    			break;
+	    		case R.id.ueb01_cos:
+	    			addToCalcField(getString(R.string.ueb01_cos));
+	    			break;
+	    		case R.id.ueb01_tan:
+	    			addToCalcField(getString(R.string.ueb01_tan));
+	    			break;
+	    		case R.id.ueb01_sqrt:
+	    			addToCalcField(getString(R.string.ueb01_sqrt));
+	    			break;
+	    		default:
+	    			// Do nothing
+	    			break;
 	    	}
     		addToCalcField(getString(R.string.ueb01_lpar));
 		}
@@ -187,7 +221,7 @@ public class Ueb01 extends Activity {
 
 
 	private void inflateAdditionalMenu() {
-		// ##########
+		inflateMenu = true;
 	}
 	
 	
@@ -274,6 +308,37 @@ public class Ueb01 extends Activity {
 		txtCos.setOnClickListener(extendedButtonListener);
 		txtTan.setOnClickListener(extendedButtonListener);
 		txtSqrt.setOnClickListener(extendedButtonListener);
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.math_menu, menu);
+		return inflateMenu;
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_item_sin:
+				addToCalcField(getString(R.string.ueb01_sin));
+				break;
+			case R.id.menu_item_cos:
+				addToCalcField(getString(R.string.ueb01_cos));
+				break;
+			case R.id.menu_item_tan:
+				addToCalcField(getString(R.string.ueb01_tan));
+				break;
+			case R.id.menu_item_sqrt:
+				addToCalcField(getString(R.string.ueb01_sqrt));
+				break;
+			default:
+				// do nothing
+				return true;
+		}
+		addToCalcField(getString(R.string.ueb01_lpar));
+		return true;
 	}
 	
 	
