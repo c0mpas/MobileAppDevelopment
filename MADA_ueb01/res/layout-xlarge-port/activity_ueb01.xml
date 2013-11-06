@@ -13,6 +13,7 @@
         android:gravity="right"
         android:padding="@dimen/ueb01_calcField_large"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/ueb01_large_text"
         android:textColor="@android:color/white"
         android:maxLines="@string/ueb01_max_input_lines"
         android:minLines="2"
