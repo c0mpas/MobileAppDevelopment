@@ -9,20 +9,36 @@
 
     	<menu>
 		    <item
-		        android:id="@+id/menu_item_sin"
-		        android:title="@string/ueb01_menu_item_sin"
+		        android:id="@+id/menu_item_sin_front"
+		        android:title="@string/ueb01_menu_item_sin_front"
 		        android:showAsAction="never" />
 		    <item
-		        android:id="@+id/menu_item_cos"
-		        android:title="@string/ueb01_menu_item_cos"
+		        android:id="@+id/menu_item_cos_front"
+		        android:title="@string/ueb01_menu_item_cos_front"
 		        android:showAsAction="never" />
 		    <item
-		        android:id="@+id/menu_item_tan"
-		        android:title="@string/ueb01_menu_item_tan"
+		        android:id="@+id/menu_item_tan_front"
+		        android:title="@string/ueb01_menu_item_tan_front"
 		        android:showAsAction="never" />
 		    <item
-		        android:id="@+id/menu_item_sqrt"
-		        android:title="@string/ueb01_menu_item_sqrt"
+		        android:id="@+id/menu_item_sqrt_front"
+		        android:title="@string/ueb01_menu_item_sqrt_front"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_sin_back"
+		        android:title="@string/ueb01_menu_item_sin_back"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_cos_back"
+		        android:title="@string/ueb01_menu_item_cos_back"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_tan_back"
+		        android:title="@string/ueb01_menu_item_tan_back"
+		        android:showAsAction="never" />
+		    <item
+		        android:id="@+id/menu_item_sqrt_back"
+		        android:title="@string/ueb01_menu_item_sqrt_back"
 		        android:showAsAction="never" />
 		    </menu>
         </item>

@@ -321,23 +321,42 @@ public class Ueb01 extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.menu_item_sin:
+			case R.id.menu_item_sin_front:
+				addToCalcFieldFront(getString(R.string.ueb01_lpar));
+				addToCalcFieldFront(getString(R.string.ueb01_sin));
+				break;
+			case R.id.menu_item_cos_front:
+				addToCalcFieldFront(getString(R.string.ueb01_lpar));
+				addToCalcFieldFront(getString(R.string.ueb01_cos));
+				break;
+			case R.id.menu_item_tan_front:
+				addToCalcFieldFront(getString(R.string.ueb01_lpar));
+				addToCalcFieldFront(getString(R.string.ueb01_tan));
+				break;
+			case R.id.menu_item_sqrt_front:
+				addToCalcFieldFront(getString(R.string.ueb01_lpar));
+				addToCalcFieldFront(getString(R.string.ueb01_sqrt));
+				break;
+			case R.id.menu_item_sin_back:
 				addToCalcField(getString(R.string.ueb01_sin));
+				addToCalcField(getString(R.string.ueb01_lpar));
 				break;
-			case R.id.menu_item_cos:
+			case R.id.menu_item_cos_back:
 				addToCalcField(getString(R.string.ueb01_cos));
+				addToCalcField(getString(R.string.ueb01_lpar));
 				break;
-			case R.id.menu_item_tan:
+			case R.id.menu_item_tan_back:
 				addToCalcField(getString(R.string.ueb01_tan));
+				addToCalcField(getString(R.string.ueb01_lpar));
 				break;
-			case R.id.menu_item_sqrt:
+			case R.id.menu_item_sqrt_back:
 				addToCalcField(getString(R.string.ueb01_sqrt));
+				addToCalcField(getString(R.string.ueb01_lpar));
 				break;
 			default:
 				// do nothing
 				return true;
 		}
-		addToCalcField(getString(R.string.ueb01_lpar));
 		return true;
 	}
 	
@@ -347,6 +366,14 @@ public class Ueb01 extends Activity {
 	 */
 	private void addToCalcField(String txt) {
 		calcField.setText(calcField.getText() + txt);
+	}
+	
+	
+	/**
+	 * Hängt den Wert der gedrueckten Taste an das Ergebnisfeld an.
+	 */
+	private void addToCalcFieldFront(String txt) {
+		calcField.setText(txt + calcField.getText());
 	}
 	
 
