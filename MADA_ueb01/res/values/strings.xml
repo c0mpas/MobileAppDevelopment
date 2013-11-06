@@ -32,10 +32,10 @@
     <string name="ueb01_sqrt">sqrt</string>
     <string name="ueb01_wrongInput">Eingabe fehlerhaft!</string>
     <string name="ueb01_menu_item_more">Weitere Funktionen</string>
-    <string name="ueb01_menu_item_sin_front">sin(&#8230;</string>
-    <string name="ueb01_menu_item_cos_front">cos(&#8230;</string>
-    <string name="ueb01_menu_item_tan_front">tan(&#8230;</string>
-    <string name="ueb01_menu_item_sqrt_front">sqrt(&#8230;</string>
+    <string name="ueb01_menu_item_sin_front">sin(&#8230;)</string>
+    <string name="ueb01_menu_item_cos_front">cos(&#8230;)</string>
+    <string name="ueb01_menu_item_tan_front">tan(&#8230;)</string>
+    <string name="ueb01_menu_item_sqrt_front">sqrt(&#8230;)</string>
     <string name="ueb01_menu_item_sin_back">&#8230;sin</string>
     <string name="ueb01_menu_item_cos_back">&#8230;cos</string>
     <string name="ueb01_menu_item_tan_back">&#8230;tan</string>
