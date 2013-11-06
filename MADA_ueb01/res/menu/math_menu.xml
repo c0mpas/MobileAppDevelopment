@@ -3,7 +3,7 @@
     <item
         android:id="@+id/menu_item_more"
         android:title="@string/ueb01_menu_item_more"
-        android:showAsAction="never" >
+        android:showAsAction="always" >
     	<menu>
 		    <item
 		        android:id="@+id/menu_item_sin"
