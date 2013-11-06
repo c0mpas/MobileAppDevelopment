@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -183,29 +183,29 @@ public class Ueb01 extends Activity {
 	};
 	
 	
-	private OnClickListener extendedButtonLongListener = new OnClickListener() {
+	private OnLongClickListener extendedButtonLongListener = new OnLongClickListener() {
 		@Override
-		public void onClick(View v) {
+		public boolean onLongClick(View v) {
     		switch (v.getId()) {
 	    		case R.id.ueb01_sin:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_sin));
-	    			break;
+	    			return true;
 	    		case R.id.ueb01_cos:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_cos));
-	    			break;
+	    			return true;
 	    		case R.id.ueb01_tan:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_tan));
-	    			break;
+	    			return true;
 	    		case R.id.ueb01_sqrt:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_sqrt));
-	    			break;
+	    			return true;
 	    		default:
 	    			// Do nothing
-	    			break;
+	    			return true;
 	    	}
 		}
 	};
@@ -336,10 +336,10 @@ public class Ueb01 extends Activity {
 		txtCos.setOnClickListener(extendedButtonListener);
 		txtTan.setOnClickListener(extendedButtonListener);
 		txtSqrt.setOnClickListener(extendedButtonListener);
-		txtSin.setOnClickListener(extendedButtonLongListener);
-		txtCos.setOnClickListener(extendedButtonLongListener);
-		txtTan.setOnClickListener(extendedButtonLongListener);
-		txtSqrt.setOnClickListener(extendedButtonLongListener);
+		txtSin.setOnLongClickListener(extendedButtonLongListener);
+		txtCos.setOnLongClickListener(extendedButtonLongListener);
+		txtTan.setOnLongClickListener(extendedButtonLongListener);
+		txtSqrt.setOnLongClickListener(extendedButtonLongListener);
 	}
 	
 	
