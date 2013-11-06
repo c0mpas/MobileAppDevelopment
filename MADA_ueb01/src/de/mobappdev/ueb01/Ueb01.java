@@ -183,6 +183,34 @@ public class Ueb01 extends Activity {
 	};
 	
 	
+	private OnClickListener extendedButtonLongListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+    		switch (v.getId()) {
+	    		case R.id.ueb01_sin:
+	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
+	    			addToCalcFieldFront(getString(R.string.ueb01_sin));
+	    			break;
+	    		case R.id.ueb01_cos:
+	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
+	    			addToCalcFieldFront(getString(R.string.ueb01_cos));
+	    			break;
+	    		case R.id.ueb01_tan:
+	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
+	    			addToCalcFieldFront(getString(R.string.ueb01_tan));
+	    			break;
+	    		case R.id.ueb01_sqrt:
+	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
+	    			addToCalcFieldFront(getString(R.string.ueb01_sqrt));
+	    			break;
+	    		default:
+	    			// Do nothing
+	    			break;
+	    	}
+		}
+	};
+	
+	
 	/**
 	 *  Referenziert die Java-Variablen mit dem entsprechendem Objekt in der XML-Datei
 	 */
@@ -308,6 +336,10 @@ public class Ueb01 extends Activity {
 		txtCos.setOnClickListener(extendedButtonListener);
 		txtTan.setOnClickListener(extendedButtonListener);
 		txtSqrt.setOnClickListener(extendedButtonListener);
+		txtSin.setOnClickListener(extendedButtonLongListener);
+		txtCos.setOnClickListener(extendedButtonLongListener);
+		txtTan.setOnClickListener(extendedButtonLongListener);
+		txtSqrt.setOnClickListener(extendedButtonLongListener);
 	}
 	
 	
