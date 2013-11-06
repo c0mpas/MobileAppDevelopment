@@ -190,18 +190,22 @@ public class Ueb01 extends Activity {
 	    		case R.id.ueb01_sin:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_sin));
+	    			addToCalcField(getString(R.string.ueb01_rpar));
 	    			return true;
 	    		case R.id.ueb01_cos:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_cos));
+	    			addToCalcField(getString(R.string.ueb01_rpar));
 	    			return true;
 	    		case R.id.ueb01_tan:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_tan));
+	    			addToCalcField(getString(R.string.ueb01_rpar));
 	    			return true;
 	    		case R.id.ueb01_sqrt:
 	    			addToCalcFieldFront(getString(R.string.ueb01_lpar));
 	    			addToCalcFieldFront(getString(R.string.ueb01_sqrt));
+	    			addToCalcField(getString(R.string.ueb01_rpar));
 	    			return true;
 	    		default:
 	    			// Do nothing
@@ -356,18 +360,22 @@ public class Ueb01 extends Activity {
 			case R.id.menu_item_sin_front:
 				addToCalcFieldFront(getString(R.string.ueb01_lpar));
 				addToCalcFieldFront(getString(R.string.ueb01_sin));
+				addToCalcField(getString(R.string.ueb01_rpar));
 				break;
 			case R.id.menu_item_cos_front:
 				addToCalcFieldFront(getString(R.string.ueb01_lpar));
 				addToCalcFieldFront(getString(R.string.ueb01_cos));
+				addToCalcField(getString(R.string.ueb01_rpar));
 				break;
 			case R.id.menu_item_tan_front:
 				addToCalcFieldFront(getString(R.string.ueb01_lpar));
 				addToCalcFieldFront(getString(R.string.ueb01_tan));
+				addToCalcField(getString(R.string.ueb01_rpar));
 				break;
 			case R.id.menu_item_sqrt_front:
 				addToCalcFieldFront(getString(R.string.ueb01_lpar));
 				addToCalcFieldFront(getString(R.string.ueb01_sqrt));
+				addToCalcField(getString(R.string.ueb01_rpar));
 				break;
 			case R.id.menu_item_sin_back:
 				addToCalcField(getString(R.string.ueb01_sin));
