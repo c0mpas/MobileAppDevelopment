@@ -2,15 +2,32 @@ package com.example.mada_ueb03;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
 
-public class ToDoListActivity extends Activity {
+public class ToDoListActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_to_do_list);
+		
+		
+		
 	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+			
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
