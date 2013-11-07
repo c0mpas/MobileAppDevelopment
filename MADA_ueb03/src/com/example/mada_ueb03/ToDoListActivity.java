@@ -18,7 +18,7 @@ public class ToDoListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
+		
 		
 		initComponents();
 		showListView();
