@@ -1,6 +1,7 @@
 package com.example.mada_ueb03;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -32,8 +33,9 @@ public class ToDoListActivity extends ListActivity {
 	}
 	
 	private void showListView(){
+		Collections.sort(taskList);
 		
-		ListViewAdapterStd adapter = new ListViewAdapterStd(this , taskList);
+		ListViewAdapterStd adapter = new ListViewAdapterStd(this ,taskList);
 		setListAdapter(adapter);
 		
 		

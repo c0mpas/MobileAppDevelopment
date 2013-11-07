@@ -1,7 +1,7 @@
 
 package com.example.mada_ueb03;
 
-public class ToDoTask {
+public class ToDoTask implements Comparable<ToDoTask>{
 
 	private static final String INVALID_PRIORITY_VALUE = "Invalid Priority Value";
 	private static final String TITLE_NOT_NULL_OR_EMPTY = "Title darf nicht leer oder NULL sein";
@@ -48,6 +48,19 @@ public class ToDoTask {
 			throw new InvalidPrioException(INVALID_PRIORITY_VALUE);
 		this.priority = priority;
 	}
+	@Override
+	 public int compareTo(ToDoTask task) {
+	        if(this.getPriority() == task.getPriority()){
+	        	return 0;
+	        }else if (this.getPriority() > task.getPriority()) {
+				return 1;
+			}else {
+				return -1;
+			}
+	        
+	    }
+
+	
 
 }
 
