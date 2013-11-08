@@ -14,15 +14,17 @@ import android.widget.ListView;
 
 public class ToDoListActivity extends ListActivity {
 
+	public static final String CALL_TYPE = "callType";
 	private static final String WRONG_ID = "wrongID";
-	private final static int REQUEST_CODE_EDIT = 1;
-	private final static int REQUEST_CODE_NEW = 2;
+	public final static int REQUEST_CODE_EDIT = 1;
+	public final static int REQUEST_CODE_NEW = 2;
 
 	public final static String SEND_CODE_SERIALIZE = "task";
 	public final static String RECIEVE_CODE_TITLE = "title";
 	public final static String RECIEVE_CODE_DESCRIPTION = "description";
 	public final static String RECIEVE_CODE_PRIORITY = "priority";
 	public final static String RECIEVE_CODE_ID = "id";
+	private static final String value = null;
 
 	private ArrayList<ToDoTask> taskList;
 	private int IDCounter;
@@ -60,15 +62,16 @@ public class ToDoListActivity extends ListActivity {
 
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(SEND_CODE_SERIALIZE, taskList.get(taskPosition));
-
+		intent.putExtra(CALL_TYPE, REQUEST_CODE_EDIT);
 		startActivityForResult(intent, REQUEST_CODE_EDIT);
 
 	}
 
 	private void createNewTask() {
 
-		startActivityForResult(new Intent(this, DetailActivity.class),
-				REQUEST_CODE_NEW);
+		Intent intent = new Intent(this, DetailActivity.class);
+		intent.putExtra(CALL_TYPE, REQUEST_CODE_NEW);
+		startActivityForResult(intent, REQUEST_CODE_NEW);
 	}
 
 	private void initIDCounter() {
@@ -121,6 +124,8 @@ public class ToDoListActivity extends ListActivity {
 		taskList.add(new ToDoTask(data.getStringExtra(RECIEVE_CODE_TITLE), data
 				.getStringExtra(RECIEVE_CODE_DESCRIPTION), data.getIntExtra(
 				RECIEVE_CODE_PRIORITY, -1), IDCounter));
+		
+		IDCounter++;
 		
 		showListView();
 	}
