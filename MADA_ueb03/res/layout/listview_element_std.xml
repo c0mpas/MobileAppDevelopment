@@ -8,8 +8,7 @@
         android:id="@+id/listelement_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:padding="@dimen/list_element_padding"
         android:src="@drawable/prio_low" />
 
