@@ -1,11 +1,17 @@
 package com.example.mada_ueb03;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +20,11 @@ import android.widget.ListView;
 
 public class ToDoListActivity extends ListActivity {
 
+	private static final String FILE_NAME = "/todo.list";
+	private static final String DIR_NAME = "/ToDoList";
+	private static final String SAVE_FILE = "saveFile";
+	private static final String LOAD_FILE = "loadFile";
+	private static final String ORIENTATION_CHANGED = "orientationChanged";
 	public static final String CALL_TYPE = "callType";
 	private static final String WRONG_ID = "wrongID";
 	public final static int REQUEST_CODE_EDIT = 1;
@@ -24,29 +35,38 @@ public class ToDoListActivity extends ListActivity {
 	public final static String RECIEVE_CODE_DESCRIPTION = "description";
 	public final static String RECIEVE_CODE_PRIORITY = "priority";
 	public final static String RECIEVE_CODE_ID = "id";
-	private static final String value = null;
+
 
 	private ArrayList<ToDoTask> taskList;
 	private int IDCounter;
+	private String filePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		filePath = Environment.getExternalStorageDirectory().toString();
 
-		loadTasks();
-		taskList.add(new ToDoTask("Titel1", "Coole Beschreibung1,  Oh yeah!",
-				2, 1));
-		taskList.add(new ToDoTask("Titel2", "Coole Beschreibung2,  Oh yeah!",
-				3, 1));
-		taskList.add(new ToDoTask("Titel3", "Coole Beschreibung3,  Oh yeah!",
-				1, 1));
-		taskList.add(new ToDoTask("Titel4", "Coole Beschreibung4,  Oh yeah!",
-				3, 1));
-		taskList.add(new ToDoTask("Titel5", "Coole Beschreibung5,  Oh yeah!",
-				2, 1));
+
+		if (savedInstanceState == null) {
+			loadTasks(null);
+			
+		} else {
+			loadTasks((ArrayList<ToDoTask>) savedInstanceState
+					.getSerializable(ORIENTATION_CHANGED));
+		}
+
 		initIDCounter();
 
 		showListView();
+
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putSerializable(ORIENTATION_CHANGED, taskList);
 
 	}
 
@@ -91,17 +111,23 @@ public class ToDoListActivity extends ListActivity {
 
 	}
 
-	private void loadTasks() {
+	private void loadTasks(ArrayList<ToDoTask> taskList) {
 
-		taskList = new ArrayList<ToDoTask>();
-
+		if(taskList != null){
+			this.taskList = taskList;
+		}else if(loadFromFile() != null){
+			this.taskList = loadFromFile();
+		}else{
+			this.taskList = new ArrayList<ToDoTask>();
+		}
 	}
 
 	private void saveChanges(Intent data) {
 
+		int id = data.getIntExtra(RECIEVE_CODE_ID, -1);
 		for (ToDoTask task : taskList) {
 
-			if (task.getID() == data.getIntExtra(RECIEVE_CODE_ID, -1)) {
+			if (task.getID() == id) {
 				try {
 					task.setTitle(data.getStringExtra(RECIEVE_CODE_TITLE));
 					task.setDescription(data
@@ -115,8 +141,46 @@ public class ToDoListActivity extends ListActivity {
 			}
 		}
 
+		saveToFile();
+
 		showListView();
 
+	}
+	
+	
+	private ArrayList<ToDoTask> loadFromFile(){
+		
+		ArrayList<ToDoTask> tasks = null;
+		
+		try {
+			FileInputStream fs = new FileInputStream(filePath + DIR_NAME + FILE_NAME);
+			ObjectInputStream is = new ObjectInputStream(fs);
+			tasks = (ArrayList<ToDoTask>) is.readObject();
+			is.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.wtf(LOAD_FILE, e);
+		}
+		
+		return tasks;
+	}
+	
+
+	
+	private void saveToFile(){
+		
+		File dir = new File (filePath, DIR_NAME);
+		dir.mkdirs();
+			
+		try {		
+			FileOutputStream fs = new FileOutputStream(filePath + DIR_NAME + FILE_NAME);
+			ObjectOutputStream os = new ObjectOutputStream(fs);
+			os.writeObject(taskList);
+			os.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.wtf(SAVE_FILE, e);
+		}
 	}
 
 	private void addNewTask(Intent data) {
@@ -124,9 +188,9 @@ public class ToDoListActivity extends ListActivity {
 		taskList.add(new ToDoTask(data.getStringExtra(RECIEVE_CODE_TITLE), data
 				.getStringExtra(RECIEVE_CODE_DESCRIPTION), data.getIntExtra(
 				RECIEVE_CODE_PRIORITY, -1), IDCounter));
-		
+
 		IDCounter++;
-		
+		saveToFile();
 		showListView();
 	}
 
