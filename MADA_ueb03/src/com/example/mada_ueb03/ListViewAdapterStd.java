@@ -47,7 +47,7 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 
 		holder.title.setText(tasks.get(position).getTitle());
-		holder.description.setText(tasks.get(position).getTitle());
+		holder.description.setText(tasks.get(position).getDescription());
 
 		switch (tasks.get(position).getPriority()) {
 		case 1:
