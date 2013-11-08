@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -12,15 +13,26 @@ import android.widget.ListView;
 public class ToDoListActivity extends ListActivity {
 	
 	
+	public final static String TODO_KEY = "toDoTask";
+	private final static int RESULT_KEY = 666;
+	
 	private ArrayList<ToDoTask> taskList;
+	private int IDCounter;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		loadTasks();
+		taskList.add(new ToDoTask("Titel1", "Coole Beschreibung1,  Oh yeah!",2, 1));
+		taskList.add(new ToDoTask("Titel2", "Coole Beschreibung2,  Oh yeah!",3, 1));
+		taskList.add(new ToDoTask("Titel3", "Coole Beschreibung3,  Oh yeah!",1, 1));
+		taskList.add(new ToDoTask("Titel4", "Coole Beschreibung4,  Oh yeah!",3, 1));
+		taskList.add(new ToDoTask("Titel5", "Coole Beschreibung5,  Oh yeah!",2, 1));
+		initIDCounter();
+
 		
-		initComponents();
 		showListView();
 		
 	}
@@ -28,8 +40,26 @@ public class ToDoListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 			
+		editTask(position);
 		
+	}
+	
+	private void editTask(int taskPosition){
 		
+		Intent intent = new Intent(this, DetailActivity.class);
+		intent.putExtra(TODO_KEY, taskList.get(taskPosition));
+		
+		startActivityForResult(intent, RESULT_KEY);
+		
+	}
+	
+	private void initIDCounter(){
+		IDCounter = 0;
+		
+		for(ToDoTask task : taskList){
+			if(task.getID() >= IDCounter) 
+				IDCounter = task.getID() + 1;
+		}
 	}
 	
 	private void showListView(){
@@ -42,13 +72,10 @@ public class ToDoListActivity extends ListActivity {
 	}
 	
 	
-	private void initComponents(){
+	private void loadTasks(){
 		
 		taskList = new ArrayList<ToDoTask>();
 		
-		taskList.add(new ToDoTask("MyTitle", "Das ist eine ganz tolle Beschreibung.", 3));
-		taskList.add(new ToDoTask("MyTitle2", "Das ist eine ganz tolle Beschreibung2.", 1));
-		taskList.add(new ToDoTask("MyTitle3", "Das ist eine ganz tolle Beschreibung3.", 2));
 		
 		
 	}

@@ -1,7 +1,9 @@
 
 package com.example.mada_ueb03;
 
-public class ToDoTask implements Comparable<ToDoTask>{
+import java.io.Serializable;
+
+public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 
 	private static final String INVALID_PRIORITY_VALUE = "Invalid Priority Value";
 	private static final String TITLE_NOT_NULL_OR_EMPTY = "Title darf nicht leer oder NULL sein";
@@ -10,15 +12,23 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	private String title;
 	private String description;	
 	private int priority;
+	private int id;
+	
+	private static final long serialVersionUID = 46548946;
 
-	public ToDoTask(String title, String description, int priority) {
+	public ToDoTask(String title, String description, int priority, int id) {
 
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
+		this.id = id;
 
 	}
 
+	public int getID(){
+		return id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
