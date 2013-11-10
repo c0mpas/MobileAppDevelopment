@@ -29,11 +29,10 @@ public class ToDoListActivity extends ListActivity {
 	private static final String WRONG_ID = "wrongID";
 	public final static int REQUEST_CODE_EDIT = 1;
 	public final static int REQUEST_CODE_NEW = 2;
-
+	public final static int RESULT_DELETE = 5;
+	
 	public final static String SEND_CODE_SERIALIZE = "task";
-	public final static String RECIEVE_CODE_TITLE = "title";
-	public final static String RECIEVE_CODE_DESCRIPTION = "description";
-	public final static String RECIEVE_CODE_PRIORITY = "priority";
+	public final static String RECIEVE_TASK = "taskToSave";
 	public final static String RECIEVE_CODE_ID = "id";
 
 
@@ -91,6 +90,7 @@ public class ToDoListActivity extends ListActivity {
 
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(CALL_TYPE, REQUEST_CODE_NEW);
+		intent.putExtra(RECIEVE_CODE_ID, IDCounter);
 		startActivityForResult(intent, REQUEST_CODE_NEW);
 	}
 
@@ -124,23 +124,10 @@ public class ToDoListActivity extends ListActivity {
 
 	private void saveChanges(Intent data) {
 
-		int id = data.getIntExtra(RECIEVE_CODE_ID, -1);
-		for (ToDoTask task : taskList) {
 
-			if (task.getID() == id) {
-				try {
-					task.setTitle(data.getStringExtra(RECIEVE_CODE_TITLE));
-					task.setDescription(data
-							.getStringExtra(RECIEVE_CODE_DESCRIPTION));
-					task.setPriority(data
-							.getIntExtra(RECIEVE_CODE_PRIORITY, -1));
-					break;
-				} catch (InvalidPrioException e) {
-					Log.wtf(WRONG_ID, e);
-				}
-			}
-		}
-
+		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
+		taskList.add((ToDoTask)data.getSerializableExtra(RECIEVE_TASK));
+		
 		saveToFile();
 
 		showListView();
@@ -185,9 +172,7 @@ public class ToDoListActivity extends ListActivity {
 
 	private void addNewTask(Intent data) {
 
-		taskList.add(new ToDoTask(data.getStringExtra(RECIEVE_CODE_TITLE), data
-				.getStringExtra(RECIEVE_CODE_DESCRIPTION), data.getIntExtra(
-				RECIEVE_CODE_PRIORITY, -1), IDCounter));
+		taskList.add((ToDoTask)data.getSerializableExtra(RECIEVE_TASK));
 
 		IDCounter++;
 		saveToFile();
@@ -203,6 +188,10 @@ public class ToDoListActivity extends ListActivity {
 
 				saveChanges(data);
 			}
+			if (resultCode == RESULT_DELETE) {
+
+				deleteTask(data);
+			}
 		}
 		if (requestCode == REQUEST_CODE_NEW) {
 			// Make sure the request was successful
@@ -211,6 +200,16 @@ public class ToDoListActivity extends ListActivity {
 				addNewTask(data);
 			}
 		}
+	}
+	
+	private void deleteTask(Intent data){
+		
+		
+				taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
+				saveToFile();
+				showListView();
+		
+		
 	}
 
 	@Override

@@ -70,6 +70,17 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 	        
 	    }
 
+	@Override
+	public boolean equals(Object o) {
+		ToDoTask task = (ToDoTask)o;
+		
+		if(this.id == task.getID())
+			return true;
+		else
+			return false;
+	}
+
+	
 	
 
 }
