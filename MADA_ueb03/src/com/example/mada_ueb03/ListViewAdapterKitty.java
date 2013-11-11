@@ -47,8 +47,8 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 					.findViewById(R.id.listelement_description);
 			viewHolder.prioImage = (ImageView) rowView
 					.findViewById(R.id.listelement_img);
-			viewHolder.title.setTextSize(Float.parseFloat(prefs.getString("fontsize_head", SettingsActivity.DEFAULT_HEAD_SIZE)));
-			viewHolder.description.setTextSize(Float.parseFloat(prefs.getString("fontsize_tail", SettingsActivity.DEFAULT_TAIL_SIZE)));
+			viewHolder.title.setTextSize(Float.parseFloat(prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
+			viewHolder.description.setTextSize(Float.parseFloat(prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
 
 			rowView.setTag(viewHolder);
 		}
