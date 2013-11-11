@@ -3,6 +3,8 @@ package com.example.mada_ueb03;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 		public TextView title;
 		public TextView description;
 		public ImageView prioImage;
+
+
 	}
 
 	public ListViewAdapterStd(Activity context,  ArrayList<ToDoTask> tasks) {
@@ -34,13 +38,18 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 		if (rowView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
 			rowView = inflater.inflate(R.layout.listview_element_std, null);
+			
 			ViewHolder viewHolder = new ViewHolder();
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 			viewHolder.title = (TextView) rowView
 					.findViewById(R.id.listelement_title);
 			viewHolder.description = (TextView) rowView
 					.findViewById(R.id.listelement_description);
 			viewHolder.prioImage = (ImageView) rowView
 					.findViewById(R.id.listelement_img);
+			viewHolder.title.setTextSize(Float.parseFloat(prefs.getString("fontsize_head", "10")));
+			viewHolder.description.setTextSize(Float.parseFloat(prefs.getString("fontsize_tail", "10")));
+
 			rowView.setTag(viewHolder);
 		}
 
