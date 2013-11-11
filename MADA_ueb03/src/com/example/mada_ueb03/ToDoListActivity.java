@@ -10,8 +10,10 @@ import java.util.Collections;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -106,6 +108,11 @@ public class ToDoListActivity extends ListActivity {
 	private void showListView() {
 		Collections.sort(taskList);
 
+		SharedPreferences prefs =PreferenceManager.getDefaultSharedPreferences(this);
+		String selectedTheme = prefs.getString(SettingsActivity.THEME, SettingsActivity.DEFAULT_THEME);
+		
+		if(selectedTheme.equals(SettingsActivity.Th))
+		
 		ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 		setListAdapter(adapter);
 
