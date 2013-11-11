@@ -13,8 +13,8 @@ import android.widget.EditText;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 	
-	public static final String DEFAULT_HEAD_SIZE = "20";
-	public static final String DEFAULT_TAIL_SIZE = "16";
+	public static final String DEFAULT_HEAD_SIZE = "14";
+	public static final String DEFAULT_TAIL_SIZE = "10";
 	public static final String DEFAULT_THEME = "0";
 	public static final String FONTSIZE_HEAD = "fontsize_head";
 	public static final String FONTSIZE_TAIL = "fontsize_tail";
