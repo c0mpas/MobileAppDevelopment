@@ -9,6 +9,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -62,12 +64,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		prefFontsizeHead = (EditTextPreference) findPreference(FONTSIZE_HEAD);
 		prefFontsizeHead.getEditText().setOnKeyListener(
 				new EditText.OnKeyListener() {
-
 					@Override
 					public boolean onKey(View v, int keyCode, KeyEvent event) {
-						if (prefFontsizeHead.getEditText().getText().length() > 1)
-							return true;
-
+						if (prefFontsizeHead.getEditText().getText().length() > 1) return true;
 						return false;
 					}
 				});
@@ -75,12 +74,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		prefFontsizeTail = (EditTextPreference) findPreference(FONTSIZE_TAIL);
 		prefFontsizeTail.getEditText().setOnKeyListener(
 				new EditText.OnKeyListener() {
-
 					@Override
 					public boolean onKey(View v, int keyCode, KeyEvent event) {
-						if (prefFontsizeTail.getEditText().getText().length() > 1)
-							return true;
-
+						if (prefFontsizeTail.getEditText().getText().length() > 1) return true;
 						return false;
 					}
 				});
@@ -109,15 +105,13 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getPreferenceScreen().getSharedPreferences()
-				.registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		getPreferenceScreen().getSharedPreferences()
-				.unregisterOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 }
