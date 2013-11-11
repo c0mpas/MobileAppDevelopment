@@ -1,7 +1,10 @@
 package com.example.mada_ueb03;
 
 import com.example.mada_ueb03.R.id;
+
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,18 +41,43 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 		TextView prio = (TextView) row.findViewById(R.id.textSpinnerPrio);
 		ImageView img = (ImageView) row.findViewById(R.id.imgSpinnerPrio);
 		
-		if(prios[position].equals(1)){			
-			img.setImageResource(R.drawable.prio_high);	
-			prio.setText(R.string.prio_high);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		int selectedTheme = Integer.valueOf(((prefs.getString(SettingsActivity.THEME,
+				SettingsActivity.DEFAULT_THEME))));
+
+		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
+			
+			if(prios[position].equals(1)){			
+				img.setImageResource(R.drawable.prio_high);	
+				prio.setText(R.string.prio_high);
+			}
+			if(prios[position].equals(2)){			
+				img.setImageResource(R.drawable.prio_mid);	
+				prio.setText(R.string.prio_mid);
+			}
+			if(prios[position].equals(3)){			
+				img.setImageResource(R.drawable.prio_low);	
+				prio.setText(R.string.prio_low);
+			}
+			
+		}else if(selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
+			
+			if(prios[position].equals(1)){			
+				img.setImageResource(R.drawable.kitty_high);	
+				prio.setText(R.string.prio_high);
+			}
+			if(prios[position].equals(2)){			
+				img.setImageResource(R.drawable.kitty_mid);	
+				prio.setText(R.string.prio_mid);
+			}
+			if(prios[position].equals(3)){			
+				img.setImageResource(R.drawable.kitty_low);	
+				prio.setText(R.string.prio_low);
+			}
+			
 		}
-		if(prios[position].equals(2)){			
-			img.setImageResource(R.drawable.prio_mid);	
-			prio.setText(R.string.prio_mid);
-		}
-		if(prios[position].equals(3)){			
-			img.setImageResource(R.drawable.prio_low);	
-			prio.setText(R.string.prio_low);
-		}
+		
 
 
 		return row;
