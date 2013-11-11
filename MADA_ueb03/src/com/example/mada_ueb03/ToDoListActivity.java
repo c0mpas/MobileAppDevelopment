@@ -108,17 +108,20 @@ public class ToDoListActivity extends ListActivity {
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		String selectedTheme = prefs.getString(SettingsActivity.THEME,
-				SettingsActivity.DEFAULT_THEME);
+		int selectedTheme = Integer.valueOf(((prefs.getString(SettingsActivity.THEME,
+				SettingsActivity.DEFAULT_THEME))));
 
-		if (selectedTheme.equals(SettingsActivity.THEME_ANDROID)) {
+		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
-		}else if(selectedTheme.equals(SettingsActivity.THEME_DARK)) {
+		}else if(selectedTheme == SettingsActivity.THEME_VALUE_DARK) {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
-		}else if(selectedTheme.equals(SettingsActivity.THEME_KITTY)) {
+		}else if(selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
 			ListViewAdapterKitty adapter = new ListViewAdapterKitty(this, taskList);
+			setListAdapter(adapter);
+		}else{
+			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
 		}
 
