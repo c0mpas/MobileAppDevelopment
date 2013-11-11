@@ -32,11 +32,10 @@ public class ToDoListActivity extends ListActivity {
 	public final static int REQUEST_CODE_EDIT = 1;
 	public final static int REQUEST_CODE_NEW = 2;
 	public final static int RESULT_DELETE = 5;
-	
+
 	public final static String SEND_CODE_SERIALIZE = "task";
 	public final static String RECIEVE_TASK = "taskToSave";
 	public final static String RECIEVE_CODE_ID = "id";
-
 
 	private ArrayList<ToDoTask> taskList;
 	private int IDCounter;
@@ -45,13 +44,12 @@ public class ToDoListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		filePath = Environment.getExternalStorageDirectory().toString();
 
+		filePath = Environment.getExternalStorageDirectory().toString();
 
 		if (savedInstanceState == null) {
 			loadTasks(null);
-			
+
 		} else {
 			loadTasks((ArrayList<ToDoTask>) savedInstanceState
 					.getSerializable(ORIENTATION_CHANGED));
@@ -108,46 +106,53 @@ public class ToDoListActivity extends ListActivity {
 	private void showListView() {
 		Collections.sort(taskList);
 
-		SharedPreferences prefs =PreferenceManager.getDefaultSharedPreferences(this);
-		String selectedTheme = prefs.getString(SettingsActivity.THEME, SettingsActivity.DEFAULT_THEME);
-		
-		if(selectedTheme.equals(SettingsActivity.Th))
-		
-		ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
-		setListAdapter(adapter);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String selectedTheme = prefs.getString(SettingsActivity.THEME,
+				SettingsActivity.DEFAULT_THEME);
+
+		if (selectedTheme.equals(SettingsActivity.THEME_ANDROID)) {
+			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
+			setListAdapter(adapter);
+		}else if(selectedTheme.equals(SettingsActivity.THEME_DARK)) {
+			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
+			setListAdapter(adapter);
+		}else if(selectedTheme.equals(SettingsActivity.THEME_KITTY)) {
+			ListViewAdapterKitty adapter = new ListViewAdapterKitty(this, taskList);
+			setListAdapter(adapter);
+		}
 
 	}
 
 	private void loadTasks(ArrayList<ToDoTask> taskList) {
 
-		if(taskList != null){
+		if (taskList != null) {
 			this.taskList = taskList;
-		}else if(loadFromFile() != null){
+		} else if (loadFromFile() != null) {
 			this.taskList = loadFromFile();
-		}else{
+		} else {
 			this.taskList = new ArrayList<ToDoTask>();
 		}
 	}
 
 	private void saveChanges(Intent data) {
 
-
 		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
-		taskList.add((ToDoTask)data.getSerializableExtra(RECIEVE_TASK));
-		
+		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
+
 		saveToFile();
 
 		showListView();
 
 	}
-	
-	
-	private ArrayList<ToDoTask> loadFromFile(){
-		
+
+	private ArrayList<ToDoTask> loadFromFile() {
+
 		ArrayList<ToDoTask> tasks = null;
-		
+
 		try {
-			FileInputStream fs = new FileInputStream(filePath + DIR_NAME + FILE_NAME);
+			FileInputStream fs = new FileInputStream(filePath + DIR_NAME
+					+ FILE_NAME);
 			ObjectInputStream is = new ObjectInputStream(fs);
 			tasks = (ArrayList<ToDoTask>) is.readObject();
 			is.close();
@@ -155,19 +160,18 @@ public class ToDoListActivity extends ListActivity {
 			// TODO Auto-generated catch block
 			Log.wtf(LOAD_FILE, e);
 		}
-		
+
 		return tasks;
 	}
-	
 
-	
-	private void saveToFile(){
-		
-		File dir = new File (filePath, DIR_NAME);
+	private void saveToFile() {
+
+		File dir = new File(filePath, DIR_NAME);
 		dir.mkdirs();
-			
-		try {		
-			FileOutputStream fs = new FileOutputStream(filePath + DIR_NAME + FILE_NAME);
+
+		try {
+			FileOutputStream fs = new FileOutputStream(filePath + DIR_NAME
+					+ FILE_NAME);
 			ObjectOutputStream os = new ObjectOutputStream(fs);
 			os.writeObject(taskList);
 			os.close();
@@ -179,7 +183,7 @@ public class ToDoListActivity extends ListActivity {
 
 	private void addNewTask(Intent data) {
 
-		taskList.add((ToDoTask)data.getSerializableExtra(RECIEVE_TASK));
+		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
 
 		IDCounter++;
 		saveToFile();
@@ -208,8 +212,8 @@ public class ToDoListActivity extends ListActivity {
 			}
 		}
 	}
-	
-	private void deleteTask(Intent data){
+
+	private void deleteTask(Intent data) {
 		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
 		saveToFile();
 		showListView();

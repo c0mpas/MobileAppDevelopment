@@ -19,7 +19,12 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	public static final String FONTSIZE_HEAD = "fontsize_head";
 	public static final String FONTSIZE_TAIL = "fontsize_tail";
 	public static final String THEME = "theme";
-		
+
+	public static final String THEME_ANDROID = "Android";
+	public static final String THEME_KITTY = "Kitty";
+	public static final String THEME_DARK = "Dark";
+	private String[] themes = {THEME_ANDROID, THEME_KITTY, THEME_DARK};
+	
 	SharedPreferences prefs;
 	
 	int head, tail, theme;
@@ -27,7 +32,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	EditTextPreference prefFontsizeHead;
 	EditTextPreference prefFontsizeTail;
 	ListPreference prefTheme;
-	
+
 	
 	@SuppressWarnings("deprecation")
 	@Override
