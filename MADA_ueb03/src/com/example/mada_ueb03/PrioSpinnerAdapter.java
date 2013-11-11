@@ -17,8 +17,7 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 	private Activity context;
 	private Integer[] prios;
 
-	public PrioSpinnerAdapter(Activity context, int textViewResourceId,
-			Integer[] prios) {
+	public PrioSpinnerAdapter(Activity context, int textViewResourceId, Integer[] prios) {
 		super(context, textViewResourceId, prios);
 		this.context = context;
 		this.prios = prios;
@@ -48,37 +47,50 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 
 		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
 			
-			if(prios[position].equals(1)){			
+			if (prios[position].equals(1)) {			
 				img.setImageResource(R.drawable.prio_high);	
 				prio.setText(R.string.prio_high);
 			}
-			if(prios[position].equals(2)){			
+			if (prios[position].equals(2)) {			
 				img.setImageResource(R.drawable.prio_mid);	
 				prio.setText(R.string.prio_mid);
 			}
-			if(prios[position].equals(3)){			
+			if (prios[position].equals(3)) {			
 				img.setImageResource(R.drawable.prio_low);	
 				prio.setText(R.string.prio_low);
 			}
 			
-		}else if(selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
+		} else if (selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
 			
-			if(prios[position].equals(1)){			
+			if (prios[position].equals(1)) {			
 				img.setImageResource(R.drawable.kitty_high);	
 				prio.setText(R.string.prio_high);
 			}
-			if(prios[position].equals(2)){			
+			if (prios[position].equals(2)) {			
 				img.setImageResource(R.drawable.kitty_mid);	
 				prio.setText(R.string.prio_mid);
 			}
-			if(prios[position].equals(3)){			
+			if (prios[position].equals(3)) {			
 				img.setImageResource(R.drawable.kitty_low);	
 				prio.setText(R.string.prio_low);
 			}
 			
+		} else if (selectedTheme == SettingsActivity.THEME_VALUE_SIMPLE) {
+			
+			if (prios[position].equals(1)) {			
+				img.setImageResource(R.drawable.simple_high);	
+				prio.setText(R.string.prio_high);
+			}
+			if (prios[position].equals(2)) {			
+				img.setImageResource(R.drawable.simple_med);	
+				prio.setText(R.string.prio_mid);
+			}
+			if (prios[position].equals(3)) {			
+				img.setImageResource(R.drawable.simple_low);	
+				prio.setText(R.string.prio_low);
+			}
+			
 		}
-		
-
 
 		return row;
 	}

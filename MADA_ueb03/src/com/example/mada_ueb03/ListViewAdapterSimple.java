@@ -19,9 +19,9 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 	private int imgID;
 	private int color;
 	
-	private static final int RED = Color.parseColor("#FF0000");
-	private static final int ORANGE = Color.parseColor("#FF8000");
-	private static final int GREEN = Color.parseColor("#00FF00");
+	private static final int RED = Color.parseColor("#DF0101");
+	private static final int ORANGE = Color.parseColor("#B45F04");
+	private static final int GREEN = Color.parseColor("#088A08");
 
 	static class ViewHolder {
 		public TextView title;
@@ -64,20 +64,20 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 
 		switch (tasks.get(position).getPriority()) {
 			case 1:
-				imgID = R.drawable.prio_high;
+				imgID = R.drawable.simple_high;
 				color = RED;
 				break;
 			case 2:
-				imgID = R.drawable.prio_mid;
+				imgID = R.drawable.simple_med;
 				color = ORANGE;
 				break;
 			case 3:
-				imgID = R.drawable.prio_low;
+				imgID = R.drawable.simple_low;
 				color = GREEN;
 				break;
 	
 			default:
-				imgID = R.drawable.prio_mid;
+				imgID = R.drawable.simple_med;
 				color = ORANGE;
 				break;
 		}
