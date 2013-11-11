@@ -16,6 +16,7 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 	private final Activity context;
 	private final ArrayList<ToDoTask> tasks;
 	private int imgID;
+	private boolean iconVisibility;
 
 	static class ViewHolder {
 		public TextView title;
@@ -46,7 +47,8 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
 			viewHolder.description.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
-
+			iconVisibility = prefs.getBoolean(SettingsActivity.ICON, true);
+			
 			rowView.setTag(viewHolder);
 		}
 
@@ -70,8 +72,11 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 				imgID = R.drawable.kitty_mid;
 				break;
 		}
+		
 		holder.prioImage.setImageResource(imgID);
-
+		if (iconVisibility) holder.prioImage.setVisibility(ImageView.VISIBLE);
+		else holder.prioImage.setVisibility(ImageView.INVISIBLE);
+		
 		return rowView;
 	}
 }

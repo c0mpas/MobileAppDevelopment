@@ -18,6 +18,7 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 	private final ArrayList<ToDoTask> tasks;
 	private int imgID;
 	private int color;
+	private boolean iconVisibility;
 	
 	private static final int RED = Color.parseColor("#DF0101");
 	private static final int ORANGE = Color.parseColor("#B45F04");
@@ -53,7 +54,8 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
 			viewHolder.description.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
-
+			iconVisibility = prefs.getBoolean(SettingsActivity.ICON, true);
+			
 			rowView.setTag(viewHolder);
 		}
 
@@ -84,6 +86,8 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 		
 		holder.prioImage.setImageResource(imgID);
 		holder.title.setTextColor(color);
+		if (iconVisibility) holder.prioImage.setVisibility(ImageView.VISIBLE);
+		else holder.prioImage.setVisibility(ImageView.INVISIBLE);
 		
 		return rowView;
 	}

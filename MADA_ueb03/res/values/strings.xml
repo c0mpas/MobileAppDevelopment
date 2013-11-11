@@ -25,5 +25,7 @@
     <string name="settings_pref_fontsize_tail_title">Schriftgröße Beschreibung</string>
     <string name="settings_pref_theme_title">Theme</string>
     <string name="settings_pref_colour_theme_title">Design</string>
+    <string name="settings_pref_icon_title">Icon</string>
+    <string name="settings_pref_icon_summary">Zeige Icon neben Tasks</string>
     
 </resources>

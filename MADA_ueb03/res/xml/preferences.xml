@@ -23,5 +23,10 @@
 	        android:key="theme"
 	        android:entryValues="@array/pref_theme_values"
 	        android:defaultValue="0" />
+	    <SwitchPreference
+	        android:title="@string/settings_pref_icon_title"
+	        android:summary="@string/settings_pref_icon_summary"
+	        android:key="icon_visibility"
+	        android:defaultValue="true" />
     </PreferenceCategory>
 </PreferenceScreen>

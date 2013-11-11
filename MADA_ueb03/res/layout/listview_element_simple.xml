@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:padding="@dimen/list_element_padding"
-        android:src="@drawable/prio_low" />
+        android:src="@drawable/circle"
+        android:visibility="invisible" />"
 
     <TextView
         android:id="@+id/listelement_title"
