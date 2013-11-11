@@ -203,13 +203,9 @@ public class ToDoListActivity extends ListActivity {
 	}
 	
 	private void deleteTask(Intent data){
-		
-		
-				taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
-				saveToFile();
-				showListView();
-		
-		
+		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
+		saveToFile();
+		showListView();
 	}
 
 	@Override
@@ -227,7 +223,7 @@ public class ToDoListActivity extends ListActivity {
 			createNewTask();
 			break;
 		case R.id.menu_preference:
-
+			startActivity(new Intent(this, SettingsActivity.class));
 			break;
 		default:
 			break;

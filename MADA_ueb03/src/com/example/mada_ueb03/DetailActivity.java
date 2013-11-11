@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class DetailActivity extends Activity {
 
@@ -74,9 +75,26 @@ public class DetailActivity extends Activity {
 	private void save() throws InvalidPrioException {
 		Intent intent = new Intent();
 		
-		task.setTitle(title.getText().toString());
-		task.setDescription(description.getText().toString());
-		task.setPriority(priority.getSelectedItemPosition() + 1);
+		try {
+			task.setTitle(title.getText().toString());
+		} catch (NullPointerException e) {
+			Toast.makeText(getApplicationContext(), getString(R.string.error_title_empty), Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		try {
+			task.setDescription(description.getText().toString());
+		} catch (NullPointerException e) {
+			Toast.makeText(getApplicationContext(), getString(R.string.error_description_null), Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		try {
+			task.setPriority(priority.getSelectedItemPosition() + 1);
+		} catch (InvalidPrioException e) {
+			Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_prio), Toast.LENGTH_SHORT).show();
+			return;
+		}
 		
 		intent.putExtra(ToDoListActivity.RECIEVE_TASK, task);
 		setResult(RESULT_OK, intent);
