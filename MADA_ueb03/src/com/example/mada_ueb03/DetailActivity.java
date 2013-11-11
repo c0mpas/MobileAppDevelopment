@@ -34,7 +34,7 @@ public class DetailActivity extends Activity {
 			if (getIntent().getIntExtra(ToDoListActivity.CALL_TYPE, -1) == ToDoListActivity.REQUEST_CODE_EDIT) {
 				updateViews((ToDoTask) getIntent().getExtras().getSerializable(
 						ToDoListActivity.SEND_CODE_SERIALIZE));
-			}else{
+			} else {
 				task = new ToDoTask("", "", 1, getIntent().getIntExtra(ToDoListActivity.RECIEVE_CODE_ID, -1));
 			}
 		}
@@ -43,10 +43,8 @@ public class DetailActivity extends Activity {
 	private void setListeners() {
 
 		save.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-
 				try {
 					save();
 				} catch (InvalidPrioException e) {
@@ -56,20 +54,14 @@ public class DetailActivity extends Activity {
 		});
 
 		cancel.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-
 				cancel();
-
 			}
 		});
 
 		Integer[] prioArray = { 1, 2, 3 };
-
-		priority.setAdapter(new PrioSpinnerAdapter(this,
-				R.layout.prio_spinner_std, prioArray));
-
+		priority.setAdapter(new PrioSpinnerAdapter(this, R.layout.prio_spinner_std, prioArray));
 	}
 
 	private void save() throws InvalidPrioException {
@@ -107,23 +99,18 @@ public class DetailActivity extends Activity {
 	}
 
 	private void initViews() {
-
 		save = (Button) findViewById(R.id.detail_bt_save);
 		cancel = (Button) findViewById(R.id.detail_bt_cancel);
 		title = (EditText) findViewById(R.id.edit_title);
 		description = (EditText) findViewById(R.id.edit_description);
 		priority = (Spinner) findViewById(R.id.spinner_priority);
-
 	}
 
 	private void updateViews(ToDoTask task) {
-
 		this.task = task;
-		
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
 		priority.setSelection(task.getPriority() - 1);
-
 	}
 
 	@Override
@@ -137,15 +124,15 @@ public class DetailActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
-		case R.id.menu_delete:
-			Intent intent = new Intent();
-			intent.putExtra(ToDoListActivity.RECIEVE_TASK, task);
-			setResult(ToDoListActivity.RESULT_DELETE, intent);
-			finish();
-			
-			break;
-		default:
-			break;
+			case R.id.menu_delete:
+				Intent intent = new Intent();
+				intent.putExtra(ToDoListActivity.RECIEVE_TASK, task);
+				setResult(ToDoListActivity.RESULT_DELETE, intent);
+				finish();
+				break;
+				
+			default:
+				break;
 		}
 		return true;
 	}

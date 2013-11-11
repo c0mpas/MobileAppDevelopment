@@ -50,45 +50,33 @@ public class ToDoListActivity extends ListActivity {
 
 		if (savedInstanceState == null) {
 			loadTasks(null);
-
 		} else {
-			loadTasks((ArrayList<ToDoTask>) savedInstanceState
-					.getSerializable(ORIENTATION_CHANGED));
+			loadTasks((ArrayList<ToDoTask>) savedInstanceState.getSerializable(ORIENTATION_CHANGED));
 		}
 
 		initIDCounter();
-
 		showListView();
-
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-
 		outState.putSerializable(ORIENTATION_CHANGED, taskList);
-
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, View view, int position,
-			long id) {
-
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		editTask(position);
-
 	}
 
 	private void editTask(int taskPosition) {
-
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(SEND_CODE_SERIALIZE, taskList.get(taskPosition));
 		intent.putExtra(CALL_TYPE, REQUEST_CODE_EDIT);
 		startActivityForResult(intent, REQUEST_CODE_EDIT);
-
 	}
 
 	private void createNewTask() {
-
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(CALL_TYPE, REQUEST_CODE_NEW);
 		intent.putExtra(RECIEVE_CODE_ID, IDCounter);
@@ -97,31 +85,28 @@ public class ToDoListActivity extends ListActivity {
 
 	private void initIDCounter() {
 		IDCounter = 0;
-
 		for (ToDoTask task : taskList) {
-			if (task.getID() >= IDCounter)
-				IDCounter = task.getID() + 1;
+			if (task.getID() >= IDCounter) IDCounter = task.getID() + 1;
 		}
 	}
 
 	private void showListView() {
 		Collections.sort(taskList);
 
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		int selectedTheme = Integer.valueOf(((prefs.getString(SettingsActivity.THEME,
-				SettingsActivity.DEFAULT_THEME))));
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		int selectedTheme = Integer.valueOf(((
+				prefs.getString(SettingsActivity.THEME, SettingsActivity.DEFAULT_THEME))));
 
 		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
-		}else if(selectedTheme == SettingsActivity.THEME_VALUE_DARK) {
+		} else if (selectedTheme == SettingsActivity.THEME_VALUE_SIMPLE) {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
-		}else if(selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
+		} else if (selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
 			ListViewAdapterKitty adapter = new ListViewAdapterKitty(this, taskList);
 			setListAdapter(adapter);
-		}else{
+		} else {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
 		}
@@ -140,14 +125,11 @@ public class ToDoListActivity extends ListActivity {
 	}
 
 	private void saveChanges(Intent data) {
-
 		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
 		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
 
 		saveToFile();
-
 		showListView();
-
 	}
 
 	private ArrayList<ToDoTask> loadFromFile() {
@@ -155,13 +137,11 @@ public class ToDoListActivity extends ListActivity {
 		ArrayList<ToDoTask> tasks = null;
 
 		try {
-			FileInputStream fs = new FileInputStream(filePath + DIR_NAME
-					+ FILE_NAME);
+			FileInputStream fs = new FileInputStream(filePath + DIR_NAME + FILE_NAME);
 			ObjectInputStream is = new ObjectInputStream(fs);
 			tasks = (ArrayList<ToDoTask>) is.readObject();
 			is.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.wtf(LOAD_FILE, e);
 		}
 
@@ -174,21 +154,17 @@ public class ToDoListActivity extends ListActivity {
 		dir.mkdirs();
 
 		try {
-			FileOutputStream fs = new FileOutputStream(filePath + DIR_NAME
-					+ FILE_NAME);
+			FileOutputStream fs = new FileOutputStream(filePath + DIR_NAME + FILE_NAME);
 			ObjectOutputStream os = new ObjectOutputStream(fs);
 			os.writeObject(taskList);
 			os.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.wtf(SAVE_FILE, e);
 		}
 	}
 
 	private void addNewTask(Intent data) {
-
 		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
-
 		IDCounter++;
 		saveToFile();
 		showListView();
@@ -199,26 +175,15 @@ public class ToDoListActivity extends ListActivity {
 		// Check which request we're responding to
 		if (requestCode == REQUEST_CODE_EDIT) {
 			// Make sure the request was successful
-			if (resultCode == RESULT_OK) {
-
-				saveChanges(data);
-			}
-			if (resultCode == RESULT_DELETE) {
-
-				deleteTask(data);
-			}
+			if (resultCode == RESULT_OK) saveChanges(data);
+			if (resultCode == RESULT_DELETE) deleteTask(data);
 		}
 		if (requestCode == REQUEST_CODE_NEW) {
 			// Make sure the request was successful
-			if (resultCode == RESULT_OK) {
-
-				addNewTask(data);
-			}
+			if (resultCode == RESULT_OK) addNewTask(data);
 		}
 		if (requestCode == REQUEST_CODE_SETTINGS) {
-			if (resultCode == RESULT_OK) {
-				showListView();
-			}
+			if (resultCode == RESULT_OK) showListView();
 		}
 	}
 

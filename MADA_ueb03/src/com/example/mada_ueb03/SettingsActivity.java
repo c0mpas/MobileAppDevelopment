@@ -28,9 +28,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	public static final int THEME_VALUE_ANDROID = 0;
 	public static final String THEME_KITTY = "Kitty";
 	public static final int THEME_VALUE_KITTY = 1;
-	public static final String THEME_DARK = "Dark";
-	public static final int THEME_VALUE_DARK = 2;
-	private String[] themes = { THEME_ANDROID, THEME_KITTY, THEME_DARK };
+	public static final String THEME_SIMPLE = "Simple";
+	public static final int THEME_VALUE_SIMPLE = 2;
+	private String[] themes = { THEME_ANDROID, THEME_KITTY, THEME_SIMPLE };
 
 	SharedPreferences prefs;
 
