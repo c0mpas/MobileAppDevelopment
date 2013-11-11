@@ -27,8 +27,8 @@
         </activity>
         <activity
             android:name="com.example.mada_ueb03.DetailActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/title_activity_detail" >
+            android:label="@string/title_activity_detail"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.example.mada_ueb03.SettingsActivity"
