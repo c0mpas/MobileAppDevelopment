@@ -101,7 +101,7 @@ public class ToDoListActivity extends ListActivity {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
 			setListAdapter(adapter);
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_SIMPLE) {
-			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
+			ListViewAdapterSimple adapter = new ListViewAdapterSimple(this, taskList);
 			setListAdapter(adapter);
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
 			ListViewAdapterKitty adapter = new ListViewAdapterKitty(this, taskList);
