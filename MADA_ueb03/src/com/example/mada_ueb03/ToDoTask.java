@@ -17,12 +17,10 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 	private static final long serialVersionUID = 46548946;
 
 	public ToDoTask(String title, String description, int priority, int id) {
-
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
 		this.id = id;
-
 	}
 
 	public int getID(){
@@ -58,30 +56,24 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 			throw new InvalidPrioException(INVALID_PRIORITY_VALUE);
 		this.priority = priority;
 	}
+	
 	@Override
 	 public int compareTo(ToDoTask task) {
-	        if(this.getPriority() == task.getPriority()){
+	        if (this.getPriority() == task.getPriority()){
 	        	return 0;
-	        }else if (this.getPriority() > task.getPriority()) {
+	        } else if (this.getPriority() > task.getPriority()) {
 				return 1;
-			}else {
+			} else {
 				return -1;
 			}
-	        
 	    }
 
 	@Override
 	public boolean equals(Object o) {
-		ToDoTask task = (ToDoTask)o;
+		ToDoTask task = (ToDoTask) o;
 		
-		if(this.id == task.getID())
-			return true;
-		else
-			return false;
+		if (this.id == task.getID()) return true;
+		else return false;
 	}
 
-	
-	
-
 }
-
