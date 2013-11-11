@@ -5,8 +5,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
@@ -22,23 +20,25 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		
 	SharedPreferences prefs;
 	
-	int head, tail, theme;
-	
 	EditTextPreference prefFontsizeHead;
 	EditTextPreference prefFontsizeTail;
 	ListPreference prefTheme;
 	
+	public static final String THEME_ANDROID = "Android";
+	public static final String THEME_KITTY = "Kitty";
+	public static final String THEME_DARK = "Dark";
+	private String[] themes = {THEME_ANDROID, THEME_KITTY, THEME_DARK};
 	
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 		referencePreferences();
+		prefTheme.setEntries(themes);
 		updatePreferenceSummarys();
 	}
 
-	@SuppressWarnings("deprecation")
 	private void updatePreferenceSummarys() {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
@@ -54,18 +54,14 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		prefTheme = (ListPreference) findPreference(THEME);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (key.equals(FONTSIZE_HEAD)) {
-			EditTextPreference pref = (EditTextPreference) findPreference(FONTSIZE_HEAD);
-			pref.setSummary(((EditText) pref.getEditText()).getText());
+			prefFontsizeHead.setSummary(((EditText) prefFontsizeHead.getEditText()).getText());
 		} else if (key.equals(FONTSIZE_TAIL)) {
-			EditTextPreference pref = (EditTextPreference) findPreference(FONTSIZE_TAIL);
-			pref.setSummary(((EditText) pref.getEditText()).getText());
+			prefFontsizeTail.setSummary(((EditText) prefFontsizeTail.getEditText()).getText());
 		} else if (key.equals(THEME)) {
-			ListPreference pref = (ListPreference) findPreference(THEME);
-			pref.setSummary(pref.getEntry());
+			prefTheme.setSummary(prefTheme.getEntry());
 		}
 	}
 	

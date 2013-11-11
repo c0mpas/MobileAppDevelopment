@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_theme_names">        
-        <item>Standard</item>
-        <item>Hell</item>
-        <item>Dunkel</item>
+        <item>Android</item>
+        <item>Kitty</item>
+        <item>Dark</item>
     </string-array>
     <string-array name="pref_theme_values">        
         <item>0</item>
