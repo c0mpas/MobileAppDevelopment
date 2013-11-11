@@ -11,16 +11,19 @@ import android.widget.EditText;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 	
-	public static final String DEFAULT_HEAD_SIZE = "14";
-	public static final String DEFAULT_TAIL_SIZE = "10";
+	public static final String DEFAULT_HEAD_SIZE = "20";
+	public static final String DEFAULT_TAIL_SIZE = "16";
 	public static final String DEFAULT_THEME = "0";
 	public static final String FONTSIZE_HEAD = "fontsize_head";
 	public static final String FONTSIZE_TAIL = "fontsize_tail";
 	public static final String THEME = "theme";
 
-	public static final String THEME_ANDROID = "Android";
-	public static final String THEME_KITTY = "Kitty";
-	public static final String THEME_DARK = "Dark";
+	public static final String	THEME_ANDROID = "Android";
+	public static final int		THEME_VALUE_ANDROID = 0;
+	public static final String	THEME_KITTY = "Kitty";
+	public static final int		THEME_VALUE_KITTY = 1;
+	public static final String	THEME_DARK = "Dark";
+	public static final int		THEME_VALUE_DARK = 2;
 	private String[] themes = {THEME_ANDROID, THEME_KITTY, THEME_DARK};
 	
 	SharedPreferences prefs;
@@ -34,24 +37,23 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		referencePreferences();
-		prefTheme.setEntries(themes);
+		initializePreferences();
 		updatePreferenceSummarys();
 	}
 
 	private void updatePreferenceSummarys() {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		
 		prefFontsizeHead.setSummary(prefs.getString(FONTSIZE_HEAD, DEFAULT_HEAD_SIZE));
 		prefFontsizeTail.setSummary(prefs.getString(FONTSIZE_TAIL, DEFAULT_TAIL_SIZE));
 		prefTheme.setSummary(prefTheme.getEntry());
 	}
     
 	@SuppressWarnings("deprecation")
-	private void referencePreferences() {
+	private void initializePreferences() {
 		prefFontsizeHead = (EditTextPreference) findPreference(FONTSIZE_HEAD);
 		prefFontsizeTail = (EditTextPreference) findPreference(FONTSIZE_TAIL);
 		prefTheme = (ListPreference) findPreference(THEME);
+		prefTheme.setEntries(themes);
 	}
 
 	@Override
