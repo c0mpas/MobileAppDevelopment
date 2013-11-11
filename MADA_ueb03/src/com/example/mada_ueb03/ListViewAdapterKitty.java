@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
+public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 	private final Activity context;
 	private final ArrayList<ToDoTask> tasks;
 	private int imgID;
@@ -25,8 +25,8 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 
 	}
 
-	public ListViewAdapterStd(Activity context,  ArrayList<ToDoTask> tasks) {
-		super(context, R.layout.listview_element_std, tasks);
+	public ListViewAdapterKitty(Activity context,  ArrayList<ToDoTask> tasks) {
+		super(context, R.layout.listview_element_kitty, tasks);
 		
 		this.context = context;
 		this.tasks = tasks;
@@ -37,7 +37,7 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 		View rowView = convertView;
 		if (rowView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			rowView = inflater.inflate(R.layout.listview_element_std, null);
+			rowView = inflater.inflate(R.layout.listview_element_kitty, null);
 			
 			ViewHolder viewHolder = new ViewHolder();
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -60,13 +60,13 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 
 		switch (tasks.get(position).getPriority()) {
 		case 1:
-			imgID = R.drawable.prio_high;
+			imgID = R.drawable.kitty_high;
 			break;
 		case 2:
-			imgID = R.drawable.prio_mid;
+			imgID = R.drawable.kitty_mid;
 			break;
 		case 3:
-			imgID = R.drawable.prio_low;
+			imgID = R.drawable.kitty_low;
 			break;
 
 		default:
