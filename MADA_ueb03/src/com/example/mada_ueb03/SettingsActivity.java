@@ -75,6 +75,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 			ListPreference pref = (ListPreference) findPreference(THEME);
 			pref.setSummary(pref.getEntry());
 		}
+		setResult(RESULT_OK);
 	}
 	
 	@Override

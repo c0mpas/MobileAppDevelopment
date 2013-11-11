@@ -31,6 +31,7 @@ public class ToDoListActivity extends ListActivity {
 	private static final String WRONG_ID = "wrongID";
 	public final static int REQUEST_CODE_EDIT = 1;
 	public final static int REQUEST_CODE_NEW = 2;
+	public final static int REQUEST_CODE_SETTINGS = 3;
 	public final static int RESULT_DELETE = 5;
 
 	public final static String SEND_CODE_SERIALIZE = "task";
@@ -214,6 +215,11 @@ public class ToDoListActivity extends ListActivity {
 				addNewTask(data);
 			}
 		}
+		if (requestCode == REQUEST_CODE_SETTINGS) {
+			if (resultCode == RESULT_OK) {
+				showListView();
+			}
+		}
 	}
 
 	private void deleteTask(Intent data) {
@@ -237,7 +243,7 @@ public class ToDoListActivity extends ListActivity {
 			createNewTask();
 			break;
 		case R.id.menu_preference:
-			startActivity(new Intent(this, SettingsActivity.class));
+			startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_CODE_SETTINGS);
 			break;
 		default:
 			break;

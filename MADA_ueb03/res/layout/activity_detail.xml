@@ -21,14 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/detail_save" />
+            android:text="@string/detail_save"
+            android:background="@drawable/button" />
 
         <Button
             android:id="@+id/detail_bt_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/detail_cancel" />
+            android:text="@string/detail_cancel"
+            android:background="@drawable/button" />
+        
     </LinearLayout>
 
     <ScrollView
