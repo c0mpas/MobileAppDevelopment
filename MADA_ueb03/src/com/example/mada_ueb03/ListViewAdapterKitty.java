@@ -21,8 +21,6 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 		public TextView title;
 		public TextView description;
 		public ImageView prioImage;
-
-
 	}
 
 	public ListViewAdapterKitty(Activity context,  ArrayList<ToDoTask> tasks) {
@@ -41,14 +39,13 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 			
 			ViewHolder viewHolder = new ViewHolder();
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-			viewHolder.title = (TextView) rowView
-					.findViewById(R.id.listelement_title);
-			viewHolder.description = (TextView) rowView
-					.findViewById(R.id.listelement_description);
-			viewHolder.prioImage = (ImageView) rowView
-					.findViewById(R.id.listelement_img);
-			viewHolder.title.setTextSize(Float.parseFloat(prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
-			viewHolder.description.setTextSize(Float.parseFloat(prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
+			viewHolder.title = (TextView) rowView.findViewById(R.id.listelement_title);
+			viewHolder.description = (TextView) rowView.findViewById(R.id.listelement_description);
+			viewHolder.prioImage = (ImageView) rowView.findViewById(R.id.listelement_img);
+			viewHolder.title.setTextSize(Float.parseFloat(
+					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
+			viewHolder.description.setTextSize(Float.parseFloat(
+					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
 
 			rowView.setTag(viewHolder);
 		}
@@ -59,19 +56,19 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 		holder.description.setText(tasks.get(position).getDescription());
 
 		switch (tasks.get(position).getPriority()) {
-		case 1:
-			imgID = R.drawable.kitty_high;
-			break;
-		case 2:
-			imgID = R.drawable.kitty_mid;
-			break;
-		case 3:
-			imgID = R.drawable.kitty_low;
-			break;
-
-		default:
-			imgID = R.drawable.prio_low;
-			break;
+			case 1:
+				imgID = R.drawable.kitty_high;
+				break;
+			case 2:
+				imgID = R.drawable.kitty_mid;
+				break;
+			case 3:
+				imgID = R.drawable.kitty_low;
+				break;
+	
+			default:
+				imgID = R.drawable.kitty_mid;
+				break;
 		}
 		holder.prioImage.setImageResource(imgID);
 
