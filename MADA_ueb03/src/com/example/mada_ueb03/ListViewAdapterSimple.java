@@ -23,6 +23,7 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 	private static final int RED = Color.parseColor("#DF0101");
 	private static final int ORANGE = Color.parseColor("#B45F04");
 	private static final int GREEN = Color.parseColor("#088A08");
+	public static final int BACK = Color.parseColor("#424242");
 
 	static class ViewHolder {
 		public TextView title;
@@ -83,11 +84,13 @@ public class ListViewAdapterSimple extends ArrayAdapter<ToDoTask> {
 				color = ORANGE;
 				break;
 		}
-		
-		holder.prioImage.setImageResource(imgID);
+
 		holder.title.setTextColor(color);
-		if (iconVisibility) holder.prioImage.setVisibility(ImageView.VISIBLE);
-		else holder.prioImage.setVisibility(ImageView.INVISIBLE);
+		
+		if (iconVisibility) {
+			holder.prioImage.setVisibility(ImageView.VISIBLE);
+			holder.prioImage.setImageResource(imgID);
+		}
 		
 		return rowView;
 	}

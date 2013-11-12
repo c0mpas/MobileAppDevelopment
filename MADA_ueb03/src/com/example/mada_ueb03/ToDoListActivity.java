@@ -33,6 +33,7 @@ public class ToDoListActivity extends ListActivity {
 	public final static int REQUEST_CODE_NEW = 2;
 	public final static int REQUEST_CODE_SETTINGS = 3;
 	public final static int RESULT_DELETE = 5;
+	private static final int DIVIDER = 2;
 
 	public final static String SEND_CODE_SERIALIZE = "task";
 	public final static String RECIEVE_TASK = "taskToSave";
@@ -99,18 +100,23 @@ public class ToDoListActivity extends ListActivity {
 
 		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
+			getListView().setBackgroundColor(ListViewAdapterStd.BACK);
 			setListAdapter(adapter);
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_SIMPLE) {
 			ListViewAdapterSimple adapter = new ListViewAdapterSimple(this, taskList);
+			getListView().setBackgroundColor(ListViewAdapterSimple.BACK);
 			setListAdapter(adapter);
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
 			ListViewAdapterKitty adapter = new ListViewAdapterKitty(this, taskList);
+			getListView().setBackgroundColor(ListViewAdapterKitty.BACK);
 			setListAdapter(adapter);
 		} else {
 			ListViewAdapterStd adapter = new ListViewAdapterStd(this, taskList);
+			getListView().setBackgroundColor(ListViewAdapterStd.BACK);
 			setListAdapter(adapter);
 		}
-
+		
+		getListView().setDividerHeight(DIVIDER);
 	}
 
 	private void loadTasks(ArrayList<ToDoTask> taskList) {

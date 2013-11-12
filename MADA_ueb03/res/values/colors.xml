@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
     <color name="listElementStdBackGround">#EEEFF4</color>
+    
     <color name="listElementKittyBackGround">#FAA7D1</color>
+    
     <color name="listElementSimpleBackGround">#424242</color>
+    <color name="listElementSimpleText">#969696</color>
+    
     <color name="listElementDesColorStd">#666666</color>
+    
     
     <color name="red">#FF0000</color>
     <color name="orange">#FF8000</color>

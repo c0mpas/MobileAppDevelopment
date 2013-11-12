@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 	private final ArrayList<ToDoTask> tasks;
 	private int imgID;
 	private boolean iconVisibility;
+
+	public static final int BACK = Color.parseColor("#FAA7D1");
 
 	static class ViewHolder {
 		public TextView title;
@@ -72,10 +75,11 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 				imgID = R.drawable.kitty_mid;
 				break;
 		}
-		
-		holder.prioImage.setImageResource(imgID);
-		if (iconVisibility) holder.prioImage.setVisibility(ImageView.VISIBLE);
-		else holder.prioImage.setVisibility(ImageView.INVISIBLE);
+
+		if (iconVisibility) {
+			holder.prioImage.setVisibility(ImageView.VISIBLE);
+			holder.prioImage.setImageResource(imgID);
+		}
 		
 		return rowView;
 	}

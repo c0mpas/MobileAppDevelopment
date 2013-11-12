@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 	private final ArrayList<ToDoTask> tasks;
 	private int imgID;
 	private boolean iconVisibility;
+
+	public static final int BACK = Color.parseColor("#EEEFF4");
 
 	static class ViewHolder {
 		public TextView title;
@@ -56,7 +59,7 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 
 		holder.title.setText(tasks.get(position).getTitle());
 		holder.description.setText(tasks.get(position).getDescription());
-
+		
 		switch (tasks.get(position).getPriority()) {
 			case 1:
 				imgID = R.drawable.prio_high;
@@ -73,9 +76,10 @@ public class ListViewAdapterStd extends ArrayAdapter<ToDoTask> {
 				break;
 		}
 		
-		holder.prioImage.setImageResource(imgID);
-		if (iconVisibility) holder.prioImage.setVisibility(ImageView.VISIBLE);
-		else holder.prioImage.setVisibility(ImageView.INVISIBLE);
+		if (iconVisibility) {
+			holder.prioImage.setVisibility(ImageView.VISIBLE);
+			holder.prioImage.setImageResource(imgID);
+		}
 		
 		return rowView;
 	}
