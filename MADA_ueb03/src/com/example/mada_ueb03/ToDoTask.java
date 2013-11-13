@@ -51,6 +51,9 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 		return priority;
 	}
 
+	/*
+	 * setzt prioritaet
+	 */
 	public void setPriority(int priority) throws InvalidPrioException {
 		if(priority < 1 || priority > 3)
 			throw new InvalidPrioException(INVALID_PRIORITY_VALUE);

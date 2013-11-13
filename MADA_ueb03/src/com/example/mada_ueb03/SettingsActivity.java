@@ -50,6 +50,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		updatePreferenceSummarys();
 	}
 
+	/*
+	 * ktulaisiert die Zusammenfassung nach Aenderungen
+	 */
 	@SuppressWarnings("deprecation")
 	private void updatePreferenceSummarys() {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -60,9 +63,14 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		prefTheme.setSummary(prefTheme.getEntry());
 	}
 
+	/*
+	 * Initalisiert die Views
+	 */
 	@SuppressWarnings("deprecation")
 	private void initializePreferences() {
 		prefFontsizeHead = (EditTextPreference) findPreference(FONTSIZE_HEAD);
+		
+		//Listener, der das TextFeld limitiert
 		prefFontsizeHead.getEditText().setOnKeyListener(
 				new EditText.OnKeyListener() {
 					@Override

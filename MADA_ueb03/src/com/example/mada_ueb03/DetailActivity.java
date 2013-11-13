@@ -42,7 +42,8 @@ public class DetailActivity extends Activity {
 			}
 		}
 	}
-
+	
+	//Listener werden definiert
 	private void setListeners() {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -66,6 +67,10 @@ public class DetailActivity extends Activity {
 		priority.setAdapter(new PrioSpinnerAdapter(this, R.layout.prio_spinner_std, prioArray));
 	}
 
+	/**
+	 * 
+	 * @throws InvalidPrioException wenn Prio nicht zwischen 1 und 3
+	 */
 	private void save() throws InvalidPrioException {
 		Intent intent = new Intent();
 		
@@ -99,6 +104,9 @@ public class DetailActivity extends Activity {
 		finish();
 	}
 
+	/*
+	 * Wird nach DetailActivity abbrechen aufgerufen
+	 */
 	private void cancel() {
 		setResult(RESULT_CANCELED);
 		finish();

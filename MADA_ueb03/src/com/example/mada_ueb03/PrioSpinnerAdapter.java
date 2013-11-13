@@ -36,6 +36,10 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 		return getCustomView(position, convertView, parent);
 	}
 
+	
+	/*
+	 * @return View gibt Listenelement zurueck
+	 */
 	public View getCustomView(int position, View convertView, ViewGroup parent) {
 
 		LayoutInflater inflater = context.getLayoutInflater();

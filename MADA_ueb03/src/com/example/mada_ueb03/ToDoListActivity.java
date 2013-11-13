@@ -70,6 +70,7 @@ public class ToDoListActivity extends ListActivity {
 		editTask(position);
 	}
 
+	//Ruft neue Activity zum bearbeiten auf
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(SEND_CODE_SERIALIZE, taskList.get(taskPosition));
@@ -77,6 +78,7 @@ public class ToDoListActivity extends ListActivity {
 		startActivityForResult(intent, REQUEST_CODE_EDIT);
 	}
 
+	//Ruft neue Activity zum erstellen eines Items auf
 	private void createNewTask() {
 		Intent intent = new Intent(this, DetailActivity.class);
 		intent.putExtra(CALL_TYPE, REQUEST_CODE_NEW);
@@ -84,6 +86,8 @@ public class ToDoListActivity extends ListActivity {
 		startActivityForResult(intent, REQUEST_CODE_NEW);
 	}
 
+	
+	//setzt den counter fuer die ids zu setzen
 	private void initIDCounter() {
 		IDCounter = 0;
 		for (ToDoTask task : taskList) {
@@ -91,6 +95,8 @@ public class ToDoListActivity extends ListActivity {
 		}
 	}
 
+	
+	// zeigt die liste mit dem ausgewaeltem theme und sortiert sie
 	private void showListView() {
 		Collections.sort(taskList);
 
@@ -119,6 +125,8 @@ public class ToDoListActivity extends ListActivity {
 		getListView().setDividerHeight(DIVIDER);
 	}
 
+	
+	//laed die listview
 	private void loadTasks(ArrayList<ToDoTask> taskList) {
 
 		if (taskList != null) {
@@ -130,6 +138,9 @@ public class ToDoListActivity extends ListActivity {
 		}
 	}
 
+	/*
+	 * speichert Aenderungen
+	 */
 	private void saveChanges(Intent data) {
 		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
 		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
@@ -138,6 +149,7 @@ public class ToDoListActivity extends ListActivity {
 		showListView();
 	}
 
+	//Laed die listview aus der datei
 	private ArrayList<ToDoTask> loadFromFile() {
 
 		ArrayList<ToDoTask> tasks = null;
@@ -154,6 +166,10 @@ public class ToDoListActivity extends ListActivity {
 		return tasks;
 	}
 
+	
+	/*
+	 * Speichetr die ListView in eine Datei
+	 */
 	private void saveToFile() {
 
 		File dir = new File(filePath, DIR_NAME);
@@ -169,6 +185,8 @@ public class ToDoListActivity extends ListActivity {
 		}
 	}
 
+	
+	//Fuegt einen neuen Task in die Liste hinzu
 	private void addNewTask(Intent data) {
 		taskList.add((ToDoTask) data.getSerializableExtra(RECIEVE_TASK));
 		IDCounter++;
@@ -193,6 +211,8 @@ public class ToDoListActivity extends ListActivity {
 		}
 	}
 
+	
+	//Loscht einen Task aus der Liste
 	private void deleteTask(Intent data) {
 		taskList.remove(data.getSerializableExtra(RECIEVE_TASK));
 		saveToFile();
