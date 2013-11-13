@@ -30,18 +30,20 @@ public class DetailActivity extends Activity {
 		initViews();
 		setListeners();
 
+		// Check if edit or create
 		if (savedInstanceState == null) {
 			if (getIntent().getIntExtra(ToDoListActivity.CALL_TYPE, -1) == ToDoListActivity.REQUEST_CODE_EDIT) {
+				// Edit selected task
 				updateViews((ToDoTask) getIntent().getExtras().getSerializable(
 						ToDoListActivity.SEND_CODE_SERIALIZE));
 			} else {
+				// Create new task
 				task = new ToDoTask("", "", 1, getIntent().getIntExtra(ToDoListActivity.RECIEVE_CODE_ID, -1));
 			}
 		}
 	}
 
 	private void setListeners() {
-
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -67,6 +69,7 @@ public class DetailActivity extends Activity {
 	private void save() throws InvalidPrioException {
 		Intent intent = new Intent();
 		
+		// Save title
 		try {
 			task.setTitle(title.getText().toString());
 		} catch (NullPointerException e) {
@@ -74,6 +77,7 @@ public class DetailActivity extends Activity {
 			return;
 		}
 		
+		// Save description
 		try {
 			task.setDescription(description.getText().toString());
 		} catch (NullPointerException e) {
@@ -81,6 +85,7 @@ public class DetailActivity extends Activity {
 			return;
 		}
 		
+		// Save priority
 		try {
 			task.setPriority(priority.getSelectedItemPosition() + 1);
 		} catch (InvalidPrioException e) {
@@ -88,6 +93,7 @@ public class DetailActivity extends Activity {
 			return;
 		}
 		
+		// Forward new task to ToDoListActivity
 		intent.putExtra(ToDoListActivity.RECIEVE_TASK, task);
 		setResult(RESULT_OK, intent);
 		finish();
@@ -98,6 +104,7 @@ public class DetailActivity extends Activity {
 		finish();
 	}
 
+	// Reference views
 	private void initViews() {
 		save = (Button) findViewById(R.id.detail_bt_save);
 		cancel = (Button) findViewById(R.id.detail_bt_cancel);
@@ -106,6 +113,7 @@ public class DetailActivity extends Activity {
 		priority = (Spinner) findViewById(R.id.spinner_priority);
 	}
 
+	// Update views with new task
 	private void updateViews(ToDoTask task) {
 		this.task = task;
 		title.setText(task.getTitle());
@@ -115,7 +123,6 @@ public class DetailActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.detail_menu, menu);
 		return true;
 	}
@@ -127,6 +134,7 @@ public class DetailActivity extends Activity {
 			case R.id.menu_delete:
 				Intent intent = new Intent();
 				intent.putExtra(ToDoListActivity.RECIEVE_TASK, task);
+				// Go back to main activity
 				setResult(ToDoListActivity.RESULT_DELETE, intent);
 				finish();
 				break;

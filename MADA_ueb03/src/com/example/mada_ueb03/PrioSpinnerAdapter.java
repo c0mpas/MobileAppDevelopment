@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Spinner for selection of priority
+ */
 public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 
 	private Activity context;
@@ -40,24 +43,24 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 		TextView prio = (TextView) row.findViewById(R.id.textSpinnerPrio);
 		ImageView img = (ImageView) row.findViewById(R.id.imgSpinnerPrio);
 		
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		int selectedTheme = Integer.valueOf(((prefs.getString(SettingsActivity.THEME,
-				SettingsActivity.DEFAULT_THEME))));
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		int selectedTheme = Integer.valueOf(((
+				prefs.getString(SettingsActivity.THEME, SettingsActivity.DEFAULT_THEME))));
 
 		if (selectedTheme == SettingsActivity.THEME_VALUE_ANDROID) {
 			
 			if (prios[position].equals(1)) {			
 				img.setImageResource(R.drawable.prio_high);	
 				prio.setText(R.string.prio_high);
-			}
-			if (prios[position].equals(2)) {			
+			} else if (prios[position].equals(2)) {			
 				img.setImageResource(R.drawable.prio_mid);	
 				prio.setText(R.string.prio_mid);
-			}
-			if (prios[position].equals(3)) {			
+			} else if (prios[position].equals(3)) {			
 				img.setImageResource(R.drawable.prio_low);	
 				prio.setText(R.string.prio_low);
+			} else {
+				img.setImageResource(R.drawable.prio_mid);	
+				prio.setText(R.string.prio_mid);
 			}
 			
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_KITTY) {
@@ -65,14 +68,15 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 			if (prios[position].equals(1)) {			
 				img.setImageResource(R.drawable.kitty_high);	
 				prio.setText(R.string.prio_high);
-			}
-			if (prios[position].equals(2)) {			
+			} else if (prios[position].equals(2)) {			
 				img.setImageResource(R.drawable.kitty_mid);	
 				prio.setText(R.string.prio_mid);
-			}
-			if (prios[position].equals(3)) {			
+			} else if (prios[position].equals(3)) {			
 				img.setImageResource(R.drawable.kitty_low);	
 				prio.setText(R.string.prio_low);
+			} else {
+				img.setImageResource(R.drawable.kitty_mid);	
+				prio.setText(R.string.prio_mid);
 			}
 			
 		} else if (selectedTheme == SettingsActivity.THEME_VALUE_SIMPLE) {
@@ -80,14 +84,15 @@ public class PrioSpinnerAdapter extends ArrayAdapter<Integer> {
 			if (prios[position].equals(1)) {			
 				img.setImageResource(R.drawable.simple_high);	
 				prio.setText(R.string.prio_high);
-			}
-			if (prios[position].equals(2)) {			
+			} else if (prios[position].equals(2)) {			
 				img.setImageResource(R.drawable.simple_med);	
 				prio.setText(R.string.prio_mid);
-			}
-			if (prios[position].equals(3)) {			
+			} else if (prios[position].equals(3)) {			
 				img.setImageResource(R.drawable.simple_low);	
 				prio.setText(R.string.prio_low);
+			} else {
+				img.setImageResource(R.drawable.simple_med);	
+				prio.setText(R.string.prio_mid);
 			}
 			
 		}

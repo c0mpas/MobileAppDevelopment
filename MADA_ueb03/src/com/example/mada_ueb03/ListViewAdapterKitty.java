@@ -19,6 +19,7 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 	private int imgID;
 	private boolean iconVisibility;
 
+	// Colors
 	public static final int BACK = Color.parseColor("#FAA7D1");
 
 	static class ViewHolder {
@@ -27,9 +28,11 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 		public ImageView prioImage;
 	}
 
+	/**
+	 * Constructor
+	 */
 	public ListViewAdapterKitty(Activity context,  ArrayList<ToDoTask> tasks) {
 		super(context, R.layout.listview_element_kitty, tasks);
-		
 		this.context = context;
 		this.tasks = tasks;
 	}
@@ -40,16 +43,21 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 		if (rowView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
 			rowView = inflater.inflate(R.layout.listview_element_kitty, null);
-			
 			ViewHolder viewHolder = new ViewHolder();
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			
+			// Reference Views
 			viewHolder.title = (TextView) rowView.findViewById(R.id.listelement_title);
 			viewHolder.description = (TextView) rowView.findViewById(R.id.listelement_description);
 			viewHolder.prioImage = (ImageView) rowView.findViewById(R.id.listelement_img);
+			
+			// Set font sizes from preferences
 			viewHolder.title.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
 			viewHolder.description.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
+			
+			// Set icon visibility
 			iconVisibility = prefs.getBoolean(SettingsActivity.ICON, true);
 			
 			rowView.setTag(viewHolder);
@@ -60,6 +68,7 @@ public class ListViewAdapterKitty extends ArrayAdapter<ToDoTask> {
 		holder.title.setText(tasks.get(position).getTitle());
 		holder.description.setText(tasks.get(position).getDescription());
 
+		// Select icon for priority
 		switch (tasks.get(position).getPriority()) {
 			case 1:
 				imgID = R.drawable.kitty_high;
