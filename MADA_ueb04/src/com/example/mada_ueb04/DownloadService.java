@@ -11,14 +11,20 @@ import java.net.URLConnection;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ResultReceiver;
 import android.util.Log;
 
 public class DownloadService extends IntentService {
 
 	public static final int UPDATE_PROGRESS = 1005;
+	
+	private String filePath;
 
 	public DownloadService() {
+		
+
+
 
 		super("DownloadService");
 	}
@@ -33,6 +39,8 @@ public class DownloadService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
+		filePath = Environment.getExternalStorageDirectory().toString();
+		
 		Log.d("SERVICE", "Start download");
 
 		String urlToDownload = intent.getStringExtra("url");
@@ -48,7 +56,7 @@ public class DownloadService extends IntentService {
 
 			// download the file
 			InputStream input = new BufferedInputStream(url.openStream());
-			OutputStream output = new FileOutputStream("/sdcard/testimg.png");
+			OutputStream output = new FileOutputStream(filePath+"/pic1.png");
 
 			byte data[] = new byte[1024];
 			long total = 0;
