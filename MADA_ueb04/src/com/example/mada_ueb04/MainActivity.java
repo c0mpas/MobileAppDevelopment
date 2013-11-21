@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 		referenceViews();
 
 		Intent intent = new Intent(this, DownloadService.class);
-		intent.putExtra("url", "http://youswap.tv/resources/logo.png");
+		intent.putExtra("url", "http://de.download.nvidia.com/Windows/331.82/331.82-desktop-win8-win7-winvista-32bit-international-whql.exe");
 		intent.putExtra("receiver", receiver);
 		startService(intent);
 	}
