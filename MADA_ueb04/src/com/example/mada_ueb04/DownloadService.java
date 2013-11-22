@@ -21,15 +21,13 @@ import android.util.Log;
 public class DownloadService extends IntentService {
 
 	public static final int UPDATE_PROGRESS = 1005;
-	
+	public static final String INTENT_KEY = "myawesomekey";
+
 	private String filePath;
 	private NotificationManager mNotifyManager;
 	private NotificationCompat.Builder mBuilder;
 
 	public DownloadService() {
-		
-
-
 
 		super("DownloadService");
 	}
@@ -43,22 +41,25 @@ public class DownloadService extends IntentService {
 	// Will be called asynchronously be Android
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		mNotifyManager =
-		        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mBuilder = new NotificationCompat.Builder(this);
 		mBuilder.setContentTitle("Download")
-		    .setContentText(getString(R.string.downloadProgress))
-		    .setSmallIcon(R.drawable.ic_launcher);
-		
+				.setContentText(getString(R.string.downloadProgress)+getString(R.string.zeroPercent))
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setProgress(100, 0, false);
+			
 
 		filePath = Environment.getExternalStorageDirectory().toString();
-		
+
 		Log.d("SERVICE", "Start download");
 
 		String urlToDownload = intent.getStringExtra("url");
-		ResultReceiver receiver = (ResultReceiver) intent
-				.getParcelableExtra("receiver");
+		
+		Intent resuktIntent = new Intent();
+		resuktIntent.setAction(INTENT_KEY);
+        
+
 		try {
 			URL url = new URL(urlToDownload);
 			URLConnection connection = url.openConnection();
@@ -69,32 +70,39 @@ public class DownloadService extends IntentService {
 
 			// download the file
 			InputStream input = new BufferedInputStream(url.openStream());
-			OutputStream output = new FileOutputStream(filePath+"/pic02.exe");
+			OutputStream output = new FileOutputStream(filePath + "/pic02.exe");
 
-			byte data[] = new byte[1024];
+			int progress = 0;
+			int lastProgress = 0;
+
+			byte data[] = new byte[16384];
 			long total = 0;
 			int count;
 			while ((count = input.read(data)) != -1) {
 				total += count;
 				// publishing the progress....
-				Bundle resultData = new Bundle();
-				
-				int progress =  (int) (total * 100 / fileLength);
-				resultData.putInt("progress", progress);
-				receiver.send(UPDATE_PROGRESS, resultData);
-				
-				mBuilder.setProgress(100, progress, false)
-						.setContentText(getString(R.string.downloadProgress)+progress+getString(R.string.percent));
-                // Displays the progress bar for the first time.
-                mNotifyManager.notify(0, mBuilder.build());
-                
-                if(progress == 100)
-                	mBuilder.setProgress(100, progress, false)
-					.setContentText(getString(R.string.finishedDownload));
-            // Displays the progress bar for the first time.
-            mNotifyManager.notify(0, mBuilder.build());
-                	
-				
+				progress = (int) (total * 100 / fileLength);
+
+				if (lastProgress < progress) {
+
+			        resuktIntent.putExtra("progress", progress);
+			        this.sendBroadcast(resuktIntent);
+
+					mBuilder.setProgress(100, progress, false).setContentText(
+							getString(R.string.downloadProgress) + progress
+									+ getString(R.string.percent));
+					// Displays the progress bar for the first time.
+					mNotifyManager.notify(0, mBuilder.build());
+
+					lastProgress = progress;
+				}
+
+				if (progress == 100)
+					mBuilder.setProgress(100, progress, false).setContentText(
+							getString(R.string.finishedDownload));
+				// Displays the progress bar for the first time.
+				mNotifyManager.notify(0, mBuilder.build());
+
 				output.write(data, 0, count);
 			}
 

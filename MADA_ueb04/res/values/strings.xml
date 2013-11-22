@@ -8,5 +8,6 @@
     <string name="downloadProgress">Dowloadfortschritt:</string>
     <string name="percent">%</string>
     <string name="finishedDownload">Download abgeschlossen!</string>
+    <string name="zeroPercent">0%</string>
 
 </resources>
