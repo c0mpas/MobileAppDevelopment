@@ -12,12 +12,15 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private ProgressBar progressBar;
 	private Button startDownload;
+	private TextView url;
+	private TextView saveName;
 
 	private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -43,20 +46,29 @@ public class MainActivity extends Activity {
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		startDownload = (Button) findViewById(R.id.startDownload);
+		url = (TextView) findViewById(R.id.url);
+		saveName = (TextView) findViewById(R.id.saveName);
+
 		startDownload.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
 				if (!isMyServiceRunning()) {
-					Intent intent = new Intent(getApplicationContext(), DownloadService.class);
-					intent.putExtra(
-							"url",
-							"http://de.download.nvidia.com/Windows/331.82/331.82-desktop-win8-win7-winvista-32bit-international-whql.exe");
 
-					startService(intent);
-				}else
-					Toast.makeText(getApplicationContext(), "Download läuft bereits", Toast.LENGTH_SHORT).show();
+					if (fieldsAreFilled()) {
+						Intent intent = new Intent(getApplicationContext(),
+								DownloadService.class);
+						intent.putExtra("url", url.getText().toString())
+								.putExtra("saveName",
+										saveName.getText().toString());
+
+						startService(intent);
+					}
+				} else
+					Toast.makeText(getApplicationContext(),
+							"Download läuft bereits", Toast.LENGTH_SHORT)
+							.show();
 			}
 		});
 
@@ -70,7 +82,6 @@ public class MainActivity extends Activity {
 		referenceViews();
 
 	}
-
 
 	@Override
 	protected void onPause() {
@@ -96,6 +107,20 @@ public class MainActivity extends Activity {
 			}
 		}
 		return false;
+	}
+
+	private boolean fieldsAreFilled() {
+		if (url.getText().toString().isEmpty()) {
+			Toast.makeText(this, "Bitte Download-URL angeben!",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		} else if (saveName.getText().toString().isEmpty()) {
+			Toast.makeText(this, "Bitte Speichername angeben!",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		} else
+			return true;
+
 	}
 
 }

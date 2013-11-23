@@ -38,7 +38,7 @@ public class DownloadService extends IntentService {
 		return START_STICKY;
 	}
 
-	// Will be called asynchronously be Android
+
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
@@ -55,7 +55,7 @@ public class DownloadService extends IntentService {
 		Log.d("SERVICE", "Start download");
 
 		String urlToDownload = intent.getStringExtra("url");
-		
+		String saveName = intent.getStringExtra("saveName");
 		Intent resuktIntent = new Intent();
 		resuktIntent.setAction(INTENT_KEY);
         
@@ -70,7 +70,7 @@ public class DownloadService extends IntentService {
 
 			// download the file
 			InputStream input = new BufferedInputStream(url.openStream());
-			OutputStream output = new FileOutputStream(filePath + "/pic02.exe");
+			OutputStream output = new FileOutputStream(filePath + "/"+saveName);
 
 			int progress = 0;
 			int lastProgress = 0;
@@ -110,7 +110,7 @@ public class DownloadService extends IntentService {
 			output.close();
 			input.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			Log.wtf("IOEXCEPTION", e);		
+			}
 	}
 }
