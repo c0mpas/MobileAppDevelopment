@@ -9,5 +9,10 @@
     <string name="percent">%</string>
     <string name="finishedDownload">Download abgeschlossen!</string>
     <string name="zeroPercent">0%</string>
+    <string name="download_erfolgreich">Download erfolgreich</string>
+    <string name="download_running">Download läuft bereits</string>
+    <string name="url_needed">Bitte Download-URL angeben!</string>
+    <string name="save_name_needed">Bitte Speichername angeben!</string>
+    <string name="notification_header">Download</string>
 
 </resources>

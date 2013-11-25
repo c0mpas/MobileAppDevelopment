@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -20,6 +21,8 @@ import android.util.Log;
 
 public class DownloadService extends IntentService {
 
+	private static final String DOWNLOAD_SERVICE = "DownloadService";
+	public static final String PROGRESS = "progress";
 	public static final int UPDATE_PROGRESS = 1005;
 	public static final String INTENT_KEY = "myawesomekey";
 
@@ -29,7 +32,7 @@ public class DownloadService extends IntentService {
 
 	public DownloadService() {
 
-		super("DownloadService");
+		super(DOWNLOAD_SERVICE);
 	}
 
 	@Override
@@ -44,7 +47,7 @@ public class DownloadService extends IntentService {
 
 		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mBuilder = new NotificationCompat.Builder(this);
-		mBuilder.setContentTitle("Download")
+		mBuilder.setContentTitle(getString(R.string.notification_header))
 				.setContentText(getString(R.string.downloadProgress)+getString(R.string.zeroPercent))
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setProgress(100, 0, false);
@@ -54,8 +57,8 @@ public class DownloadService extends IntentService {
 
 		Log.d("SERVICE", "Start download");
 
-		String urlToDownload = intent.getStringExtra("url");
-		String saveName = intent.getStringExtra("saveName");
+		String urlToDownload = intent.getStringExtra(MainActivity.URL);
+		String saveName = intent.getStringExtra(MainActivity.SAVE_NAME);
 		Intent resuktIntent = new Intent();
 		resuktIntent.setAction(INTENT_KEY);
         
@@ -85,7 +88,7 @@ public class DownloadService extends IntentService {
 
 				if (lastProgress < progress) {
 
-			        resuktIntent.putExtra("progress", progress);
+			        resuktIntent.putExtra(PROGRESS, progress);
 			        this.sendBroadcast(resuktIntent);
 
 					mBuilder.setProgress(100, progress, false).setContentText(

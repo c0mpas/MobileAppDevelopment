@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	public static final String SAVE_NAME = "saveName";
+	public static final String URL = "url";
 	private ProgressBar progressBar;
 	private Button startDownload;
 	private TextView url;
@@ -29,11 +31,11 @@ public class MainActivity extends Activity {
 
 			if (intent.getAction().equals(DownloadService.INTENT_KEY)) {
 
-				int progress = intent.getIntExtra("progress", 0);
+				int progress = intent.getIntExtra(DownloadService.PROGRESS, 0);
 				progressBar.setProgress(progress);
 				if (progress == 100) {
 					Toast.makeText(getApplicationContext(),
-							"Download erfolgreich", Toast.LENGTH_LONG).show();
+							R.string.download_erfolgreich, Toast.LENGTH_LONG).show();
 				}
 
 			}
@@ -59,15 +61,15 @@ public class MainActivity extends Activity {
 					if (fieldsAreFilled()) {
 						Intent intent = new Intent(getApplicationContext(),
 								DownloadService.class);
-						intent.putExtra("url", url.getText().toString())
-								.putExtra("saveName",
+						intent.putExtra(URL, url.getText().toString())
+								.putExtra(SAVE_NAME,
 										saveName.getText().toString());
 
 						startService(intent);
 					}
 				} else
 					Toast.makeText(getApplicationContext(),
-							"Download läuft bereits", Toast.LENGTH_SHORT)
+							R.string.download_running, Toast.LENGTH_SHORT)
 							.show();
 			}
 		});
@@ -111,11 +113,11 @@ public class MainActivity extends Activity {
 
 	private boolean fieldsAreFilled() {
 		if (url.getText().toString().isEmpty()) {
-			Toast.makeText(this, "Bitte Download-URL angeben!",
+			Toast.makeText(this, R.string.url_needed,
 					Toast.LENGTH_SHORT).show();
 			return false;
 		} else if (saveName.getText().toString().isEmpty()) {
-			Toast.makeText(this, "Bitte Speichername angeben!",
+			Toast.makeText(this, R.string.save_name_needed,
 					Toast.LENGTH_SHORT).show();
 			return false;
 		} else
