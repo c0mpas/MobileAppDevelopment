@@ -15,5 +15,9 @@
     <string name="save_name_needed">Bitte Speichername angeben!</string>
     <string name="notification_header">Download</string>
     <string name="stop">Stop</string>
+    <string name="download_url">Download-URL</string>
+    <string name="url_preselection">http://www.wallzbucket.com/data/media/100/Sexy_Girl9275.jpg</string>
+    <string name="save_file_name">Speichername</string>
+    <string name="progress">Ladefortschritt</string>
 
 </resources>

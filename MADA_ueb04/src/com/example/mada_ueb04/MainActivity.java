@@ -1,3 +1,4 @@
+
 package com.example.mada_ueb04;
 
 import android.app.Activity;
@@ -25,7 +26,6 @@ public class MainActivity extends Activity {
 	private Button startDownload;
 	private TextView url;
 	private TextView saveName;
-	private Intent serviceIntent;
 
 	private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -38,8 +38,7 @@ public class MainActivity extends Activity {
 				progressBar.setProgress(progress);
 				if (progress == 100) {
 					Toast.makeText(getApplicationContext(),
-							R.string.download_erfolgreich, Toast.LENGTH_LONG)
-							.show();
+							R.string.download_erfolgreich, Toast.LENGTH_LONG).show();
 				}
 
 			}
@@ -63,13 +62,13 @@ public class MainActivity extends Activity {
 				if (!isMyServiceRunning()) {
 
 					if (fieldsAreFilled()) {
-						serviceIntent = new Intent(getApplicationContext(),
+						Intent intent = new Intent(getApplicationContext(),
 								DownloadService.class);
-						serviceIntent.putExtra(URL, url.getText().toString())
+						intent.putExtra(URL, url.getText().toString())
 								.putExtra(SAVE_NAME,
 										saveName.getText().toString());
 
-						startService(serviceIntent);
+						startService(intent);
 					}
 				} else
 					Toast.makeText(getApplicationContext(),
@@ -117,12 +116,12 @@ public class MainActivity extends Activity {
 
 	private boolean fieldsAreFilled() {
 		if (url.getText().toString().isEmpty()) {
-			Toast.makeText(this, R.string.url_needed, Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, R.string.url_needed,
+					Toast.LENGTH_SHORT).show();
 			return false;
 		} else if (saveName.getText().toString().isEmpty()) {
-			Toast.makeText(this, R.string.save_name_needed, Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, R.string.save_name_needed,
+					Toast.LENGTH_SHORT).show();
 			return false;
 		} else
 			return true;
@@ -134,15 +133,15 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
 			case R.id.stop_download:
-				if(serviceIntent != null)		{		
-					stopService(serviceIntent);
-				}
+				Intent intent = new Intent();
+				intent.setAction(DownloadService.INTENT_KEY);				
+				stopService(intent);
 				break;
 				
 			default:
@@ -150,5 +149,7 @@ public class MainActivity extends Activity {
 		}
 		return true;
 	}
+	
 
 }
+
