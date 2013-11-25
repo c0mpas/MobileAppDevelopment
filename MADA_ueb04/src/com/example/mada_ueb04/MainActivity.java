@@ -53,6 +53,14 @@ public class MainActivity extends Activity {
 		startDownload = (Button) findViewById(R.id.startDownload);
 		url = (TextView) findViewById(R.id.url);
 		saveName = (TextView) findViewById(R.id.saveName);
+		
+		// Preset save filename
+		try {
+			String[] urlParts = url.getText().toString().split("/");
+			if (urlParts != null) saveName.setText(urlParts[urlParts.length-1]);
+		} catch (Exception e) {
+			// Don't care
+		}
 
 		startDownload.setOnClickListener(new View.OnClickListener() {
 
