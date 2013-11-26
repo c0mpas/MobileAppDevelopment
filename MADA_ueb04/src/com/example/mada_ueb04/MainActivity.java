@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -136,27 +135,27 @@ public class MainActivity extends Activity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_menu, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-			case R.id.stop_download:
-				Intent intent = new Intent();
-				intent.setAction(DownloadService.INTENT_KEY);				
-				stopService(intent);
-				break;
-				
-			default:
-				break;
-		}
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.main_menu, menu);
+//		return super.onCreateOptionsMenu(menu);
+//	}
+//	
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle item selection
+//		switch (item.getItemId()) {
+//			case R.id.stop_download:
+//				Intent intent = new Intent();
+//				intent.setAction(DownloadService.INTENT_KEY);				
+//				stopService(intent);
+//				break;
+//				
+//			default:
+//				break;
+//		}
+//		return true;
+//	}
 	
 
 }
