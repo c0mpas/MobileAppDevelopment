@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 		url = (TextView) findViewById(R.id.url);
 		saveName = (TextView) findViewById(R.id.saveName);
 		
-		// Preset save filename
+		// Preset save filename (from input url)
 		try {
 			String[] urlParts = url.getText().toString().split("/");
 			if (urlParts != null) saveName.setText(urlParts[urlParts.length-1]);
@@ -65,22 +65,16 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
 				if (!isMyServiceRunning()) {
-
-					if (fieldsAreFilled()) {
-						Intent intent = new Intent(getApplicationContext(),
-								DownloadService.class);
-						intent.putExtra(URL, url.getText().toString())
-								.putExtra(SAVE_NAME,
-										saveName.getText().toString());
-
+					if (verifyInput()) {
+						Intent intent = new Intent(getApplicationContext(), DownloadService.class);
+						intent.putExtra(URL, url.getText().toString().trim())
+							  .putExtra(SAVE_NAME, saveName.getText().toString().trim());
 						startService(intent);
 					}
 				} else
 					Toast.makeText(getApplicationContext(),
-							R.string.download_running, Toast.LENGTH_SHORT)
-							.show();
+							R.string.download_running, Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -90,9 +84,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		referenceViews();
-
 	}
 
 	@Override
@@ -111,27 +103,24 @@ public class MainActivity extends Activity {
 
 	private boolean isMyServiceRunning() {
 		ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		for (RunningServiceInfo service : manager
-				.getRunningServices(Integer.MAX_VALUE)) {
-			if (DownloadService.class.getName().equals(
-					service.service.getClassName())) {
+		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+			if (DownloadService.class.getName().equals(service.service.getClassName())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean fieldsAreFilled() {
-		if (url.getText().toString().isEmpty()) {
-			Toast.makeText(this, R.string.url_needed,
-					Toast.LENGTH_SHORT).show();
+	private boolean verifyInput() {
+		if (url.getText().toString().trim().isEmpty()) {
+			Toast.makeText(this, R.string.url_needed, Toast.LENGTH_SHORT).show();
 			return false;
-		} else if (saveName.getText().toString().isEmpty()) {
-			Toast.makeText(this, R.string.save_name_needed,
-					Toast.LENGTH_SHORT).show();
+		} else if (saveName.getText().toString().trim().isEmpty()) {
+			Toast.makeText(this, R.string.save_name_needed, Toast.LENGTH_SHORT).show();
 			return false;
-		} else
+		} else {
 			return true;
+		}
 
 	}
 
