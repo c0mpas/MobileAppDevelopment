@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 public class DownloadService extends IntentService {
 
-	private static final int BUFFERSIZE = 16384;
+	private static final int BUFFERSIZE = 65536;
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
 	public static final String PROGRESS = "progress";
 	public static final int UPDATE_PROGRESS = 1005;
