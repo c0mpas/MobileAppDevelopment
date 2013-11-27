@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
 	private TextView url;
 	private TextView saveName;
 
+	
+	//Receiver which receives the progress
 	private BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -42,6 +44,9 @@ public class MainActivity extends Activity {
 		}
 	};
 
+	/**
+	 * references the views
+	 */
 	private void referenceViews() {
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		startDownload = (Button) findViewById(R.id.startDownload);
@@ -96,6 +101,11 @@ public class MainActivity extends Activity {
 		super.onResume();
 	}
 
+	/**
+	 * Checks if service already running
+	 * 
+	 * @return true if service is running, false if service is not running
+	 */
 	private boolean isMyServiceRunning() {
 		ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -108,6 +118,8 @@ public class MainActivity extends Activity {
 
 	/**
 	 * Check url and filename
+	 * 
+	 * @return true if input ok, false if input not ok
 	 */
 	private boolean verifyInput() {
 		if (url.getText().toString().trim().isEmpty()) {
