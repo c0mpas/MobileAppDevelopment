@@ -19,5 +19,11 @@
     <string name="url_preselection">http://www.wallzbucket.com/data/media/100/Sexy_Girl9275.jpg</string>
     <string name="save_file_name">Speichername</string>
     <string name="progress">Ladefortschritt</string>
+    
+    <string name="error_service_general">Fehler beim Verbindungsaufbau</string>
+    <string name="error_service_download">Datei konnte nicht gelesen werden</string>
+    <string name="error_service_url_filepath">Ungültige URL \n\n (Dateipfad konnte nicht gefunden werden)</string>
+    <string name="error_service_url_host">Ungültige URL \n\n (Host konnte nicht gefunden werden)</string>
+    <string name="error_service_url_structure">Ungültige URL \n\n (Struktur der URL fehlerhaft)</string>
 
 </resources>
