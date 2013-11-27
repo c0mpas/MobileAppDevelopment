@@ -9,14 +9,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author Sebastian
+ */
 public class MainActivity extends Activity {
 
 	public static final String SAVE_NAME = "saveName";
@@ -27,27 +28,21 @@ public class MainActivity extends Activity {
 	private TextView saveName;
 
 	private BroadcastReceiver receiver = new BroadcastReceiver() {
-
 		@Override
 		public void onReceive(Context context, Intent intent) {
-
 			if (intent.getAction().equals(DownloadService.INTENT_KEY)) {
-
+				// Update progress bar
 				int progress = intent.getIntExtra(DownloadService.PROGRESS, 0);
 				progressBar.setProgress(progress);
 				if (progress == 100) {
 					Toast.makeText(getApplicationContext(),
 							R.string.download_erfolgreich, Toast.LENGTH_LONG).show();
 				}
-
 			}
-
 		}
-
 	};
 
 	private void referenceViews() {
-
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		startDownload = (Button) findViewById(R.id.startDownload);
 		url = (TextView) findViewById(R.id.url);
@@ -58,15 +53,15 @@ public class MainActivity extends Activity {
 			String[] urlParts = url.getText().toString().split("/");
 			if (urlParts != null) saveName.setText(urlParts[urlParts.length-1]);
 		} catch (Exception e) {
-			// Don't care
+			// Don't care 
 		}
 
 		startDownload.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				if (!isMyServiceRunning()) {
 					if (verifyInput()) {
+						// Create intent and start service
 						Intent intent = new Intent(getApplicationContext(), DownloadService.class);
 						intent.putExtra(URL, url.getText().toString().trim())
 							  .putExtra(SAVE_NAME, saveName.getText().toString().trim());
@@ -111,6 +106,9 @@ public class MainActivity extends Activity {
 		return false;
 	}
 
+	/**
+	 * Check url and filename
+	 */
 	private boolean verifyInput() {
 		if (url.getText().toString().trim().isEmpty()) {
 			Toast.makeText(this, R.string.url_needed, Toast.LENGTH_SHORT).show();
