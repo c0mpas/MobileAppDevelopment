@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 public class DownloadService extends IntentService {
 
+	private static final int BUFFERSIZE = 16384;
 	private static final String DOWNLOAD_SERVICE = "DownloadService";
 	public static final String PROGRESS = "progress";
 	public static final int UPDATE_PROGRESS = 1005;
@@ -51,6 +52,8 @@ public class DownloadService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
+		
+		// NotificationBar wird initalisiert
 		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mBuilder = new NotificationCompat.Builder(this);
 		mBuilder.setContentTitle(getString(R.string.notification_header))
@@ -67,6 +70,8 @@ public class DownloadService extends IntentService {
 		resultIntent.setAction(INTENT_KEY);
         
 		try {
+			
+			//Connect to file url
 			URL url = new URL(urlToDownload);
 			URLConnection connection = url.openConnection();
 			connection.connect();
@@ -82,7 +87,7 @@ public class DownloadService extends IntentService {
 			int progress = 0;
 			int lastProgress = 0;
 
-			byte data[] = new byte[16384];
+			byte data[] = new byte[BUFFERSIZE];
 			long total = 0;
 			int count;
 			while ((count = input.read(data)) != -1) {
@@ -115,6 +120,8 @@ public class DownloadService extends IntentService {
 			output.flush();
 			output.close();
 			input.close();
+			
+			//Catch different Exception with reaction
 		} catch (MalformedURLException e) {
 			handler.post(new Runnable() {
 			    public void run() {
