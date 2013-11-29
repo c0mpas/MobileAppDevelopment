@@ -21,9 +21,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	public static final String DEFAULT_SNOOZE_TIME = "5";
 	public static final int DEFAULT_SNOOZE_TIME_INT = 5;
 	
-	SharedPreferences prefs;
-	EditTextPreference prefSnoozeTime;
-	SwitchPreference prefAlarmStatus;
+	private SharedPreferences prefs;
+	private EditTextPreference prefSnoozeTime;
+	private SwitchPreference prefAlarmStatus;
     
 	
 	@SuppressWarnings("deprecation")

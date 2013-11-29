@@ -2,9 +2,11 @@ package com.example.mada_ueb05;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,7 @@ public class AlarmActivity extends Activity {
 
 	private static final int ALARMTIME = 30000;
 	
+	private SharedPreferences prefs;
 	private Button off;
 	private Button snooze;
 	private MediaPlayer player;
@@ -24,6 +27,11 @@ public class AlarmActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alarm);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		// Stop if alarm is off
+		if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
+		
 		referenceViews();
 		setListeners();
 		player = MediaPlayer.create(this, R.raw.alarm);
@@ -40,6 +48,7 @@ public class AlarmActivity extends Activity {
 		snooze.setOnClickListener(snoozeListener);
 	}
 	
+	// Plays the alarm sound
 	private void startAlarm() {
 		player.setLooping(true);
 		player.start();
@@ -47,12 +56,17 @@ public class AlarmActivity extends Activity {
 		player.stop();
 	}
 
+	// Stops the alarm sound
 	private void stopAlarm() {
 		player.stop();
+		SystemClock.sleep(2000);
+		this.finish();
 	}
 
+	// Set new alarm and stop current alarm sound
 	private void snoozeAlarm() {
-		// snooze alarm sound
+		// SET NEW ALARM HERE !!!
+		stopAlarm();
 	}
 	
 	private OnClickListener offListener = new OnClickListener() {
