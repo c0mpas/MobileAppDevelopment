@@ -50,10 +50,15 @@ public class AlarmActivity extends Activity {
 	
 	// Plays the alarm sound
 	private void startAlarm() {
-		player.setLooping(true);
-		player.start();
-		SystemClock.sleep(ALARMTIME);
-		player.stop();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				player.setLooping(true);
+				player.start();
+				SystemClock.sleep(ALARMTIME);
+				player.stop();
+			}
+		}).start();
 	}
 
 	// Stops the alarm sound
