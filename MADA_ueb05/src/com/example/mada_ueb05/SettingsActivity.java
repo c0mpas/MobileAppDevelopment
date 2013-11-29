@@ -6,19 +6,22 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.EditText;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
-	// snooze_time
-	
+	public static final String ALARM_STATUS = "alarm_status";
 	public static final String SNOOZE_TIME = "snooze_time";
+	public static final boolean DEFAULT_ALARM_STATUS = false;
 	public static final String DEFAULT_SNOOZE_TIME = "5";
 	
 	SharedPreferences prefs;
-	
 	EditTextPreference prefSnoozeTime;
-
+	SwitchPreference prefAlarmStatus;
+    
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -43,19 +46,17 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	@SuppressWarnings("deprecation")
 	private void initializePreferences() {
 		prefSnoozeTime = (EditTextPreference) findPreference(SNOOZE_TIME);
+		prefAlarmStatus = (SwitchPreference) findPreference(ALARM_STATUS);
 		
-		/*
-		//Listener, der das TextFeld limitiert
-		prefFontsizeHead.getEditText().setOnKeyListener(
-				new EditText.OnKeyListener() {
-					@Override
-					public boolean onKey(View v, int keyCode, KeyEvent event) {
-						if (prefFontsizeHead.getEditText().getText().length() > 1) return true;
-						return false;
-					}
-				});
-		 */
-		
+		// Listener, der das TextFeld limitiert
+		prefSnoozeTime.getEditText().setOnKeyListener(
+			new EditText.OnKeyListener() {
+				@Override
+				public boolean onKey(View v, int keyCode, KeyEvent event) {
+					if (prefSnoozeTime.getEditText().getText().length() > 1) return true;
+					return false;
+				}
+			});
 	}
 
 	@SuppressWarnings("deprecation")

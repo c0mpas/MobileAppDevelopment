@@ -5,8 +5,7 @@
 	    android:title="@string/alarm_status"
 	    android:key="alarm_status"
 	    android:defaultValue="false"
-	    android:order="1"
-	    android:summary="no summary" />
+	    android:order="1" />
     
     <EditTextPreference
         android:title="@string/snooze_time"
