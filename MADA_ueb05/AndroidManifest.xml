@@ -26,6 +26,10 @@
             android:name="com.example.mada_ueb05.AlarmActivity"
             android:label="@string/alarm" >
         </activity>
+        <activity
+            android:name="com.example.mada_ueb05.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

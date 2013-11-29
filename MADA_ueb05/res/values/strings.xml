@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <resources>
 
     <string name="app_name">MADA_ueb05</string>
@@ -10,6 +9,11 @@
     <string name="lblDate">Datum:</string>
     <string name="snooze">SNOOZE</string>
     <string name="off">OFF</string>
+
     <string name="lblTime">Uhrzeit:</string>
+
+    <string name="snooze_time">Snooze-Zeit</string>
+    <string name="title_activity_settings">Einstellungen</string>
+
 
 </resources>
