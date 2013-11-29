@@ -12,8 +12,14 @@ public class InvalidPrioException extends Exception {
 	
 	/*
 	 * Konstrukor fuer eigene Exception mit Nachricht
-	 */public InvalidPrioException(String msg){
+	 */
+	
+	public InvalidPrioException(String msg){
 		super(msg);
+	}
+	
+	public InvalidPrioException(Throwable tr) {
+		super(tr);
 	}
 
 }
