@@ -48,6 +48,7 @@ public class AlarmActivity extends Activity {
 		snooze.setOnClickListener(snoozeListener);
 	}
 	
+	// Plays the alarm sound
 	private void startAlarm() {
 		player.setLooping(true);
 		player.start();
@@ -55,12 +56,14 @@ public class AlarmActivity extends Activity {
 		player.stop();
 	}
 
+	// Stops the alarm sound
 	private void stopAlarm() {
 		player.stop();
 		SystemClock.sleep(2000);
 		this.finish();
 	}
 
+	// Set new alarm and stop current alarm sound
 	private void snoozeAlarm() {
 		// SET NEW ALARM HERE !!!
 		stopAlarm();
