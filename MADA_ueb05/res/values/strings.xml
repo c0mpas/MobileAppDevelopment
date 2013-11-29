@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="wakeMeUp">Wecken</string>
     <string name="alarm">Alarm</string>
+    <string name="snooze">SNOOZE</string>
+    <string name="off">OFF</string>
 
 </resources>
