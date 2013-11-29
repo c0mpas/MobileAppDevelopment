@@ -24,8 +24,8 @@ import android.widget.Toast;
 public class ConfAlarm extends Activity {
 
 	private AlarmManager mng;
-	private PendingIntent pAlarmIntent ;
-	
+	private PendingIntent pAlarmIntent;
+
 	private TimePickerDialog timePicker;
 	private DatePickerDialog datePicker;
 	private Switch alarmSwitch;
@@ -186,17 +186,12 @@ public class ConfAlarm extends Activity {
 	}
 
 	private long calcAlarmTime() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, day, hour, minute, 0);
+		long startTime = calendar.getTimeInMillis();
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.MONTH, month);
-		cal.set(Calendar.YEAR, year);
+		return ( startTime - System.currentTimeMillis());
 
-		Time dtNow = new Time();
-		dtNow.setToNow();
-
-		return (cal.getTimeInMillis() + (hour * 60 * 60 * 1000) + (minute * 60 * 1000))
-				- dtNow.toMillis(false);
 	}
 
 	private void disableMyAlarm() {
@@ -211,8 +206,10 @@ public class ConfAlarm extends Activity {
 
 		long alarmTime = calcAlarmTime();
 
-		if (alarmTime < 1)
+		if (alarmTime < 1){
 			Toast.makeText(this, R.string.timeLTOne, Toast.LENGTH_SHORT).show();
+			alarmSwitch.setChecked(false);
+		}
 		else
 			// Alarm setzen
 			mng.set(AlarmManager.ELAPSED_REALTIME, alarmTime, pAlarmIntent);
