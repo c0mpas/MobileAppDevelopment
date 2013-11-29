@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,6 +23,7 @@ public class AlarmActivity extends Activity {
 		setContentView(R.layout.activity_alarm);
 		referenceViews();
 		setListeners();
+		player = MediaPlayer.create(this, R.raw.alarm);
 		startAlarm();
 	}
 
@@ -38,7 +38,6 @@ public class AlarmActivity extends Activity {
 	}
 	
 	private void startAlarm() {
-		player = MediaPlayer.create(this, R.raw.alarm);
 		player.setLooping(true);
 		player.start();
 		SystemClock.sleep(ALARMTIME);
@@ -46,7 +45,7 @@ public class AlarmActivity extends Activity {
 	}
 
 	private void stopAlarm() {
-		// turn off alarm sound
+		player.stop();
 	}
 
 	private void snoozeAlarm() {
