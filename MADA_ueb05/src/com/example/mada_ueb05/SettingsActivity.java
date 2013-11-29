@@ -7,9 +7,11 @@ import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
@@ -17,6 +19,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	public static final String SNOOZE_TIME = "snooze_time";
 	public static final boolean DEFAULT_ALARM_STATUS = false;
 	public static final String DEFAULT_SNOOZE_TIME = "5";
+	public static final int DEFAULT_SNOOZE_TIME_INT = 5;
 	
 	SharedPreferences prefs;
 	EditTextPreference prefSnoozeTime;
