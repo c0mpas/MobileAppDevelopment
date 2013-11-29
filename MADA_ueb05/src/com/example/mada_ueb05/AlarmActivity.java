@@ -30,7 +30,7 @@ public class AlarmActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		// Stop if alarm is off
-		if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
+		// if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
 		
 		referenceViews();
 		setListeners();
@@ -64,7 +64,7 @@ public class AlarmActivity extends Activity {
 	// Stops the alarm sound
 	private void stopAlarm() {
 		player.stop();
-		SystemClock.sleep(2000);
+		SystemClock.sleep(1000);
 		this.finish();
 	}
 
