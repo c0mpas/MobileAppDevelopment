@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,7 +79,7 @@ public class ConfAlarm extends Activity {
 		Intent alarmIntent = new Intent(this, AlarmActivity.class);
 		/* Erstellen eines PendingIntents für eine Activity */
 		pAlarmIntent = PendingIntent.getActivity(this, 0, alarmIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+				PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
 	private void setTime() {
@@ -191,7 +192,7 @@ public class ConfAlarm extends Activity {
 		long startTime = calendar.getTimeInMillis();
 
 		return ( startTime - System.currentTimeMillis());
-
+	
 	}
 
 	private void disableMyAlarm() {
@@ -212,7 +213,7 @@ public class ConfAlarm extends Activity {
 		}
 		else
 			// Alarm setzen
-			mng.set(AlarmManager.ELAPSED_REALTIME, alarmTime, pAlarmIntent);
+			mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,SystemClock.elapsedRealtime()+ alarmTime, pAlarmIntent);
 
 	}
 
