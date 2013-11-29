@@ -13,7 +13,6 @@
     <string name="snooze_time">Snooze-Zeit</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="alarm_status">Alarmstatus</string>
-    <string name="msg_max_snooze_time">Die maximale Snooze-Zeit beträgt 60 Minuten</string>
-
+    <string name="timeLTOne">Zeitreisen sind noch nicht möglich!</string>
 
 </resources>
