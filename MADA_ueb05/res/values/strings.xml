@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <resources>
 
     <string name="app_name">MADA_ueb05</string>
@@ -7,5 +8,7 @@
     <string name="wakeMeUp">Wecken</string>
     <string name="alarm">Alarm</string>
     <string name="lblDate">Datum:</string>
+    <string name="snooze">SNOOZE</string>
+    <string name="off">OFF</string>
 
 </resources>
