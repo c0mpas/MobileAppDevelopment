@@ -9,8 +9,10 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,10 @@ import android.widget.Toast;
 
 public class ConfAlarm extends Activity {
 
+	private static final String KEY_ALARM = "alarmkey";
+	
+	private SharedPreferences prefs;
+	
 	private AlarmManager mng;
 	private PendingIntent pAlarmIntent;
 
@@ -45,12 +51,27 @@ public class ConfAlarm extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conf_alarm);
 
+		
+		
 		initAlarm();
 
+
 		refViews();
+		checkAlarm();
 		setDateTime();
 		setListeners();
+		
+		
+		
 
+	}
+	
+	
+	private void checkAlarm(){
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		if(prefs.getBoolean(KEY_ALARM, false))
+			alarmSwitch.setChecked(true);
 	}
 
 	private void setDateTime() {
@@ -76,10 +97,11 @@ public class ConfAlarm extends Activity {
 
 		// Hier wird die Komponente eingetragen, die als Action
 		// ausgeführt werden soll
-		Intent alarmIntent = new Intent(this, AlarmActivity.class);
+		Intent alarmIntent = new Intent(ConfAlarm.this, AlarmActivity.class);
 		/* Erstellen eines PendingIntents für eine Activity */
 		pAlarmIntent = PendingIntent.getActivity(this, 0, alarmIntent,
-				PendingIntent.FLAG_CANCEL_CURRENT);
+				PendingIntent.FLAG_UPDATE_CURRENT);
+
 	}
 
 	private void setTime() {
@@ -120,11 +142,13 @@ public class ConfAlarm extends Activity {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
-						if (isChecked)
-							setMyAlarm();
-						else
+						if (isChecked){
+							setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, true).commit();
+						}
+						else{
 							disableMyAlarm();
-
+							setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, false).commit();
+						}
 					}
 				});
 

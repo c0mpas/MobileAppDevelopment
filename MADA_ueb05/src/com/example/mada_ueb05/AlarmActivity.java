@@ -30,7 +30,7 @@ public class AlarmActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		// Stop if alarm is off
-		if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
+		//if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
 		
 		referenceViews();
 		setListeners();
