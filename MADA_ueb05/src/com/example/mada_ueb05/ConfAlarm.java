@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Switch;
@@ -170,8 +171,21 @@ public class ConfAlarm extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.conf_alarm, menu);
+		// Inflate the menu
+		getMenuInflater().inflate(R.menu.alarm, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				startActivity(new Intent(this, SettingsActivity.class));
+				break;
+			default:
+				break;
+		}
 		return true;
 	}
 
