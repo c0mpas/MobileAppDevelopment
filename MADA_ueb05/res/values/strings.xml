@@ -9,8 +9,12 @@
     <string name="lblDate">Datum:</string>
     <string name="snooze">SNOOZE</string>
     <string name="off">OFF</string>
+
+    <string name="lblTime">Uhrzeit:</string>
+
     <string name="snooze_time">Snooze-Zeit</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="alarm_status">Alarmstatus</string>
+
 
 </resources>
