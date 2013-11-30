@@ -27,15 +27,15 @@ import android.widget.Toast;
 public class ConfAlarm extends Activity {
 
 	private static final String KEY_ALARM = "alarmkey";
-	
 	private SharedPreferences prefs;
 	
 	private AlarmManager mng;
 	private PendingIntent pAlarmIntent;
-
 	private TimePickerDialog timePicker;
 	private DatePickerDialog datePicker;
 	private Switch alarmSwitch;
+	private TextView selDate;
+	private TextView selTime;
 
 	private int year;
 	private int month;
@@ -43,29 +43,16 @@ public class ConfAlarm extends Activity {
 	private int hour;
 	private int minute;
 
-	private TextView selDate;
-	private TextView selTime;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conf_alarm);
-
-		
-		
 		initAlarm();
-
-
 		refViews();
 		checkAlarm();
 		setDateTime();
 		setListeners();
-		
-		
-		
-
 	}
-	
 	
 	private void checkAlarm(){
 		
@@ -98,147 +85,107 @@ public class ConfAlarm extends Activity {
 		// Hier wird die Komponente eingetragen, die als Action
 		// ausgeführt werden soll
 		Intent alarmIntent = new Intent(ConfAlarm.this, AlarmActivity.class);
-		/* Erstellen eines PendingIntents für eine Activity */
+		// Erstellen eines PendingIntents für eine Activity
 		pAlarmIntent = PendingIntent.getActivity(this, 0, alarmIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}
 
 	private void setTime() {
-
 		String hourStr = String.valueOf(hour).toString();
 		String minuteStr = String.valueOf(minute).toString();
-
-		if (hourStr.length() < 2)
-			hourStr = "0" + hourStr;
-
-		if (minuteStr.length() < 2)
-			minuteStr = "0" + minuteStr;
-
+		if (hourStr.length() < 2) hourStr = "0" + hourStr;
+		if (minuteStr.length() < 2) minuteStr = "0" + minuteStr;
 		selTime.setText(hourStr + ":" + minuteStr + " Uhr");
-
 	}
 
 	private void setDate() {
-
 		String monthStr = String.valueOf(month + 1).toString();
 		String dayStr = String.valueOf(day).toString();
-
-		if (monthStr.length() < 2)
-			monthStr = "0" + monthStr;
-
-		if (dayStr.length() < 2)
-			dayStr = "0" + dayStr;
-
+		if (monthStr.length() < 2) monthStr = "0" + monthStr;
+		if (dayStr.length() < 2) dayStr = "0" + dayStr;
 		selDate.setText(dayStr + "." + monthStr + "." + year);
-
 	}
 
 	private void setListeners() {
 
-		alarmSwitch
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked){
-							setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, true).commit();
-						}
-						else{
-							disableMyAlarm();
-							setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, false).commit();
-						}
-					}
-				});
+		alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked){
+					setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, true).commit();
+				} else {
+					disableMyAlarm();
+					setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, false).commit();
+				}
+			}
+		});
 
 		final TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
-
 			@Override
-			public void onTimeSet(TimePicker view, int hourOfDay,
-					int minuteOfHour) {
+			public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour) {
 				hour = hourOfDay;
 				minute = minuteOfHour;
 				setTime();
-
 			}
 		};
 
 		selTime.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				timePicker = new TimePickerDialog(ConfAlarm.this, timeListener,
-						hour, minute, true);
+				timePicker = new TimePickerDialog(ConfAlarm.this, timeListener, hour, minute, true);
 				timePicker.show();
-
 			}
 		});
 
 		final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
-
 			@Override
-			public void onDateSet(DatePicker view, int selectedYear,
-					int monthOfYear, int dayOfMonth) {
+			public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
 				year = selectedYear;
 				month = monthOfYear;
 				day = dayOfMonth;
-
 				setDate();
-
 			}
 		};
 
 		selDate.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				datePicker = new DatePickerDialog(ConfAlarm.this, dateListener,
-						year, month, day);
+				datePicker = new DatePickerDialog(ConfAlarm.this, dateListener, year, month, day);
 				datePicker.show();
-
 			}
 		});
 
 	}
 
 	private void refViews() {
-
 		selDate = (TextView) findViewById(R.id.selectedDate);
 		selTime = (TextView) findViewById(R.id.selectedTime);
 		alarmSwitch = (Switch) findViewById(R.id.alarmSwitch);
-
 	}
 
 	private long calcAlarmTime() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, day, hour, minute, 0);
 		long startTime = calendar.getTimeInMillis();
-
 		return ( startTime - System.currentTimeMillis());
-	
 	}
 
 	private void disableMyAlarm() {
-
 		AlarmManager mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
 		mng.cancel(pAlarmIntent);
-
 	}
 
 	private void setMyAlarm() {
-
 		long alarmTime = calcAlarmTime();
-
-		if (alarmTime < 1){
+		if (alarmTime < 1) {
 			Toast.makeText(this, R.string.timeLTOne, Toast.LENGTH_SHORT).show();
 			alarmSwitch.setChecked(false);
-		}
-		else
+		} else {
 			// Alarm setzen
 			mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,SystemClock.elapsedRealtime()+ alarmTime, pAlarmIntent);
-
+		}
 	}
 
 	@Override

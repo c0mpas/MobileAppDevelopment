@@ -29,11 +29,6 @@ public class AlarmActivity extends Activity {
 		setContentView(R.layout.activity_alarm);
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		// Stop if alarm is off
-
-		//if (!prefs.getBoolean(SettingsActivity.ALARM_STATUS, true)) this.finish();
-
-		
 		referenceViews();
 		setListeners();
 		player = MediaPlayer.create(this, R.raw.alarm);
