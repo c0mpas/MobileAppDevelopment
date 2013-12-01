@@ -26,9 +26,14 @@ import android.widget.Toast;
 
 public class ConfAlarm extends Activity {
 
-	private static final String KEY_ALARM = "alarmkey";
+	private static final String KEY_MINUTE = "keyMinute";
+	private static final String KEY_HOUR = "keyHour";
+	private static final String KEY_DAY = "keyDay";
+	private static final String KEY_MONTH = "keyMonth";
+	private static final String KEY_YEAR = "keyYear";
+	public static final String KEY_ALARM = "alarmkey";
 	private SharedPreferences prefs;
-	
+
 	private AlarmManager mng;
 	private PendingIntent pAlarmIntent;
 	private TimePickerDialog timePicker;
@@ -50,28 +55,34 @@ public class ConfAlarm extends Activity {
 		initAlarm();
 		refViews();
 		checkAlarm();
-		setDateTime();
 		setListeners();
 	}
-	
-	private void checkAlarm(){
-		
+
+	private void checkAlarm() {
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		if(prefs.getBoolean(KEY_ALARM, false))
+		if (prefs.getBoolean(KEY_ALARM, false)) {
 			alarmSwitch.setChecked(true);
+			setDateTime(true);
+		}else
+			setDateTime(false);
 	}
 
-	private void setDateTime() {
-		Time dtNow = new Time();
-		dtNow.setToNow();
+	private void setDateTime(boolean alarmSet) {
 
-		hour = dtNow.hour;
-		minute = dtNow.minute;
+		if (alarmSet)
+			readFromPrefs();
+		else {
+			Time dtNow = new Time();
+			dtNow.setToNow();
 
-		year = dtNow.year;
-		month = dtNow.month;
-		day = dtNow.monthDay;
+			hour = dtNow.hour;
+			minute = dtNow.minute;
 
+			year = dtNow.year;
+			month = dtNow.month;
+			day = dtNow.monthDay;
+		}
 		setDate();
 		setTime();
 
@@ -94,37 +105,45 @@ public class ConfAlarm extends Activity {
 	private void setTime() {
 		String hourStr = String.valueOf(hour).toString();
 		String minuteStr = String.valueOf(minute).toString();
-		if (hourStr.length() < 2) hourStr = "0" + hourStr;
-		if (minuteStr.length() < 2) minuteStr = "0" + minuteStr;
+		if (hourStr.length() < 2)
+			hourStr = "0" + hourStr;
+		if (minuteStr.length() < 2)
+			minuteStr = "0" + minuteStr;
 		selTime.setText(hourStr + ":" + minuteStr + " Uhr");
 	}
 
 	private void setDate() {
 		String monthStr = String.valueOf(month + 1).toString();
 		String dayStr = String.valueOf(day).toString();
-		if (monthStr.length() < 2) monthStr = "0" + monthStr;
-		if (dayStr.length() < 2) dayStr = "0" + dayStr;
+		if (monthStr.length() < 2)
+			monthStr = "0" + monthStr;
+		if (dayStr.length() < 2)
+			dayStr = "0" + dayStr;
 		selDate.setText(dayStr + "." + monthStr + "." + year);
 	}
 
 	private void setListeners() {
 
-		alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked){
-					setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, true).commit();
-				} else {
-					disableMyAlarm();
-					setMyAlarm();prefs.edit().putBoolean(KEY_ALARM, false).commit();
-				}
-			}
-		});
+		alarmSwitch
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						if (isChecked) {
+							setMyAlarm();
+							prefs.edit().putBoolean(KEY_ALARM, true).commit();
+						} else {
+							disableMyAlarm();
+							setMyAlarm();
+							prefs.edit().putBoolean(KEY_ALARM, false).commit();
+						}
+					}
+				});
 
 		final TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
 			@Override
-			public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour) {
+			public void onTimeSet(TimePicker view, int hourOfDay,
+					int minuteOfHour) {
 				hour = hourOfDay;
 				minute = minuteOfHour;
 				setTime();
@@ -134,14 +153,16 @@ public class ConfAlarm extends Activity {
 		selTime.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				timePicker = new TimePickerDialog(ConfAlarm.this, timeListener, hour, minute, true);
+				timePicker = new TimePickerDialog(ConfAlarm.this, timeListener,
+						hour, minute, true);
 				timePicker.show();
 			}
 		});
 
 		final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
 			@Override
-			public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
+			public void onDateSet(DatePicker view, int selectedYear,
+					int monthOfYear, int dayOfMonth) {
 				year = selectedYear;
 				month = monthOfYear;
 				day = dayOfMonth;
@@ -152,7 +173,8 @@ public class ConfAlarm extends Activity {
 		selDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				datePicker = new DatePickerDialog(ConfAlarm.this, dateListener, year, month, day);
+				datePicker = new DatePickerDialog(ConfAlarm.this, dateListener,
+						year, month, day);
 				datePicker.show();
 			}
 		});
@@ -169,7 +191,7 @@ public class ConfAlarm extends Activity {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, day, hour, minute, 0);
 		long startTime = calendar.getTimeInMillis();
-		return ( startTime - System.currentTimeMillis());
+		return (startTime - System.currentTimeMillis());
 	}
 
 	private void disableMyAlarm() {
@@ -184,8 +206,28 @@ public class ConfAlarm extends Activity {
 			alarmSwitch.setChecked(false);
 		} else {
 			// Alarm setzen
-			mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,SystemClock.elapsedRealtime()+ alarmTime, pAlarmIntent);
+			mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+					SystemClock.elapsedRealtime() + alarmTime, pAlarmIntent);
+			saveToPrefs();
 		}
+	}
+
+	private void saveToPrefs() {
+		// Zeit wegspeichern
+		prefs.edit().putInt(KEY_YEAR, year).commit();
+		prefs.edit().putInt(KEY_MONTH, month).commit();
+		prefs.edit().putInt(KEY_DAY, day).commit();
+		prefs.edit().putInt(KEY_HOUR, hour).commit();
+		prefs.edit().putInt(KEY_MINUTE, minute).commit();
+	}
+
+	private void readFromPrefs() {
+		// Wekczeit laden
+		year = prefs.getInt(KEY_YEAR, 2013);
+		month = prefs.getInt(KEY_MONTH, 12);
+		day = prefs.getInt(KEY_DAY, 1);
+		hour = prefs.getInt(KEY_HOUR, 12);
+		minute = prefs.getInt(KEY_MINUTE, 30);
 	}
 
 	@Override
