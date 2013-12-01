@@ -28,7 +28,7 @@ public class AlarmActivity extends Activity {
 
 	private static final int ALARMTIME = 300000;
 	private static final int MILLIS = 60000;
-	private static final long[] starwars = {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
+	private static final long[] vibration_theme = {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
 	
 	private SharedPreferences prefs;
 	private Button off;
@@ -75,7 +75,7 @@ public class AlarmActivity extends Activity {
 			@Override
 			public void run() {
 				player.setLooping(true);
-				if (checkVibration()) vibrator.vibrate(starwars,0);
+				if (checkVibration()) vibrator.vibrate(vibration_theme,0);
 				player.start();
 				SystemClock.sleep(ALARMTIME);
 				vibrator.cancel();
