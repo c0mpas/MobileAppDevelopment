@@ -1,7 +1,6 @@
 package com.example.mada_ueb05;
 
 import java.util.Calendar;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -26,12 +25,13 @@ import android.widget.Toast;
 
 public class ConfAlarm extends Activity {
 
-	private static final String KEY_MINUTE = "keyMinute";
-	private static final String KEY_HOUR = "keyHour";
-	private static final String KEY_DAY = "keyDay";
-	private static final String KEY_MONTH = "keyMonth";
-	private static final String KEY_YEAR = "keyYear";
+	public static final String KEY_MINUTE = "keyMinute";
+	public static final String KEY_HOUR = "keyHour";
+	public static final String KEY_DAY = "keyDay";
+	public static final String KEY_MONTH = "keyMonth";
+	public static final String KEY_YEAR = "keyYear";
 	public static final String KEY_ALARM = "alarmkey";
+	
 	private SharedPreferences prefs;
 
 	private AlarmManager mng;
@@ -134,7 +134,6 @@ public class ConfAlarm extends Activity {
 							prefs.edit().putBoolean(KEY_ALARM, true).commit();
 						} else {
 							disableMyAlarm();
-							setMyAlarm();
 							prefs.edit().putBoolean(KEY_ALARM, false).commit();
 						}
 					}
@@ -147,6 +146,8 @@ public class ConfAlarm extends Activity {
 				hour = hourOfDay;
 				minute = minuteOfHour;
 				setTime();
+				alarmSwitch.setChecked(false);
+
 			}
 		};
 
@@ -167,9 +168,12 @@ public class ConfAlarm extends Activity {
 				month = monthOfYear;
 				day = dayOfMonth;
 				setDate();
+				alarmSwitch.setChecked(false);
 			}
 		};
 
+		
+		
 		selDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -209,7 +213,21 @@ public class ConfAlarm extends Activity {
 			mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 					SystemClock.elapsedRealtime() + alarmTime, pAlarmIntent);
 			saveToPrefs();
+			showSleepTime(alarmTime);
 		}
+	}
+	
+	private void showSleepTime(long alarmTime){
+		
+		long minutes = alarmTime / 1000 / 60;
+		
+		long hours = minutes / 60;
+		
+		minutes = minutes - (hours*60) + 1;
+		
+		
+		Toast.makeText(this, getString(R.string.sleepTimeMsg1)+String.valueOf(hours).toString()+getString(R.string.sleepTimeMsg2)+String.valueOf(minutes).toString()+getString(R.string.sleepTimeMsg3), Toast.LENGTH_LONG).show();
+		
 	}
 
 	private void saveToPrefs() {
