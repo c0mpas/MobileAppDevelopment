@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,11 +28,13 @@ public class AlarmActivity extends Activity {
 
 	private static final int ALARMTIME = 300000;
 	private static final int MILLIS = 60000;
+	private static final long[] starwars = {0,500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500};
 	
 	private SharedPreferences prefs;
 	private Button off;
 	private Button snooze;
 	private MediaPlayer player;
+	private Vibrator vibrator;
 	
 	
 	@Override
@@ -46,7 +49,9 @@ public class AlarmActivity extends Activity {
 		
 		referenceViews();
 		setListeners();
+		
 		player = MediaPlayer.create(this, R.raw.alarm);
+		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		
 		unlockScreen();
 		startAlarm();
@@ -70,8 +75,10 @@ public class AlarmActivity extends Activity {
 			@Override
 			public void run() {
 				player.setLooping(true);
+				if (checkVibration()) vibrator.vibrate(starwars,0);
 				player.start();
 				SystemClock.sleep(ALARMTIME);
+				vibrator.cancel();
 				player.stop();
 			}
 		}).start();
@@ -79,6 +86,7 @@ public class AlarmActivity extends Activity {
 
 	// Stops the alarm sound
 	private void stopAlarm() {
+		vibrator.cancel();
 		player.stop();
 		prefs.edit().putBoolean(ConfAlarm.KEY_ALARM, false).commit();
 		Toast.makeText(this, R.string.msg_alarm_off, Toast.LENGTH_SHORT).show();
@@ -88,6 +96,7 @@ public class AlarmActivity extends Activity {
 
 	// Set new alarm and stop current alarm sound
 	private void snoozeAlarm() {
+		vibrator.cancel();
 		player.stop();
 		int snoozetime = Integer.parseInt(prefs.getString(SettingsActivity.SNOOZE_TIME, SettingsActivity.DEFAULT_SNOOZE_TIME));
 		if (snoozetime < 1) snoozetime = 1;
@@ -148,6 +157,11 @@ public class AlarmActivity extends Activity {
         wakeLock.release();
 	}
 	
+	private Boolean checkVibration() {
+		Boolean vibrate = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+				.getBoolean(SettingsActivity.VIBRATE, SettingsActivity.DEFAULT_VIBRATE);
+		return vibrate;
+	}
 	
 	private OnClickListener offListener = new OnClickListener() {
 		@Override

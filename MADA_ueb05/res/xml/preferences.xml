@@ -8,4 +8,10 @@
         android:order="1"
         android:inputType="number" />
     
+    <SwitchPreference
+        android:title="@string/vibration"
+        android:key="vibration"
+        android:defaultValue="false"
+        android:order="2" />
+    
 </PreferenceScreen>

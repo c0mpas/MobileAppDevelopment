@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,9 +18,12 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	public static final String SNOOZE_TIME = "snooze_time";
 	public static final String DEFAULT_SNOOZE_TIME = "5";
 	public static final int DEFAULT_SNOOZE_TIME_INT = 5;
+	public static final String VIBRATE = "vibration";
+	public static final Boolean DEFAULT_VIBRATE = false;
 	
 	private SharedPreferences prefs;
 	private EditTextPreference prefSnoozeTime;
+	private SwitchPreference prefVibrate;
 	
 	
 	@SuppressWarnings("deprecation")
@@ -45,6 +49,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	@SuppressWarnings("deprecation")
 	private void initializePreferences() {
 		prefSnoozeTime = (EditTextPreference) findPreference(SNOOZE_TIME);
+		prefVibrate = (SwitchPreference) findPreference(VIBRATE);
 		
 		// Listener, der das TextFeld limitiert
 		prefSnoozeTime.getEditText().setOnKeyListener(
