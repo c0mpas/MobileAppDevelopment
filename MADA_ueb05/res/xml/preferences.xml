@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <SwitchPreference
-	    android:title="@string/alarm_status"
-	    android:key="alarm_status"
-	    android:defaultValue="false"
-	    android:order="1" />
-    
     <EditTextPreference
         android:title="@string/snooze_time"
         android:key="snooze_time"
         android:defaultValue="5"
-        android:order="2"
+        android:order="1"
         android:inputType="number" />
     
 </PreferenceScreen>

@@ -14,6 +14,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,8 @@ public class AlarmActivity extends Activity {
 		
 		unlockScreen();
 		startAlarm();
+		
+		AlarmNotify.showNotification(this);
 	}
 
 	private void referenceViews() {
@@ -87,6 +90,7 @@ public class AlarmActivity extends Activity {
 	private void snoozeAlarm() {
 		player.stop();
 		int snoozetime = Integer.parseInt(prefs.getString(SettingsActivity.SNOOZE_TIME, SettingsActivity.DEFAULT_SNOOZE_TIME));
+		if (snoozetime < 1) snoozetime = 1;
 		
 		// Set new alarm
 		AlarmManager mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -183,5 +187,5 @@ public class AlarmActivity extends Activity {
 	public void onBackPressed() {
 		// Do nothing
 	}
-	
+
 }
