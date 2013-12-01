@@ -14,7 +14,8 @@ public class AlarmNotify {
 		        new NotificationCompat.Builder(context)
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle(context.getString(R.string.wakeUpTitle))
-		        .setContentText(context.getString(R.string.wakeUpMsg));
+		        .setContentText(context.getString(R.string.wakeUpMsg))
+		        .setAutoCancel(true);
 		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(context, ConfAlarm.class);
 
@@ -36,7 +37,8 @@ public class AlarmNotify {
 		NotificationManager mNotificationManager =
 		    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		// mId allows you to update the notification later on.
-		mNotificationManager.notify(0, mBuilder.build());
+		int mID = 25462;
+		mNotificationManager.notify(mID, mBuilder.build());
 	}
 	
 }
