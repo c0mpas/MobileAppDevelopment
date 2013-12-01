@@ -20,5 +20,7 @@
     <string name="sleepTimeMsg1">"Sie werden in "</string>
     <string name="sleepTimeMsg2">" Stunden und "</string>
     <string name="sleepTimeMsg3"> Minuten geweckt!</string>
+    <string name="wakeUpMsg">Nur der frühe Vogel fängt den Wurm!</string>
+    <string name="wakeUpTitle">Wecker</string>
 
 </resources>
