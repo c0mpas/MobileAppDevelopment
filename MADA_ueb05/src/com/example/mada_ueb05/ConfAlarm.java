@@ -155,7 +155,7 @@ public class ConfAlarm extends Activity {
 				hour = hourOfDay;
 				minute = minuteOfHour;
 				setTime();
-				alarmSwitch.setChecked(false);
+				disableCauseOfChange();
 
 			}
 		};
@@ -177,7 +177,7 @@ public class ConfAlarm extends Activity {
 				month = monthOfYear;
 				day = dayOfMonth;
 				setDate();
-				alarmSwitch.setChecked(false);
+				disableCauseOfChange();
 			}
 		};
 
@@ -196,6 +196,13 @@ public class ConfAlarm extends Activity {
 		selDate = (TextView) findViewById(R.id.selectedDate);
 		selTime = (TextView) findViewById(R.id.selectedTime);
 		alarmSwitch = (Switch) findViewById(R.id.alarmSwitch);
+	}
+	
+	private void disableCauseOfChange(){
+		
+		alarmSwitch.setChecked(false);
+		Toast.makeText(this, R.string.activateAlarmAgain, Toast.LENGTH_SHORT).show();
+		
 	}
 
 	private long calcAlarmTime() {
