@@ -78,7 +78,8 @@ public class ConfAlarm extends Activity {
 
 	private void setDateTime(boolean alarmSet) {
 
-		if (alarmSet) readFromPrefs();
+		if (alarmSet)
+			readFromPrefs();
 		else {
 			Time dtNow = new Time();
 			dtNow.setToNow();
@@ -108,16 +109,20 @@ public class ConfAlarm extends Activity {
 	private void setTime() {
 		String hourStr = String.valueOf(hour).toString();
 		String minuteStr = String.valueOf(minute).toString();
-		if (hourStr.length() < 2) hourStr = "0" + hourStr;
-		if (minuteStr.length() < 2) minuteStr = "0" + minuteStr;
+		if (hourStr.length() < 2)
+			hourStr = "0" + hourStr;
+		if (minuteStr.length() < 2)
+			minuteStr = "0" + minuteStr;
 		selTime.setText(hourStr + ":" + minuteStr + " Uhr");
 	}
 
 	private void setDate() {
 		String monthStr = String.valueOf(month + 1).toString();
 		String dayStr = String.valueOf(day).toString();
-		if (monthStr.length() < 2) monthStr = "0" + monthStr;
-		if (dayStr.length() < 2) dayStr = "0" + dayStr;
+		if (monthStr.length() < 2)
+			monthStr = "0" + monthStr;
+		if (dayStr.length() < 2)
+			dayStr = "0" + dayStr;
 		selDate.setText(dayStr + "." + monthStr + "." + year);
 	}
 
@@ -187,12 +192,14 @@ public class ConfAlarm extends Activity {
 		selTime = (TextView) findViewById(R.id.selectedTime);
 		alarmSwitch = (Switch) findViewById(R.id.alarmSwitch);
 	}
-	
-	private void disableCauseOfChange(){
-		
-		alarmSwitch.setChecked(false);
-		Toast.makeText(this, R.string.activateAlarmAgain, Toast.LENGTH_SHORT).show();
-		
+
+	private void disableCauseOfChange() {
+		if (alarmSwitch.isChecked()) {
+			alarmSwitch.setChecked(false);
+			Toast.makeText(this, R.string.activateAlarmAgain,
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 	private long calcAlarmTime() {
@@ -205,6 +212,7 @@ public class ConfAlarm extends Activity {
 	private void disableMyAlarm() {
 		AlarmManager mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		mng.cancel(pAlarmIntent);
+		Toast.makeText(this, R.string.alarmDisabled, Toast.LENGTH_SHORT).show();
 	}
 
 	private void setMyAlarm() {
@@ -226,7 +234,8 @@ public class ConfAlarm extends Activity {
 		long hours = minutes / 60;
 		minutes = minutes - (hours * 60) + 1;
 
-		Toast.makeText(this,
+		Toast.makeText(
+				this,
 				getString(R.string.sleepTimeMsg1)
 						+ String.valueOf(hours).toString()
 						+ getString(R.string.sleepTimeMsg2)
