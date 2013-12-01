@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
 
@@ -61,14 +62,24 @@ public class AlarmActivity extends Activity {
 	// Stops the alarm sound
 	private void stopAlarm() {
 		player.stop();
-		SystemClock.sleep(1000);
+		prefs.edit().putBoolean(ConfAlarm.KEY_ALARM, false).commit();
+		Toast.makeText(this, R.string.msg_alarm_off, Toast.LENGTH_SHORT).show();
+		SystemClock.sleep(500);
 		this.finish();
 	}
 
 	// Set new alarm and stop current alarm sound
 	private void snoozeAlarm() {
+		player.stop();
+		
+		int snoozetime = Integer.parseInt(prefs.getString(SettingsActivity.SNOOZE_TIME, SettingsActivity.DEFAULT_SNOOZE_TIME));
 		// SET NEW ALARM HERE !!!
-		stopAlarm();
+		
+		String message = getString(R.string.msg_alarm_snooze_part1) + snoozetime + getString(R.string.msg_alarm_snooze_part2);
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+		
+		SystemClock.sleep(500);
+		this.finish();
 	}
 	
 	private OnClickListener offListener = new OnClickListener() {
@@ -105,4 +116,5 @@ public class AlarmActivity extends Activity {
 		return true;
 	}
 
+	
 }
