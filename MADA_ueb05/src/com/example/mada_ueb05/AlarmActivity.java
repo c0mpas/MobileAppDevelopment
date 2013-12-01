@@ -1,6 +1,9 @@
 package com.example.mada_ueb05;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 public class AlarmActivity extends Activity {
 
 	private static final int ALARMTIME = 30000;
+	private static final int MILLIS = 60000;
 	
 	private SharedPreferences prefs;
 	private Button off;
@@ -71,15 +75,51 @@ public class AlarmActivity extends Activity {
 	// Set new alarm and stop current alarm sound
 	private void snoozeAlarm() {
 		player.stop();
-		
 		int snoozetime = Integer.parseInt(prefs.getString(SettingsActivity.SNOOZE_TIME, SettingsActivity.DEFAULT_SNOOZE_TIME));
-		// SET NEW ALARM HERE !!!
+		
+		// Set new alarm
+		AlarmManager mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		Intent alarmIntent = new Intent(this, AlarmActivity.class);
+		PendingIntent pAlarmIntent = PendingIntent.getActivity(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		// Convert snoozetime from minutes to milliseconds
+		mng.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + snoozetime*MILLIS, pAlarmIntent);
+		// Update shared preferences
+		updatePrefsDate(snoozetime);
 		
 		String message = getString(R.string.msg_alarm_snooze_part1) + snoozetime + getString(R.string.msg_alarm_snooze_part2);
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		
 		SystemClock.sleep(500);
 		this.finish();
+	}
+	
+	private void updatePrefsDate(int snoozetime) {
+		// Boolean overflow = false;
+		int minute = prefs.getInt(ConfAlarm.KEY_MINUTE, 30);
+		minute += snoozetime;
+		
+		if (minute < 60) {
+			prefs.edit().putInt(ConfAlarm.KEY_MINUTE, minute).commit();
+		} else {
+			minute -= 60;
+			prefs.edit().putInt(ConfAlarm.KEY_MINUTE, minute).commit();
+			int hour = prefs.getInt(ConfAlarm.KEY_HOUR, 12);
+			hour++;
+			if (hour < 24) {
+				prefs.edit().putInt(ConfAlarm.KEY_HOUR, hour).commit();
+			} else {
+				hour -= 24;
+				prefs.edit().putInt(ConfAlarm.KEY_HOUR, hour).commit();
+				// Handel overflow (increase date by one day)
+			}
+		}
+		
+		int year = prefs.getInt(ConfAlarm.KEY_YEAR, 2013);
+		int month = prefs.getInt(ConfAlarm.KEY_MONTH, 12);
+		int day = prefs.getInt(ConfAlarm.KEY_DAY, 1);
+		prefs.edit().putInt(ConfAlarm.KEY_YEAR, year).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_MONTH, month).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_DAY, day).commit();
 	}
 	
 	private OnClickListener offListener = new OnClickListener() {
