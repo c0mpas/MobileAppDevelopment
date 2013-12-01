@@ -2,24 +2,30 @@ package com.example.mada_ueb05;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardLock;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
 
-	private static final int ALARMTIME = 30000;
+	private static final int ALARMTIME = 300000;
 	private static final int MILLIS = 60000;
 	
 	private SharedPreferences prefs;
@@ -32,12 +38,20 @@ public class AlarmActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alarm);
+		
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		referenceViews();
 		setListeners();
 		player = MediaPlayer.create(this, R.raw.alarm);
+		
+		unlockScreen();
 		startAlarm();
+		
+		AlarmNotify.showNotification(this);
 	}
 
 	private void referenceViews() {
@@ -76,6 +90,7 @@ public class AlarmActivity extends Activity {
 	private void snoozeAlarm() {
 		player.stop();
 		int snoozetime = Integer.parseInt(prefs.getString(SettingsActivity.SNOOZE_TIME, SettingsActivity.DEFAULT_SNOOZE_TIME));
+		if (snoozetime < 1) snoozetime = 1;
 		
 		// Set new alarm
 		AlarmManager mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -122,6 +137,18 @@ public class AlarmActivity extends Activity {
 		prefs.edit().putInt(ConfAlarm.KEY_DAY, day).commit();
 	}
 	
+	// Unlock and activate screen
+	@SuppressWarnings("deprecation")
+	private void unlockScreen() {
+		PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK | 
+        											 PowerManager.ACQUIRE_CAUSES_WAKEUP | 
+        											 PowerManager.ON_AFTER_RELEASE, "INFO");
+        wakeLock.acquire();
+        wakeLock.release();
+	}
+	
+	
 	private OnClickListener offListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -156,5 +183,9 @@ public class AlarmActivity extends Activity {
 		return true;
 	}
 
-	
+	@Override
+	public void onBackPressed() {
+		// Do nothing
+	}
+
 }

@@ -56,7 +56,6 @@ public class ConfAlarm extends Activity {
 		refViews();
 		checkAlarm();
 		setListeners();
-
 	}
 
 	@Override
@@ -79,26 +78,21 @@ public class ConfAlarm extends Activity {
 
 	private void setDateTime(boolean alarmSet) {
 
-		if (alarmSet)
-			readFromPrefs();
+		if (alarmSet) readFromPrefs();
 		else {
 			Time dtNow = new Time();
 			dtNow.setToNow();
-
 			hour = dtNow.hour;
 			minute = dtNow.minute;
-
 			year = dtNow.year;
 			month = dtNow.month;
 			day = dtNow.monthDay;
 		}
 		setDate();
 		setTime();
-
 	}
 
 	private void initAlarm() {
-
 		// AlarmManager vom System abrufen
 		mng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
@@ -114,20 +108,16 @@ public class ConfAlarm extends Activity {
 	private void setTime() {
 		String hourStr = String.valueOf(hour).toString();
 		String minuteStr = String.valueOf(minute).toString();
-		if (hourStr.length() < 2)
-			hourStr = "0" + hourStr;
-		if (minuteStr.length() < 2)
-			minuteStr = "0" + minuteStr;
+		if (hourStr.length() < 2) hourStr = "0" + hourStr;
+		if (minuteStr.length() < 2) minuteStr = "0" + minuteStr;
 		selTime.setText(hourStr + ":" + minuteStr + " Uhr");
 	}
 
 	private void setDate() {
 		String monthStr = String.valueOf(month + 1).toString();
 		String dayStr = String.valueOf(day).toString();
-		if (monthStr.length() < 2)
-			monthStr = "0" + monthStr;
-		if (dayStr.length() < 2)
-			dayStr = "0" + dayStr;
+		if (monthStr.length() < 2) monthStr = "0" + monthStr;
+		if (dayStr.length() < 2) dayStr = "0" + dayStr;
 		selDate.setText(dayStr + "." + monthStr + "." + year);
 	}
 
@@ -232,22 +222,17 @@ public class ConfAlarm extends Activity {
 	}
 
 	private void showSleepTime(long alarmTime) {
-
 		long minutes = alarmTime / 1000 / 60;
-
 		long hours = minutes / 60;
-
 		minutes = minutes - (hours * 60) + 1;
 
-		Toast.makeText(
-				this,
+		Toast.makeText(this,
 				getString(R.string.sleepTimeMsg1)
 						+ String.valueOf(hours).toString()
 						+ getString(R.string.sleepTimeMsg2)
 						+ String.valueOf(minutes).toString()
 						+ getString(R.string.sleepTimeMsg3), Toast.LENGTH_LONG)
 				.show();
-
 	}
 
 	private void saveToPrefs() {
@@ -260,7 +245,7 @@ public class ConfAlarm extends Activity {
 	}
 
 	private void readFromPrefs() {
-		// Wekczeit laden
+		// Weckzeit laden
 		year = prefs.getInt(KEY_YEAR, 2013);
 		month = prefs.getInt(KEY_MONTH, 12);
 		day = prefs.getInt(KEY_DAY, 1);
