@@ -23,5 +23,7 @@
     <string name="wakeUpMsg">Nur der frühe Vogel fängt den Wurm!</string>
     <string name="wakeUpTitle">Wecker</string>
     <string name="vibration">Vibration</string>
+    <string name="activateAlarmAgain">Alarm muss erneut aktiviert weden!</string>
+    <string name="alarmDisabled">Alarm ausgeschaltet!</string>
 
 </resources>
