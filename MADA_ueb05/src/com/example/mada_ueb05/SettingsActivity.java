@@ -67,7 +67,10 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 			} catch (Exception e) {
 				snoozetime = 0;
 			}
-			if (snoozetime < 1) prefs.edit().putString(SNOOZE_TIME, DEFAULT_SNOOZE_TIME).commit();
+			if (snoozetime < 1) {
+				prefs.edit().putString(SNOOZE_TIME, DEFAULT_SNOOZE_TIME).commit();
+				prefSnoozeTime.setText(DEFAULT_SNOOZE_TIME);
+			}
 			updatePreferenceSummarys();
 		}
 	}
