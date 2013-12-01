@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 	};
 
 	/**
-	 * references the views
+	 * references the views and sets listener
 	 */
 	private void referenceViews() {
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
