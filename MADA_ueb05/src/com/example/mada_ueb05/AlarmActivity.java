@@ -1,9 +1,10 @@
 package com.example.mada_ueb05;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.KeyguardManager;
-import android.app.KeyguardManager.KeyguardLock;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,7 @@ import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -117,33 +118,17 @@ public class AlarmActivity extends Activity {
 		this.finish();
 	}
 	
+	// Update new alarm time and date after snooze
+	@SuppressWarnings("deprecation")
 	private void updatePrefsDate(int snoozetime) {
-		// Boolean overflow = false;
-		int minute = prefs.getInt(ConfAlarm.KEY_MINUTE, 30);
-		minute += snoozetime;
-		
-		if (minute < 60) {
-			prefs.edit().putInt(ConfAlarm.KEY_MINUTE, minute).commit();
-		} else {
-			minute -= 60;
-			prefs.edit().putInt(ConfAlarm.KEY_MINUTE, minute).commit();
-			int hour = prefs.getInt(ConfAlarm.KEY_HOUR, 12);
-			hour++;
-			if (hour < 24) {
-				prefs.edit().putInt(ConfAlarm.KEY_HOUR, hour).commit();
-			} else {
-				hour -= 24;
-				prefs.edit().putInt(ConfAlarm.KEY_HOUR, hour).commit();
-				// Handel overflow (increase date by one day)
-			}
-		}
-		
-		int year = prefs.getInt(ConfAlarm.KEY_YEAR, 2013);
-		int month = prefs.getInt(ConfAlarm.KEY_MONTH, 12);
-		int day = prefs.getInt(ConfAlarm.KEY_DAY, 1);
-		prefs.edit().putInt(ConfAlarm.KEY_YEAR, year).commit();
-		prefs.edit().putInt(ConfAlarm.KEY_MONTH, month).commit();
-		prefs.edit().putInt(ConfAlarm.KEY_DAY, day).commit();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis() + snoozetime*MILLIS);
+		Date date = calendar.getTime();
+		prefs.edit().putInt(ConfAlarm.KEY_YEAR, date.getYear()+1900).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_MONTH, date.getMonth()).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_DAY, date.getDay()+1).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_HOUR, date.getHours()).commit();
+		prefs.edit().putInt(ConfAlarm.KEY_MINUTE, date.getMinutes()).commit();
 	}
 	
 	// Unlock and activate screen
