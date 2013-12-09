@@ -7,9 +7,11 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	private String title;
 	private String description;	
 	private Priorität priority;
+	private Kategorie kategorie;
 	private int id;
 	
-	public ToDoTask(String title, String description, Priorität priority, int id) {
+	public ToDoTask(String title, String description, Priorität priority, Kategorie kategorie, int id) {
+		this.kategorie = kategorie;
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
@@ -51,6 +53,20 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	 public int compareTo(ToDoTask task) {
 	        return this.priority.compareTo(task.priority);
 	    }
+
+	/**
+	 * @return the kategorie
+	 */
+	public Kategorie getKategorie() {
+		return kategorie;
+	}
+
+	/**
+	 * @param kategorie the kategorie to set
+	 */
+	public void setKategorie(Kategorie kategorie) {
+		this.kategorie = kategorie;
+	}
 
 	@Override
 	public boolean equals(Object o) {
