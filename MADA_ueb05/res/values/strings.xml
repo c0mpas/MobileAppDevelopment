@@ -14,5 +14,16 @@
     <string name="title_activity_settings">Einstellungen</string>
     <string name="alarm_status">Alarmstatus</string>
     <string name="timeLTOne">Zeitreisen sind noch nicht möglich!</string>
+    <string name="msg_alarm_off">Wecker ausgeschaltet</string>
+	<string name="msg_alarm_snooze_part1">Alarm startet erneut in&#160;</string>
+    <string name="msg_alarm_snooze_part2">&#160;Minuten</string>
+    <string name="sleepTimeMsg1">Sie werden in&#160;</string>
+    <string name="sleepTimeMsg2">&#160;Stunden und&#160;</string>
+    <string name="sleepTimeMsg3">&#160;Minuten geweckt!</string>
+    <string name="wakeUpMsg">Nur der frühe Vogel fängt den Wurm!</string>
+    <string name="wakeUpTitle">Wecker</string>
+    <string name="vibration">Vibration</string>
+    <string name="activateAlarmAgain">Alarm muss erneut aktiviert weden!</string>
+    <string name="alarmDisabled">Alarm ausgeschaltet!</string>
 
 </resources>
