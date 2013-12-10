@@ -44,9 +44,9 @@ public class CategoryActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				DBHelper db = new DBHelper();
-				category.setName(name.getText().toString());
 				if (newItem) {
 					try {
+						category = new Category(name.getText().toString());
 						db.insert(getApplicationContext(), category);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -55,6 +55,7 @@ public class CategoryActivity extends Activity {
 				} else {
 
 					try {
+						category.setName(name.getText().toString());
 						db.update(getApplicationContext(), category);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -62,7 +63,9 @@ public class CategoryActivity extends Activity {
 					}
 
 				}
+				finish();
 			}
+			
 		});
 
 		cancel.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,14 @@ public class CategoryActivity extends Activity {
 		delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				DBHelper db = new DBHelper();
+				try {
+					db.delete(getApplicationContext(), category);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finish();
 			}
 		});
 
@@ -94,17 +104,13 @@ public class CategoryActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			newItem = false;
 
 			name.setText(category.getName());
 		} else {
 
 			newItem = true;
-			try {
-				category = db.getCategoryList(this, "id", categoryID).get(0);
-			} catch (SQLException e) {
-				Log.e("PriorityActivity.initFields", e.toString());
-			}
-			name.setText(category.getName());
+			
 		}
 	}
 
