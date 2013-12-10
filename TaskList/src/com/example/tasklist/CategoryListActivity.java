@@ -1,6 +1,7 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,7 +12,7 @@ import android.widget.ListView;
 
 public class CategoryListActivity extends ListActivity {
 
-	private ArrayList<Category> categoryList;
+	private List<Category> categoryList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,13 @@ public class CategoryListActivity extends ListActivity {
 	}
 
 	private void showList() {
+		DBHelper db = new DBHelper();
+		try {
+			categoryList = db.getAllCategories(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ListViewCategoryAdapter adapter = new ListViewCategoryAdapter(this, categoryList);
 		setListAdapter(adapter);
 		getListView().setDividerHeight(MainActivity.DIVIDER);

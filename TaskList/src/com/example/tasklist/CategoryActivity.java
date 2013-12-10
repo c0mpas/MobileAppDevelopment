@@ -1,5 +1,7 @@
 package com.example.tasklist;
 
+import java.sql.SQLException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +15,8 @@ public class CategoryActivity extends Activity {
 	private Button save;
 	private Button cancel;
 	private Button delete;
-	
+
+	private int categoryID;
 	private Category category;
 	private Boolean newItem = false;
 
@@ -21,10 +24,10 @@ public class CategoryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_category);
-		
+
 		referenceViews();
 		setListeners();
-		initFields(savedInstanceState);
+		tryLoadingEdit();
 	}
 
 	private void referenceViews() {
@@ -33,19 +36,37 @@ public class CategoryActivity extends Activity {
 		cancel = (Button) findViewById(R.id.buttonCancel);
 		delete = (Button) findViewById(R.id.buttonDelete);
 	}
-	
+
 	private void setListeners() {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				DBHelper db = new DBHelper();
+				category.setName(name.getText().toString());
+				if (newItem) {
+					try {
+						db.insert(getApplicationContext(), category);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+
+					try {
+						db.update(getApplicationContext(), category);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
 			}
 		});
 
 		cancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				finish();
 			}
 		});
 
@@ -55,18 +76,28 @@ public class CategoryActivity extends Activity {
 				// #####
 			}
 		});
-		
+
 	}
-	
-	private void initFields(Bundle savedInstanceState) {
-		category = (Category) savedInstanceState.getSerializable(MainActivity.KEY_CATEGORY);
-		if (category != null) {
+
+	private void tryLoadingEdit() {
+		categoryID = getIntent().getExtras().getInt(MainActivity.KEY_CATEGORY,
+				-1);
+		if (categoryID != -1) {
+
+			DBHelper db = new DBHelper();
+			try {
+				category = db.getCategoryList(this, "id", categoryID).get(0);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			name.setText(category.getName());
 		} else {
 			newItem = true;
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.category, menu);

@@ -57,7 +57,6 @@ public class MainActivity extends ListActivity {
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, TaskActivity.class);
 		intent.putExtra(KEY_TASK, taskList.get(taskPosition).getID());
-		intent.putExtra(KEY_TASK, true);
 		startActivity(intent);
 	}
 
@@ -88,7 +87,7 @@ public class MainActivity extends ListActivity {
 			break;
 		case R.id.action_add_task:
 			startActivity(new Intent(this, TaskActivity.class).putExtra(
-					KEY_TASK, false));
+					KEY_TASK, -1));
 			break;
 		default:
 			break;

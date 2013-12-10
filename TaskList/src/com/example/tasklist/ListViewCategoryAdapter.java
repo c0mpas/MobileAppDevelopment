@@ -1,6 +1,6 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class ListViewCategoryAdapter extends ArrayAdapter<Category> {
 	private final Activity context;
-	private final ArrayList<Category> categories;
+	private final List<Category> categories;
 	
 	static class ViewHolder {
 		public TextView name;
@@ -24,7 +24,7 @@ public class ListViewCategoryAdapter extends ArrayAdapter<Category> {
 	/**
 	 * Constructor
 	 */
-	public ListViewCategoryAdapter(Activity context,  ArrayList<Category> categories) {
+	public ListViewCategoryAdapter(Activity context,  List<Category> categories) {
 		super(context, R.layout.listview_element_category, categories);
 		this.context = context;
 		this.categories = categories;
