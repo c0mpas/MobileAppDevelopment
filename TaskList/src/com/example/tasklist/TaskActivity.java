@@ -1,7 +1,7 @@
 package com.example.tasklist;
 
 import java.sql.SQLException;
-import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,8 +13,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.j256.ormlite.dao.Dao;
 
 public class TaskActivity extends Activity {
 
@@ -38,29 +36,34 @@ public class TaskActivity extends Activity {
 
 		toDoDbHelper = new DBHelper();
 
-		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK);
+		taskID = -1;
 
-		if (taskID != 0) updateViews();
+		if (getIntent().getExtras().getBoolean(MainActivity.KEY_TASK)) {
+			taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK);
+
+			updateViews();
+
+		}
 	}
 
-	private void updateTask(){
-		
+	private void updateTask() {
+
 		DBHelper db = new DBHelper();
 		try {
 			db.update(this, task);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Log.e("Update Task Error","Konnte Task nicht updaten",e);
+			Log.e("Update Task Error", "Konnte Task nicht updaten", e);
 		}
 		finish();
 	}
-	
+
 	// Listener werden definiert
 	private void setListeners() {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (taskID != 0)
+				if (taskID != -1)
 					updateTask();
 				else
 					save();
@@ -142,15 +145,16 @@ public class TaskActivity extends Activity {
 
 	// Update views with new task
 	private void updateViews() {
-		
+		List<Task> list = null;
 		DBHelper db = new DBHelper();
 		try {
-			task = db.get(this, "id", taskID).get(0);
+			list =  db.get(this,"id" , taskID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Log.e("Could not get Single Task","Bam",e);
+			Log.e("Could not get Single Task", "Bam", e);
 		}
-		
+		task = list.get(0);
+
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
 		datePicker.updateDate(task.getAblaufJahr(), task.getAblaufMonat(),

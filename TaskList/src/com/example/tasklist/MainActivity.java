@@ -1,6 +1,5 @@
 package com.example.tasklist;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -57,6 +56,7 @@ public class MainActivity extends ListActivity {
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, TaskActivity.class);
 		intent.putExtra(KEY_TASK, taskList.get(taskPosition).getID());
+		intent.putExtra(KEY_TASK, true);
 		startActivity(intent);
 	}
 

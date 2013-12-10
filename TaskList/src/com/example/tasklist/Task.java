@@ -22,7 +22,7 @@ public class Task implements Comparable<Task>, Serializable{
 	private transient Priority priority;
 	@DatabaseField(foreign = true)
 	private transient Category kategorie;
-	@DatabaseField(generatedId = true)
+	@DatabaseField(generatedId = true, columnName="id")
 	private int id;
 	@DatabaseField
 	private int ablaufJahr;
