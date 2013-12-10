@@ -38,7 +38,7 @@ public class TaskActivity extends Activity {
 
 		toDoDbHelper = new ToDoDBHelper();
 
-		taskID = savedInstanceState.getInt(MainActivity.KEY_TASK);
+		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK);
 
 		if (taskID != 0) {
 			updateViews();
@@ -54,7 +54,7 @@ public class TaskActivity extends Activity {
 			// TODO Auto-generated catch block
 			Log.e("Update Task Error","Konnte Task nicht updaten",e);
 		}
-		
+		finish();
 	}
 	
 	// Listener werden definiert
@@ -62,7 +62,7 @@ public class TaskActivity extends Activity {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (task != null)
+				if (taskID != 0)
 					updateTask();
 				else
 					save();

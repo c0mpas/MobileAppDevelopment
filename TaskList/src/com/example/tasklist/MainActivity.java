@@ -67,6 +67,12 @@ public class MainActivity extends ListActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		showList();
+		super.onResume();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
