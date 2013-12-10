@@ -74,7 +74,7 @@ public class DBHelper {
 		dao.delete(task);
 	}
 
-	public List<Task> where(Context context, String column, Object value) throws SQLException {
+	public List<Task> get(Context context, String column, Object value) throws SQLException {
 		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
 		List<Task> tasks = dao.queryBuilder().where().eq(column, value).query();
 		return tasks;

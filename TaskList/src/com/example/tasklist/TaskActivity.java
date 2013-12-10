@@ -25,6 +25,7 @@ public class TaskActivity extends Activity {
 	private Button cancel;
 	private DatePicker datePicker;
 	private DBHelper toDoDbHelper;
+	private int taskID;
 	private Task task;
 
 	@Override
@@ -37,12 +38,9 @@ public class TaskActivity extends Activity {
 
 		toDoDbHelper = new DBHelper();
 
-		task = (Task) savedInstanceState
-				.getSerializable(MainActivity.KEY_TASK);
+		taskID = savedInstanceState.getInt(MainActivity.KEY_TASK);
 
-		if (task != null) {
-			updateViews();
-		}
+		if (taskID != 0) updateViews();
 	}
 
 	private void updateTask(){
@@ -144,6 +142,15 @@ public class TaskActivity extends Activity {
 
 	// Update views with new task
 	private void updateViews() {
+		
+		DBHelper db = new DBHelper();
+		try {
+			task = db.get(this, "id", taskID).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Log.e("Could not get Single Task","Bam",e);
+		}
+		
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
 		datePicker.updateDate(task.getAblaufJahr(), task.getAblaufMonat(),
