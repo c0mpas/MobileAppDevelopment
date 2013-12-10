@@ -11,11 +11,11 @@
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Priorität_Name"
+        android:text="@string/name"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/listelement_number"
+        android:id="@+id/listelement_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -23,6 +23,6 @@
         android:layout_toRightOf="@+id/listelement_name"
         android:gravity="right"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Priorität_Nummer"
+        android:text="@string/value"
         android:textStyle="bold" />
 </RelativeLayout>

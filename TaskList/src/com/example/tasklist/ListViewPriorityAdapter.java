@@ -1,6 +1,5 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,7 +17,7 @@ public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 	
 	static class ViewHolder {
 		public TextView name;
-		public TextView number;
+		public TextView value;
 	}
 
 	/**
@@ -41,12 +40,12 @@ public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 			
 			// Reference Views
 			viewHolder.name = (TextView) rowView.findViewById(R.id.listelement_name);
-			viewHolder.number = (TextView) rowView.findViewById(R.id.listelement_number);
+			viewHolder.value = (TextView) rowView.findViewById(R.id.listelement_value);
 			
 			// Set font sizes from preferences
 			viewHolder.name.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
-			viewHolder.number.setTextSize(Float.parseFloat(
+			viewHolder.value.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
 			
 			rowView.setTag(viewHolder);
@@ -55,7 +54,7 @@ public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 
 		holder.name.setText(priorities.get(position).getName());
-		holder.number.setText(priorities.get(position).getValue());
+		holder.value.setText(String.valueOf(priorities.get(position).getValue()));
 
 		return rowView;
 	}
