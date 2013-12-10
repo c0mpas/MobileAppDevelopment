@@ -88,12 +88,21 @@ public class PriorityActivity extends Activity {
 			return;
 		}
 
-		Priority priority = new Priority(priorityName, priorityValue);
-		
-		try {
-			db.insert(this, priority);
-		} catch (SQLException e) {
-			Log.e("SQL-Error", "Konnte Priorität nicht ablegen", e);
+		if (newItem) {
+			Priority newPriority = new Priority(priorityName, priorityValue);
+			try {
+				db.insert(this, newPriority);
+			} catch (SQLException e) {
+				Log.e("SQL-Error", "Konnte Priorität nicht ablegen", e);
+			}
+		} else {
+			priority.setName(priorityName);
+			priority.setValue(priorityValue);
+			try {
+				db.update(this, priority);
+			} catch (SQLException e) {
+				Log.e("SQL-Error", "Konnte Priorität nicht speichern", e);
+			}
 		}
 
 		finish();
@@ -110,7 +119,7 @@ public class PriorityActivity extends Activity {
 				Log.e("PriorityActivity.initFields", e.toString());
 			}
 			name.setText(priority.getName());
-			value.setText(priority.getValue());
+			value.setText(String.valueOf(priority.getValue()));
 		}
 	}
 	
