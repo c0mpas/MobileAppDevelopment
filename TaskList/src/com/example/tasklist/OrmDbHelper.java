@@ -80,4 +80,12 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 
 	}
 
+	@Override
+    public void close() {
+        super.close();
+        categoryDao = null;
+    	toDoDao = null;
+    	prioDao = null;
+    }
+
 }

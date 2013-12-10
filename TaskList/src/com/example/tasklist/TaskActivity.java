@@ -32,7 +32,6 @@ public class TaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task);
 
-		// Get DBHelper
 		initViews();
 		setListeners();
 
