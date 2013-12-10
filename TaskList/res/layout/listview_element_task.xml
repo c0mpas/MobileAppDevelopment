@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
-    android:background="@color/listElementBackGround">
-
-    <ImageView
-        android:id="@+id/listelement_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:padding="@dimen/list_element_padding"
-        android:visibility="invisible" />
+    android:layout_height="wrap_content"
+    android:background="@color/listElementBackGround" >
 
     <TextView
         android:id="@+id/listelement_title"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/listelement_img"
-        android:paddingTop="@dimen/list_element_padding" />
+        android:gravity="left"
+        android:paddingTop="@dimen/list_element_padding"
+        android:text="Titel"
+        android:textStyle="bold" />
 
     <TextView
-        android:gravity="bottom"
-        android:layout_below="@+id/listelement_title"
+        android:id="@+id/listelement_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/listelement_title"
+        android:gravity="right"
+        android:paddingTop="@dimen/list_element_padding"
+        android:text="Priorität" />
+    <TextView
         android:id="@+id/listelement_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/listElementText"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/listelement_img"
-        android:paddingBottom="@dimen/list_element_padding" />
+        android:layout_below="@+id/listelement_title"
+        android:gravity="bottom"
+        android:paddingBottom="@dimen/list_element_padding"
+        android:text="Beschreibung"
+        android:textColor="@color/listElementText" />
 
+    <TextView
+        android:id="@+id/listelement_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listelement_description"
+        android:gravity="bottom"
+        android:paddingBottom="@dimen/list_element_padding"
+        android:text="Ablaufdatum"
+        android:textColor="@color/listElementText" />
 </RelativeLayout>
