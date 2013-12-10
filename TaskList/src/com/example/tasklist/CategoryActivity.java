@@ -7,21 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class PriorityActivity extends Activity {
-	
+public class CategoryActivity extends Activity {
+
 	private EditText name;
-	private EditText value;
 	private Button save;
 	private Button cancel;
 	private Button delete;
 	
-	private Priority priority;
+	private Category category;
 	private Boolean newItem = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_priority);
+		setContentView(R.layout.activity_category);
 		
 		referenceViews();
 		setListeners();
@@ -30,7 +29,6 @@ public class PriorityActivity extends Activity {
 
 	private void referenceViews() {
 		name = (EditText) findViewById(R.id.editTextName);
-		value = (EditText) findViewById(R.id.editTextValue);
 		save = (Button) findViewById(R.id.buttonSave);
 		cancel = (Button) findViewById(R.id.buttonCancel);
 		delete = (Button) findViewById(R.id.buttonDelete);
@@ -61,10 +59,9 @@ public class PriorityActivity extends Activity {
 	}
 	
 	private void initFields(Bundle savedInstanceState) {
-		priority = (Priority) savedInstanceState.getSerializable(MainActivity.KEY_PRIORITY);
-		if (priority != null) {
-			name.setText(priority.getName());
-			value.setText(priority.getValue());
+		category = (Category) savedInstanceState.getSerializable(MainActivity.KEY_CATEGORY);
+		if (category != null) {
+			name.setText(category.getName());
 		} else {
 			newItem = true;
 		}
@@ -72,7 +69,7 @@ public class PriorityActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.priority, menu);
+		getMenuInflater().inflate(R.menu.category, menu);
 		return true;
 	}
 

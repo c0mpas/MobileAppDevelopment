@@ -14,10 +14,11 @@ import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 
-	private static final int DIVIDER = 2;
-
+	public static final int DIVIDER = 2;
 	public static final String KEY_TASK = "key_task";
-
+	public static final String KEY_PRIORITY = "key_priority";
+	public static final String KEY_CATEGORY = "key_category";
+	
 	private List<ToDoTask> taskList;
 	
 	@Override

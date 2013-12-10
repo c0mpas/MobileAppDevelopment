@@ -1,12 +1,13 @@
 package com.example.tasklist;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName="priority")
-public class Priority implements Comparable<Priority>  {
+public class Priority implements Serializable, Comparable<Priority>  {
 
 	@DatabaseField
 	private String name;

@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PriorityActivity" >
+    tools:context=".CategoryActivity" >
 
     <TextView
         android:id="@+id/textViewName"
@@ -27,26 +27,6 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:ems="10"
         android:inputType="text" />
-
-    <TextView
-        android:id="@+id/textViewValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/value"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editTextValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewValue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:ems="10"
-        android:inputType="number" />
 
     <LinearLayout
         android:id="@+id/detail_button_layout"
