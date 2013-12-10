@@ -22,18 +22,24 @@
         android:layout_toRightOf="@+id/listelement_title"
         android:gravity="right"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Priorität"
-        android:textStyle="bold" />
-
+        android:text="Priorität" />
     <TextView
         android:id="@+id/listelement_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/listelement_title"
         android:gravity="bottom"
         android:paddingBottom="@dimen/list_element_padding"
         android:text="Beschreibung"
         android:textColor="@color/listElementText" />
 
+    <TextView
+        android:id="@+id/listelement_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listelement_description"
+        android:gravity="bottom"
+        android:paddingBottom="@dimen/list_element_padding"
+        android:text="Ablaufdatum"
+        android:textColor="@color/listElementText" />
 </RelativeLayout>
