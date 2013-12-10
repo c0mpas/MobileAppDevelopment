@@ -2,12 +2,10 @@ package com.example.tasklist;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Element;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +45,14 @@ public class MainActivity extends ListActivity {
 
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
-		// #####
+		editTask(position);
+	}
+
+	//Ruft neue Activity zum bearbeiten auf
+	private void editTask(int taskPosition) {
+		Intent intent = new Intent(this, TaskActivity.class);
+		taskList.get(taskPosition);
+		startActivity(intent);
 	}
 
 	@Override
