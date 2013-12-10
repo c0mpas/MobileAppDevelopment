@@ -35,8 +35,8 @@ public class PriorityListActivity extends ListActivity {
 
 	private void showList() {
 		ListViewPriorityAdapter adapter = new ListViewPriorityAdapter(this, priorityList);
-		setListAdapter(adapter);
 		getListView().setDividerHeight(MainActivity.DIVIDER);
+		setListAdapter(adapter);
 	}
 
 	@Override
@@ -68,6 +68,13 @@ public class PriorityListActivity extends ListActivity {
 				break;
 		}
 		return true;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadPriorities();
+		showList();
 	}
 
 }

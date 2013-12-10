@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class PriorityActivity extends Activity {
 	
@@ -45,14 +46,14 @@ public class PriorityActivity extends Activity {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				save();
 			}
 		});
 
 		cancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				finish();
 			}
 		});
 
@@ -64,7 +65,40 @@ public class PriorityActivity extends Activity {
 		});
 		
 	}
-	
+	private void save() {
+
+		String priorityName;
+		try {
+			priorityName = name.getText().toString();
+		} catch (NullPointerException e) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.error_title_empty), Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+
+		int priorityValue;
+		// Save description
+		try {
+			priorityValue = Integer.parseInt(value.getText().toString());
+		} catch (NullPointerException e) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.error_description_null),
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		Priority priority = new Priority(priorityName, priorityValue);
+		
+		try {
+			db.insert(this, priority);
+		} catch (SQLException e) {
+			Log.e("SQL-Error", "Konnte Priorität nicht ablegen", e);
+		}
+
+		finish();
+	}
+
 	private void initFields() {
 		int priorityID = getIntent().getExtras().getInt(MainActivity.KEY_PRIORITY, -1);
 		if (priorityID < 0) {
@@ -80,10 +114,4 @@ public class PriorityActivity extends Activity {
 		}
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.priority, menu);
-		return true;
-	}
-
 }
