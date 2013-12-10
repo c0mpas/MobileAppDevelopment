@@ -40,7 +40,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 
 	}
 
-	public Dao<Task, Integer> createTodoDAO() throws SQLException {
+	public Dao<Task, Integer> createTaskDAO() throws SQLException {
 		if (toDoDao == null) {
 			toDoDao = getDao(Task.class);
 		}

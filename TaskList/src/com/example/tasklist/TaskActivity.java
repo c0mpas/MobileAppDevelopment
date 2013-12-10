@@ -145,7 +145,7 @@ public class TaskActivity extends Activity {
 		
 		DBHelper db = new DBHelper();
 		try {
-			task = db.get(this, "id", taskID).get(0);
+			task = db.getTaskList(this, "id", taskID).get(0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			Log.e("Could not get Single Task","Bam",e);
