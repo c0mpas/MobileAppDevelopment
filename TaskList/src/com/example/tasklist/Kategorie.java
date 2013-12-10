@@ -11,8 +11,7 @@ public class Kategorie {
 	@DatabaseField(generatedId=true)
 	private int id;
 
-	Kategorie(int id, String name) {
-		setId(id);
+	Kategorie(String name) {
 		setName(name);
 	}
 

@@ -14,14 +14,11 @@ public class Priorität implements Comparable<Priorität> {
 	private int id;
 	@DatabaseField
 	private int value;
-	@DatabaseField
-	private Date ablaufDatum;  
 
-	public Priorität(String name, int id, int value, Date ablaufDatum) {
+
+	public Priorität(String name, int value) {
 		setName(name);
-		setId(id);
 		setValue(value);
-		setAblaufDatum(ablaufDatum);
 	}
 
 	public String getName() {
@@ -60,18 +57,5 @@ public class Priorität implements Comparable<Priorität> {
 		this.value = value;
 	}
 
-	/**
-	 * @return the ablaufDatum
-	 */
-	public Date getAblaufDatum() {
-		return ablaufDatum;
-	}
-
-	/**
-	 * @param ablaufDatum the ablaufDatum to set
-	 */
-	public void setAblaufDatum(Date ablaufDatum) {
-		this.ablaufDatum = ablaufDatum;
-	}
 
 }

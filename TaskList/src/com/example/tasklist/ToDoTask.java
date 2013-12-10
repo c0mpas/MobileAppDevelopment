@@ -1,6 +1,9 @@
 
 package com.example.tasklist;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -16,13 +19,15 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	private Kategorie kategorie;	
 	@DatabaseField(generatedId=true)
 	private int id;
+	@DatabaseField
+	private GregorianCalendar ablaufDatum;
 	
-	public ToDoTask(String title, String description, Priorität priority, Kategorie kategorie, int id) {
+	public ToDoTask(String title, String description, Priorität priority, Kategorie kategorie, GregorianCalendar ablaufDatum) {
 		this.kategorie = kategorie;
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
-		this.id = id;
+		setAblaufDatum(ablaufDatum);
 	}
 
 	public int getID(){
@@ -81,6 +86,20 @@ public class ToDoTask implements Comparable<ToDoTask>{
 		
 		if (this.id == task.getID()) return true;
 		else return false;
+	}
+
+	/**
+	 * @return the ablaufDatum
+	 */
+	public GregorianCalendar getAblaufDatum() {
+		return ablaufDatum;
+	}
+
+	/**
+	 * @param ablaufDatum the ablaufDatum to set
+	 */
+	public void setAblaufDatum(GregorianCalendar ablaufDatum) {
+		this.ablaufDatum = ablaufDatum;
 	}
 
 }

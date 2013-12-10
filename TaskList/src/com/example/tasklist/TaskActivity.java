@@ -1,16 +1,20 @@
 package com.example.tasklist;
 
+import java.sql.SQLException;
+import java.util.GregorianCalendar;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.j256.ormlite.dao.Dao;
 
 public class TaskActivity extends Activity {
 
@@ -20,15 +24,21 @@ public class TaskActivity extends Activity {
 	private Spinner priority;
 	private Button save;
 	private Button cancel;
-	private ToDoTask task;
+	private DatePicker datePicker;
+	private Dao<ToDoTask, Integer> todoDAO;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
+		
+		//Get DBHelper
+		OrmDbHelper dbHelper = new OrmDbHelper(this);
+		todoDAO = dbHelper.createTodoDAO();
 
 		initViews();
 		setListeners();
+		
 
 		// Check if edit or create
 		if (savedInstanceState == null) {
@@ -65,27 +75,43 @@ public class TaskActivity extends Activity {
 	 *             wenn Prio nicht zwischen 1 und 3
 	 */
 	private void save() {
-		Intent intent = new Intent();
 
+		
+
+		String taskTitle;
 		// Save title
 		try {
-			task.setTitle(title.getText().toString());
+			taskTitle = title.getText().toString();
 		} catch (NullPointerException e) {
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.error_title_empty), Toast.LENGTH_SHORT)
 					.show();
 			return;
 		}
-
+		
+		String taskDes;
 		// Save description
 		try {
-			task.setDescription(description.getText().toString());
+			taskDes = description.getText().toString();
 		} catch (NullPointerException e) {
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.error_description_null),
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		Kategorie kategorie = new Kategorie("TestCat");
+		Priorität prio = new Priorität("Testprioname", 5);
+		GregorianCalendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie, calendar);
+		
+		try {
+			todoDAO.create(task);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Log.e("SQL-Error", "Konnte Task nicht ablegen");
+		}
+
 
 		finish();
 	}
@@ -105,11 +131,13 @@ public class TaskActivity extends Activity {
 		title = (EditText) findViewById(R.id.edit_title);
 		description = (EditText) findViewById(R.id.edit_description);
 		priority = (Spinner) findViewById(R.id.spinner_priority);
+		datePicker = (DatePicker) findViewById(R.id.datePicker1);
+		
 	}
 
 	// Update views with new task
 	private void updateViews(ToDoTask task) {
-		this.task = task;
+		//this.task = task;
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
 	}
