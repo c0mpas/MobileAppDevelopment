@@ -1,7 +1,6 @@
 package com.example.tasklist;
 
 import java.util.List;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -19,6 +18,7 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	static class ViewHolder {
 		public TextView title;
 		public TextView description;
+		public TextView ablaufDatum;
 		public ImageView prioImage;
 	}
 
@@ -43,6 +43,7 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 			// Reference Views
 			viewHolder.title = (TextView) rowView.findViewById(R.id.listelement_title);
 			viewHolder.description = (TextView) rowView.findViewById(R.id.listelement_description);
+			viewHolder.ablaufDatum = (TextView) rowView.findViewById(R.id.listelement_date);
 			
 			// Set font sizes from preferences
 			viewHolder.title.setTextSize(Float.parseFloat(
@@ -57,6 +58,8 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 
 		holder.title.setText(tasks.get(position).getTitle());
 		holder.description.setText(tasks.get(position).getDescription());
+		int month = tasks.get(position).getAblaufMonat() + 1;
+		holder.ablaufDatum.setText(tasks.get(position).getAblaufTag()+context.getString(R.string.dot)+month+context.getString(R.string.dot)+tasks.get(position).getAblaufJahr());
 
 		return rowView;
 	}

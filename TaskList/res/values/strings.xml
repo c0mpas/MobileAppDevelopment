@@ -19,6 +19,8 @@
     <string name="title_activity_priority">Prioritäten verwalten</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="title_activity_task">Tasks verwalten</string>
+    <string name="dot">.</string>
+    
     <string name="hello_world">Hello world!</string>
 
 </resources>
