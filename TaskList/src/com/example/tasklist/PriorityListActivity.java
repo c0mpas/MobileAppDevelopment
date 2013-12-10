@@ -1,10 +1,12 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,17 +14,23 @@ import android.widget.ListView;
 
 public class PriorityListActivity extends ListActivity {
 
-	private ArrayList<Priority> priorityList;
+	private DBHelper db;
+	private List<Priority> priorityList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		db = new DBHelper();
 		loadPriorities();
 		showList();
 	}
 
 	private void loadPriorities() {
-		// #####
+		try {
+			priorityList = db.getAllPriorities(this);
+		} catch (SQLException e) {
+			Log.e("PriorityListActivity.loadPriorities", e.toString());
+		}
 	}
 
 	private void showList() {
@@ -54,7 +62,7 @@ public class PriorityListActivity extends ListActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 			case R.id.action_add_priority:
-				startActivity(new Intent(this, PriorityActivity.class));
+				startActivity(new Intent(this, PriorityActivity.class).putExtra(MainActivity.KEY_PRIORITY, -1));
 				break;
 			default:
 				break;

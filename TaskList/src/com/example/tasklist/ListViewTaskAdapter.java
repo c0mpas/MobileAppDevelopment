@@ -25,7 +25,7 @@ public class ListViewTaskAdapter extends ArrayAdapter<Task> {
 	/**
 	 * Constructor
 	 */
-	public ListViewTaskAdapter(Activity context,  List<Task> tasks) {
+	public ListViewTaskAdapter(Activity context, List<Task> tasks) {
 		super(context, R.layout.listview_element_task, tasks);
 		this.context = context;
 		this.tasks = tasks;

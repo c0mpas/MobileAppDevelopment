@@ -1,7 +1,10 @@
 package com.example.tasklist;
 
+import java.sql.SQLException;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,7 @@ public class CategoryActivity extends Activity {
 	
 	private Category category;
 	private Boolean newItem = false;
+	private DBHelper db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,7 @@ public class CategoryActivity extends Activity {
 		
 		referenceViews();
 		setListeners();
-		initFields(savedInstanceState);
+		initFields();
 	}
 
 	private void referenceViews() {
@@ -58,12 +62,17 @@ public class CategoryActivity extends Activity {
 		
 	}
 	
-	private void initFields(Bundle savedInstanceState) {
-		category = (Category) savedInstanceState.getSerializable(MainActivity.KEY_CATEGORY);
-		if (category != null) {
-			name.setText(category.getName());
-		} else {
+	private void initFields() {
+		int categoryID = getIntent().getExtras().getInt(MainActivity.KEY_PRIORITY, -1);
+		if (categoryID < 0) {
 			newItem = true;
+		} else {
+			try {
+				category = db.getCategoryList(this, "id", categoryID).get(0);
+			} catch (SQLException e) {
+				Log.e("PriorityActivity.initFields", e.toString());
+			}
+			name.setText(category.getName());
 		}
 	}
 	
