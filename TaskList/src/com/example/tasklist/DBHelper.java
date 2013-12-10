@@ -17,8 +17,7 @@ public class DBHelper {
 
 	public OrmDbHelper getHelper(Context context) {
 		if (databaseHelper == null) {
-			databaseHelper = OpenHelperManager.getHelper(context,
-					OrmDbHelper.class);
+			databaseHelper = OpenHelperManager.getHelper(context, OrmDbHelper.class);
 		}
 		return databaseHelper;
 	}
@@ -32,17 +31,32 @@ public class DBHelper {
 
 	public List<Task> getAllTasks(Context context) throws SQLException {
 		Log.i(Category.class.getName(), "Show list again");
-		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
+		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
 		QueryBuilder<Task, Integer> builder = dao.queryBuilder();
 		List<Task> list = dao.query(builder.prepare());
-		Log.d("CategoryDBHelper",
-				"Liste geladen, Anzahl Elemente: " + list.size());
+		Log.d("TaskDBHelper", "Liste geladen, Anzahl Elemente: " + list.size());
+		return list;
+	}
+	public List<Priority> getAllPriorities(Context context) throws SQLException {
+		Log.i(Priority.class.getName(), "Show list again");
+		Dao<Priority, Integer> dao = getHelper(context).createPriorityDAO();
+		QueryBuilder<Priority, Integer> builder = dao.queryBuilder();
+		List<Priority> list = dao.query(builder.prepare());
+		Log.d("PriorityDBHelper", "Liste geladen, Anzahl Elemente: " + list.size());
+		return list;
+	}
+	public List<Category> getAllCategories(Context context) throws SQLException {
+		Log.i(Category.class.getName(), "Show list again");
+		Dao<Category, Integer> dao = getHelper(context).createCategoryDAO();
+		QueryBuilder<Category, Integer> builder = dao.queryBuilder();
+		List<Category> list = dao.query(builder.prepare());
+		Log.d("PriorityDBHelper", "Liste geladen, Anzahl Elemente: " + list.size());
 		return list;
 	}
 
 	
 	public void insert(Context context, Task task) throws SQLException {
-		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
+		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
 		dao.create(task);
 	}
 	public void insert(Context context, Priority priority) throws SQLException {
@@ -56,7 +70,7 @@ public class DBHelper {
 	
 	
 	public void update(Context context, Task task) throws SQLException {
-		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
+		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
 		dao.update(task);
 	}
 	public void update(Context context, Priority priority) throws SQLException {
@@ -70,14 +84,33 @@ public class DBHelper {
 	
 	
 	public void delete(Context context, Task task) throws SQLException {
-		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
+		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
 		dao.delete(task);
 	}
+	public void delete(Context context, Priority priority) throws SQLException {
+		Dao<Priority, Integer> dao = getHelper(context).createPriorityDAO();
+		dao.delete(priority);
+	}
+	public void delete(Context context, Category category) throws SQLException {
+		Dao<Category, Integer> dao = getHelper(context).createCategoryDAO();
+		dao.delete(category);
+	}
+	
 
-	public List<Task> get(Context context, String column, Object value) throws SQLException {
-		Dao<Task, Integer> dao = getHelper(context).createTodoDAO();
+	public List<Task> getTaskList(Context context, String column, Object value) throws SQLException {
+		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
 		List<Task> tasks = dao.queryBuilder().where().eq(column, value).query();
 		return tasks;
+	}
+	public List<Priority> getPriorityList(Context context, String column, Object value) throws SQLException {
+		Dao<Priority, Integer> dao = getHelper(context).createPriorityDAO();
+		List<Priority> priorities = dao.queryBuilder().where().eq(column, value).query();
+		return priorities;
+	}
+	public List<Category> getCategoryList(Context context, String column, Object value) throws SQLException {
+		Dao<Category, Integer> dao = getHelper(context).createCategoryDAO();
+		List<Category> categories = dao.queryBuilder().where().eq(column, value).query();
+		return categories;
 	}
 
 }
