@@ -99,8 +99,8 @@ public class TaskActivity extends Activity {
 			return;
 		}
 		
-		Kategorie kategorie = new Kategorie("TestCat");
-		Priorität prio = new Priorität("Testprioname", 5);
+		Category kategorie = new Category("TestCat");
+		Priority prio = new Priority("Testprioname", 5);
 		GregorianCalendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie, calendar);
 		

@@ -13,9 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewPriorityAdapter extends ArrayAdapter<Priorität> {
+public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 	private final Activity context;
-	private final ArrayList<Priorität> priorities;
+	private final ArrayList<Priority> priorities;
 	
 	static class ViewHolder {
 		public TextView name;
@@ -25,7 +25,7 @@ public class ListViewPriorityAdapter extends ArrayAdapter<Priorität> {
 	/**
 	 * Constructor
 	 */
-	public ListViewPriorityAdapter(Activity context,  ArrayList<Priorität> priorities) {
+	public ListViewPriorityAdapter(Activity context,  ArrayList<Priority> priorities) {
 		super(context, R.layout.listview_element_priority, priorities);
 		this.context = context;
 		this.priorities = priorities;

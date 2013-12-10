@@ -14,15 +14,15 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	@DatabaseField
 	private String description;	
 	@DatabaseField(foreign=true)
-	private Priorität priority;
+	private Priority priority;
 	@DatabaseField(foreign=true)
-	private Kategorie kategorie;	
+	private Category kategorie;	
 	@DatabaseField(generatedId=true)
 	private int id;
 	@DatabaseField
 	private GregorianCalendar ablaufDatum;
 	
-	public ToDoTask(String title, String description, Priorität priority, Kategorie kategorie, GregorianCalendar ablaufDatum) {
+	public ToDoTask(String title, String description, Priority priority, Category kategorie, GregorianCalendar ablaufDatum) {
 		this.kategorie = kategorie;
 		this.title = title;
 		this.description = description;
@@ -50,14 +50,14 @@ public class ToDoTask implements Comparable<ToDoTask>{
 		this.description = description;
 	}
 
-	public Priorität getPriority() {
+	public Priority getPriority() {
 		return priority;
 	}
 
 	/*
 	 * setzt prioritaet
 	 */
-	public void setPriority(Priorität priority){
+	public void setPriority(Priority priority){
 		this.priority = priority;
 	}
 	
@@ -69,14 +69,14 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	/**
 	 * @return the kategorie
 	 */
-	public Kategorie getKategorie() {
+	public Category getKategorie() {
 		return kategorie;
 	}
 
 	/**
 	 * @param kategorie the kategorie to set
 	 */
-	public void setKategorie(Kategorie kategorie) {
+	public void setKategorie(Category kategorie) {
 		this.kategorie = kategorie;
 	}
 

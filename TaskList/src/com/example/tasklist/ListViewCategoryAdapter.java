@@ -13,9 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewCategoryAdapter extends ArrayAdapter<Kategorie> {
+public class ListViewCategoryAdapter extends ArrayAdapter<Category> {
 	private final Activity context;
-	private final ArrayList<Kategorie> categories;
+	private final ArrayList<Category> categories;
 	
 	static class ViewHolder {
 		public TextView name;
@@ -24,7 +24,7 @@ public class ListViewCategoryAdapter extends ArrayAdapter<Kategorie> {
 	/**
 	 * Constructor
 	 */
-	public ListViewCategoryAdapter(Activity context,  ArrayList<Kategorie> categories) {
+	public ListViewCategoryAdapter(Activity context,  ArrayList<Category> categories) {
 		super(context, R.layout.listview_element_category, categories);
 		this.context = context;
 		this.categories = categories;

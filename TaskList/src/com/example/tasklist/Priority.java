@@ -6,7 +6,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName="priority")
-public class Priorität implements Comparable<Priorität> {
+public class Priority implements Comparable<Priority> {
 
 	@DatabaseField
 	private String name;
@@ -16,7 +16,7 @@ public class Priorität implements Comparable<Priorität> {
 	private int value;
 
 
-	public Priorität(String name, int value) {
+	public Priority(String name, int value) {
 		setName(name);
 		setValue(value);
 	}
@@ -38,7 +38,7 @@ public class Priorität implements Comparable<Priorität> {
 	}
 
 	@Override
-	public int compareTo(Priorität prio) {
+	public int compareTo(Priority prio) {
 		
 		if (this.value == prio.getValue()) {
 			return 0;

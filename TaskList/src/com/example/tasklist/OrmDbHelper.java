@@ -26,8 +26,8 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(SQLiteDatabase db, ConnectionSource source) {
 		// Registrierung der Klassen beim ORM Framework
 		try { 
-			TableUtils.createTable(source, Priorität.class);
-			TableUtils.createTable(source, Kategorie.class);
+			TableUtils.createTable(source, Priority.class);
+			TableUtils.createTable(source, Category.class);
 			TableUtils.createTable(source, ToDoTask.class);
 			TableUtils.createTable(source, TaskBuffer.class);
 		} catch (SQLException ex) {
@@ -45,18 +45,18 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		return null;
 	}
 
-	public Dao<Kategorie, Integer> createKategorieDAO() {
+	public Dao<Category, Integer> createKategorieDAO() {
 		try {
-			return DaoManager.createDao(connectionSource, Kategorie.class);
+			return DaoManager.createDao(connectionSource, Category.class);
 		} catch (SQLException ex) {
 			Log.e(LOG, "error creating DAO for Kategorie class", ex);
 		}
 		return null;
 	}
 
-	public Dao<Priorität, Integer> createPrioritätDAO() {
+	public Dao<Priority, Integer> createPrioritätDAO() {
 		try {
-			return DaoManager.createDao(connectionSource, Priorität.class);
+			return DaoManager.createDao(connectionSource, Priority.class);
 		} catch (SQLException ex) {
 			Log.e(LOG, "error creating DAO for Priorität class", ex);
 		}
