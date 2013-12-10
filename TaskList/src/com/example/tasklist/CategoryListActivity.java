@@ -6,23 +6,30 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 
 public class CategoryListActivity extends ListActivity {
 
+	private DBHelper db;
 	private List<Category> categoryList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		db = new DBHelper();
 		loadCategories();
 		showList();
 	}
 
 	private void loadCategories() {
-		// #####
+		try {
+			categoryList = db.getAllCategories(this);
+		} catch (SQLException e) {
+			Log.e("loadCategories", e.toString());
+		}
 	}
 
 	private void showList() {

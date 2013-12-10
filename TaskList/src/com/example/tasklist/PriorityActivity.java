@@ -1,7 +1,10 @@
 package com.example.tasklist;
 
+import java.sql.SQLException;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +20,17 @@ public class PriorityActivity extends Activity {
 	
 	private Priority priority;
 	private Boolean newItem = false;
+	private DBHelper db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_priority);
+		db = new DBHelper();
 		
 		referenceViews();
 		setListeners();
-		initFields(savedInstanceState);
+		initFields();
 	}
 
 	private void referenceViews() {
@@ -60,13 +65,18 @@ public class PriorityActivity extends Activity {
 		
 	}
 	
-	private void initFields(Bundle savedInstanceState) {
-		priority = (Priority) savedInstanceState.getSerializable(MainActivity.KEY_PRIORITY);
-		if (priority != null) {
+	private void initFields() {
+		int priorityID = getIntent().getExtras().getInt(MainActivity.KEY_PRIORITY, -1);
+		if (priorityID < 0) {
+			newItem = true;
+		} else {
+			try {
+				priority = db.getPriorityList(this, "id", priorityID).get(0);
+			} catch (SQLException e) {
+				Log.e("PriorityActivity.initFields", e.toString());
+			}
 			name.setText(priority.getName());
 			value.setText(priority.getValue());
-		} else {
-			newItem = true;
 		}
 	}
 	

@@ -1,21 +1,20 @@
 package com.example.tasklist;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 	private final Activity context;
-	private final ArrayList<Priority> priorities;
+	private final List<Priority> priorities;
 	
 	static class ViewHolder {
 		public TextView name;
@@ -25,7 +24,7 @@ public class ListViewPriorityAdapter extends ArrayAdapter<Priority> {
 	/**
 	 * Constructor
 	 */
-	public ListViewPriorityAdapter(Activity context,  ArrayList<Priority> priorities) {
+	public ListViewPriorityAdapter(Activity context, List<Priority> priorities) {
 		super(context, R.layout.listview_element_priority, priorities);
 		this.context = context;
 		this.priorities = priorities;

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class CategoryActivity extends Activity {
 	private int categoryID;
 	private Category category;
 	private Boolean newItem = false;
+	private DBHelper db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class CategoryActivity extends Activity {
 
 	}
 
+
 	private void tryLoadingEdit() {
 		categoryID = getIntent().getExtras().getInt(MainActivity.KEY_CATEGORY,
 				-1);
@@ -94,7 +97,14 @@ public class CategoryActivity extends Activity {
 
 			name.setText(category.getName());
 		} else {
+
 			newItem = true;
+			try {
+				category = db.getCategoryList(this, "id", categoryID).get(0);
+			} catch (SQLException e) {
+				Log.e("PriorityActivity.initFields", e.toString());
+			}
+			name.setText(category.getName());
 		}
 	}
 
