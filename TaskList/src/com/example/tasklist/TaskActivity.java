@@ -21,6 +21,7 @@ public class TaskActivity extends Activity {
 	private Spinner priority;
 	private Button save;
 	private Button cancel;
+	private Button delete;
 	private DatePicker datePicker;
 	private DBHelper toDoDbHelper;
 	private int taskID;
@@ -65,6 +66,24 @@ public class TaskActivity extends Activity {
 
 	// Listener werden definiert
 	private void setListeners() {
+		
+		delete.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {	
+				
+				DBHelper db = new DBHelper();
+				try {
+					db.delete(getApplicationContext(), task);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finish();
+			}
+		});
+		
+		
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -145,6 +164,7 @@ public class TaskActivity extends Activity {
 		description = (EditText) findViewById(R.id.edit_description);
 		priority = (Spinner) findViewById(R.id.spinner_priority);
 		datePicker = (DatePicker) findViewById(R.id.datePicker1);
+		delete = (Button)findViewById(R.id.detail_bt_delete);
 
 	}
 
