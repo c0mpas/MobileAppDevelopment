@@ -13,23 +13,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
+public class ListViewPriorityAdapter extends ArrayAdapter<Priorität> {
 	private final Activity context;
-	private final ArrayList<ToDoTask> tasks;
+	private final ArrayList<Priorität> priorities;
 	
 	static class ViewHolder {
-		public TextView title;
-		public TextView description;
-		public ImageView prioImage;
+		public TextView name;
+		public TextView number;
 	}
 
 	/**
 	 * Constructor
 	 */
-	public ListViewTaskAdapter(Activity context,  ArrayList<ToDoTask> tasks) {
-		super(context, R.layout.listview_element_task, tasks);
+	public ListViewPriorityAdapter(Activity context,  ArrayList<Priorität> priorities) {
+		super(context, R.layout.listview_element_priority, priorities);
 		this.context = context;
-		this.tasks = tasks;
+		this.priorities = priorities;
 	}
 
 	@Override
@@ -37,18 +36,18 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 		View rowView = convertView;
 		if (rowView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			rowView = inflater.inflate(R.layout.listview_element_task, null);
+			rowView = inflater.inflate(R.layout.listview_element_priority, null);
 			ViewHolder viewHolder = new ViewHolder();
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 			
 			// Reference Views
-			viewHolder.title = (TextView) rowView.findViewById(R.id.listelement_title);
-			viewHolder.description = (TextView) rowView.findViewById(R.id.listelement_description);
+			viewHolder.name = (TextView) rowView.findViewById(R.id.listelement_name);
+			viewHolder.number = (TextView) rowView.findViewById(R.id.listelement_number);
 			
 			// Set font sizes from preferences
-			viewHolder.title.setTextSize(Float.parseFloat(
+			viewHolder.name.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_HEAD, SettingsActivity.DEFAULT_HEAD_SIZE)));
-			viewHolder.description.setTextSize(Float.parseFloat(
+			viewHolder.number.setTextSize(Float.parseFloat(
 					prefs.getString(SettingsActivity.FONTSIZE_TAIL, SettingsActivity.DEFAULT_TAIL_SIZE)));
 			
 			rowView.setTag(viewHolder);
@@ -56,8 +55,8 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 
-		holder.title.setText(tasks.get(position).getTitle());
-		holder.description.setText(tasks.get(position).getDescription());
+		holder.name.setText(priorities.get(position).getName());
+		holder.number.setText(priorities.get(position).getValue());
 
 		return rowView;
 	}

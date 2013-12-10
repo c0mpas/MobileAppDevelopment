@@ -32,11 +32,6 @@ public class MainActivity extends ListActivity {
 		// #####
 	}
 
-	private void handleTodos() {
-				
-		}
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

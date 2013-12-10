@@ -5,35 +5,24 @@
     android:background="@color/listElementBackGround" >
 
     <TextView
-        android:id="@+id/listelement_title"
+        android:id="@+id/listelement_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Titel"
+        android:text="Priorität_Name"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/listelement_priority"
+        android:id="@+id/listelement_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/listelement_title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/listelement_name"
         android:gravity="right"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Priorität"
+        android:text="Priorität_Nummer"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/listelement_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/listelement_title"
-        android:gravity="bottom"
-        android:paddingBottom="@dimen/list_element_padding"
-        android:text="Beschreibung"
-        android:textColor="@color/listElementText" />
-
 </RelativeLayout>
