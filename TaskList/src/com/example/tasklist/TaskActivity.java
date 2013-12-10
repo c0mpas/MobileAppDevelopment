@@ -34,7 +34,13 @@ public class TaskActivity extends Activity {
 		
 		//Get DBHelper
 		OrmDbHelper dbHelper = new OrmDbHelper(this);
-		todoDAO = dbHelper.createTodoDAO();
+		try {
+			dbHelper.getWritableDatabase();
+			todoDAO = dbHelper.createTodoDAO();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Log.e("Could not get dao","Dao nicht",e);
+		}
 		initViews();
 		setListeners();
 		

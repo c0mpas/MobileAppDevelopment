@@ -18,6 +18,10 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	public static final String DB_NAME = "todo.db";
 	public static final int DB_VERSION = 1;
 
+	private Dao<Category, Integer> categoryDao = null;
+	private Dao<ToDoTask, Integer> toDoDao = null;
+	private Dao<Priority, Integer> prioDao = null;
+
 	public OrmDbHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 	}
@@ -25,7 +29,8 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db, ConnectionSource source) {
 		// Registrierung der Klassen beim ORM Framework
-		try { 
+
+		try {
 			TableUtils.createTable(source, Priority.class);
 			TableUtils.createTable(source, Category.class);
 			TableUtils.createTable(source, ToDoTask.class);
@@ -36,37 +41,41 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 
 	}
 
-	public Dao<ToDoTask, Integer> createTodoDAO() {
-		try {
-			return DaoManager.createDao(connectionSource, ToDoTask.class);
-		} catch (SQLException ex) {
-			Log.e(LOG, "error creating DAO for ToDoTask class", ex);
+	public Dao<ToDoTask, Integer> createTodoDAO() throws SQLException {
+		if (toDoDao == null) {
+			toDoDao = getDao(ToDoTask.class);
 		}
-		return null;
+		return toDoDao;
 	}
 
-	public Dao<Category, Integer> createKategorieDAO() {
-		try {
-			return DaoManager.createDao(connectionSource, Category.class);
-		} catch (SQLException ex) {
-			Log.e(LOG, "error creating DAO for Kategorie class", ex);
+	public Dao<Category, Integer> createKategorieDAO() throws SQLException {
+		if (categoryDao == null) {
+			categoryDao = getDao(Category.class);
 		}
-		return null;
+		return categoryDao;
 	}
 
-	public Dao<Priority, Integer> createPrioritätDAO() {
-		try {
-			return DaoManager.createDao(connectionSource, Priority.class);
-		} catch (SQLException ex) {
-			Log.e(LOG, "error creating DAO for Priorität class", ex);
+	public Dao<Priority, Integer> createPrioritätDAO() throws SQLException {
+		if (prioDao == null) {
+			prioDao = getDao(Priority.class);
 		}
-		return null;
+		return prioDao;
 	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase arg0, ConnectionSource arg1, int arg2,
-			int arg3) {
-	
+	public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource,
+			int oldVer, int newVer) {
+
+		try {
+
+			TableUtils.dropTable(connectionSource, Category.class, true);
+			onCreate(db, connectionSource);
+		} catch (SQLException e) {
+			Log.e("fuckit", "error upgrading db " +newVer+ "from ver "
+					+ oldVer);
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }
