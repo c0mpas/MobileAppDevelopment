@@ -1,7 +1,7 @@
 package com.example.tasklist;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -15,7 +15,9 @@ public class MainActivity extends ListActivity {
 
 	private static final int DIVIDER = 2;
 
-	private ArrayList<ToDoTask> taskList;
+	private static final String KEY_TASK = "key_task";
+
+	private List<ToDoTask> taskList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class MainActivity extends ListActivity {
 	
 		ListViewTaskAdapter adapter;
 		try {
-			adapter = new ListViewTaskAdapter(this, db.getAll(this));
+			taskList = db.getAll(this);
+			adapter = new ListViewTaskAdapter(this, taskList);
 			setListAdapter(adapter);
 			getListView().setDividerHeight(DIVIDER);
 		} catch (SQLException e) {
@@ -51,13 +54,12 @@ public class MainActivity extends ListActivity {
 	//Ruft neue Activity zum bearbeiten auf
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, TaskActivity.class);
-		taskList.get(taskPosition);
+		intent.putExtra(KEY_TASK, taskList.get(taskPosition).getID());
 		startActivity(intent);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

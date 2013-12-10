@@ -38,6 +38,10 @@
             android:name="com.example.tasklist.PriorityListActivity"
             android:label="@string/title_activity_priority" >
         </activity>
+        <activity
+            android:name="com.example.tasklist.PriorityActivity"
+            android:label="@string/title_activity_priority" >
+        </activity>
     </application>
 
 </manifest>
