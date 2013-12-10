@@ -44,10 +44,10 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, SettingsActivity.class));
 				break;
 			case R.id.action_priorities:
-				// #####
+				startActivity(new Intent(this, PriorityActivity.class));
 				break;
 			case R.id.action_categories:
-				// #####
+				startActivity(new Intent(this, CategoryActivity.class));
 				break;
 			case R.id.action_add_task:
 				// #####

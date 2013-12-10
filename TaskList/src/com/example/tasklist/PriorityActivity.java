@@ -1,14 +1,31 @@
 package com.example.tasklist;
 
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
 
-public class PriorityActivity extends Activity {
+public class PriorityActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		loadPriorities();
+		showList();
+	}
+
+	private void loadPriorities() {
+		// #####
+	}
+
+	private void showList() {
+		// #####
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+		// #####
 	}
 
 	@Override

@@ -27,7 +27,7 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="com.example.tasklist.GroupActivity"
+            android:name="com.example.tasklist.CategoryActivity"
             android:label="@string/title_activity_group" >
         </activity>
         <activity
