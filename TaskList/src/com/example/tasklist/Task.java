@@ -8,7 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "task")
-public class ToDoTask implements Comparable<ToDoTask>, Serializable{
+public class Task implements Comparable<Task>, Serializable{
 
 	/**
 	 * 
@@ -31,10 +31,10 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 	@DatabaseField
 	private int ablaufTag;
 
-	public ToDoTask() {
+	public Task() {
 	};
 
-	public ToDoTask(String title, String description, Priority priority,
+	public Task(String title, String description, Priority priority,
 			Category kategorie, int ablaufJahr, int ablaufMonat, int ablaufTag) {
 		this.kategorie = kategorie;
 		this.title = title;
@@ -77,7 +77,7 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 	}
 
 	@Override
-	public int compareTo(ToDoTask task) {
+	public int compareTo(Task task) {
 		return this.priority.compareTo(task.priority);
 	}
 
@@ -98,7 +98,7 @@ public class ToDoTask implements Comparable<ToDoTask>, Serializable{
 
 	@Override
 	public boolean equals(Object o) {
-		ToDoTask task = (ToDoTask) o;
+		Task task = (Task) o;
 
 		if (this.id == task.getID())
 			return true;

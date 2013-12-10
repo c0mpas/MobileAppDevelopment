@@ -19,7 +19,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	public static final int DB_VERSION = 1;
 
 	private Dao<Category, Integer> categoryDao = null;
-	private Dao<ToDoTask, Integer> toDoDao = null;
+	private Dao<Task, Integer> toDoDao = null;
 	private Dao<Priority, Integer> prioDao = null;
 
 	public OrmDbHelper(Context context) {
@@ -33,28 +33,28 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			TableUtils.createTable(source, Priority.class);
 			TableUtils.createTable(source, Category.class);
-			TableUtils.createTable(source, ToDoTask.class);
+			TableUtils.createTable(source, Task.class);
 		} catch (SQLException ex) {
 			Log.e(LOG, "error creating tables", ex);
 		}
 
 	}
 
-	public Dao<ToDoTask, Integer> createTodoDAO() throws SQLException {
+	public Dao<Task, Integer> createTodoDAO() throws SQLException {
 		if (toDoDao == null) {
-			toDoDao = getDao(ToDoTask.class);
+			toDoDao = getDao(Task.class);
 		}
 		return toDoDao;
 	}
 
-	public Dao<Category, Integer> createKategorieDAO() throws SQLException {
+	public Dao<Category, Integer> createCategoryDAO() throws SQLException {
 		if (categoryDao == null) {
 			categoryDao = getDao(Category.class);
 		}
 		return categoryDao;
 	}
 
-	public Dao<Priority, Integer> createPrioritätDAO() throws SQLException {
+	public Dao<Priority, Integer> createPriorityDAO() throws SQLException {
 		if (prioDao == null) {
 			prioDao = getDao(Priority.class);
 		}
@@ -68,7 +68,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		try {
 
 			TableUtils.dropTable(connectionSource, Category.class, true);
-			TableUtils.dropTable(connectionSource, ToDoTask.class, true);
+			TableUtils.dropTable(connectionSource, Task.class, true);
 			TableUtils.dropTable(connectionSource, Priority.class, true);
 			onCreate(db, connectionSource);
 		} catch (SQLException e) {

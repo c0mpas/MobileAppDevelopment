@@ -15,13 +15,13 @@ public class TaskBuffer {
 	private int id;
 	
 	@ForeignCollectionField
-	private ArrayList<ToDoTask> taskList;
+	private ArrayList<Task> taskList;
 
 	public TaskBuffer() {
-		this.taskList = new ArrayList<ToDoTask>();
+		this.taskList = new ArrayList<Task>();
 	}
 
-	public TaskBuffer add(ToDoTask task) {
+	public TaskBuffer add(Task task) {
 
 		taskList.add(task);
 
@@ -29,7 +29,7 @@ public class TaskBuffer {
 
 	}
 
-	public TaskBuffer delete(ToDoTask task) {
+	public TaskBuffer delete(Task task) {
 
 		taskList.remove(task);
 

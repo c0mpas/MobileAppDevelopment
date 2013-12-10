@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
+public class ListViewTaskAdapter extends ArrayAdapter<Task> {
 	private final Activity context;
-	private final List<ToDoTask> tasks;
+	private final List<Task> tasks;
 	
 	static class ViewHolder {
 		public TextView title;
@@ -25,7 +25,7 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	/**
 	 * Constructor
 	 */
-	public ListViewTaskAdapter(Activity context,  List<ToDoTask> tasks) {
+	public ListViewTaskAdapter(Activity context,  List<Task> tasks) {
 		super(context, R.layout.listview_element_task, tasks);
 		this.context = context;
 		this.tasks = tasks;

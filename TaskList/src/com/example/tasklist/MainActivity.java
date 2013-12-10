@@ -19,7 +19,7 @@ public class MainActivity extends ListActivity {
 	public static final String KEY_PRIORITY = "key_priority";
 	public static final String KEY_CATEGORY = "key_category";
 	
-	private List<ToDoTask> taskList;
+	private List<Task> taskList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +33,11 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void showList() {
-		ToDoDBHelper db = new ToDoDBHelper();
+		DBHelper db = new DBHelper();
 	
 		ListViewTaskAdapter adapter;
 		try {
-			taskList = db.getAll(this);
+			taskList = db.getAllTasks(this);
 			adapter = new ListViewTaskAdapter(this, taskList);
 			setListAdapter(adapter);
 			getListView().setDividerHeight(DIVIDER);

@@ -1,7 +1,6 @@
 package com.example.tasklist;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -17,8 +16,6 @@ public class Priority implements Serializable, Comparable<Priority>  {
 	private int value;
 	
 	public Priority(){};
-
-
 
 	public Priority(String name, int value) {
 		setName(name);

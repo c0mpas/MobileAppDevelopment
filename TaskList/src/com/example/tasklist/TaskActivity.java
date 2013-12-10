@@ -24,8 +24,8 @@ public class TaskActivity extends Activity {
 	private Button save;
 	private Button cancel;
 	private DatePicker datePicker;
-	private ToDoDBHelper toDoDbHelper;
-	private ToDoTask task;
+	private DBHelper toDoDbHelper;
+	private Task task;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class TaskActivity extends Activity {
 		initViews();
 		setListeners();
 
-		toDoDbHelper = new ToDoDBHelper();
+		toDoDbHelper = new DBHelper();
 
-		task = (ToDoTask) savedInstanceState
+		task = (Task) savedInstanceState
 				.getSerializable(MainActivity.KEY_TASK);
 
 		if (task != null) {
@@ -47,7 +47,7 @@ public class TaskActivity extends Activity {
 
 	private void updateTask(){
 		
-		ToDoDBHelper db = new ToDoDBHelper();
+		DBHelper db = new DBHelper();
 		try {
 			db.update(this, task);
 		} catch (SQLException e) {
@@ -109,7 +109,7 @@ public class TaskActivity extends Activity {
 		Category kategorie = new Category("TestCat");
 		Priority prio = new Priority("Testprioname", 5);
 
-		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie,
+		Task task = new Task(taskTitle, taskDes, prio, kategorie,
 				datePicker.getYear(), datePicker.getMonth(),
 				datePicker.getDayOfMonth());
 
