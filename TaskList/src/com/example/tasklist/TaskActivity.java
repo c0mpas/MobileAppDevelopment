@@ -24,9 +24,9 @@ public class TaskActivity extends Activity {
 	private Button save;
 	private Button cancel;
 	private DatePicker datePicker;
-	private ToDoDBHelper toDoDbHelper;
+	private DBHelper toDoDbHelper;
 	private int taskID;
-	private ToDoTask task;
+	private Task task;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +36,16 @@ public class TaskActivity extends Activity {
 		initViews();
 		setListeners();
 
-		toDoDbHelper = new ToDoDBHelper();
+		toDoDbHelper = new DBHelper();
 
 		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK);
 
-		if (taskID != 0) {
-			updateViews();
-		}
+		if (taskID != 0) updateViews();
 	}
 
 	private void updateTask(){
 		
-		ToDoDBHelper db = new ToDoDBHelper();
+		DBHelper db = new DBHelper();
 		try {
 			db.update(this, task);
 		} catch (SQLException e) {
@@ -109,7 +107,7 @@ public class TaskActivity extends Activity {
 		Category kategorie = new Category("TestCat");
 		Priority prio = new Priority("Testprioname", 5);
 
-		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie,
+		Task task = new Task(taskTitle, taskDes, prio, kategorie,
 				datePicker.getYear(), datePicker.getMonth(),
 				datePicker.getDayOfMonth());
 
@@ -145,7 +143,7 @@ public class TaskActivity extends Activity {
 	// Update views with new task
 	private void updateViews() {
 		
-		ToDoDBHelper db = new ToDoDBHelper();
+		DBHelper db = new DBHelper();
 		try {
 			task = db.get(this, "id", taskID).get(0);
 		} catch (SQLException e) {
