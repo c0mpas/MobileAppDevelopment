@@ -45,6 +45,12 @@ public class ToDoDBHelper {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
 		dao.create(task);
 	}
+	
+	public void update(Context context, ToDoTask task)
+			throws SQLException {
+		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
+		dao.update(task);
+	}
 
 	public void delete(Context context, ToDoTask task) throws SQLException {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();

@@ -18,7 +18,6 @@ import com.j256.ormlite.dao.Dao;
 
 public class TaskActivity extends Activity {
 
-	private static final String SAVE_EDIT_TASK = "SaveEditTask";
 	private EditText title;
 	private EditText description;
 	private Spinner priority;
@@ -26,6 +25,7 @@ public class TaskActivity extends Activity {
 	private Button cancel;
 	private DatePicker datePicker;
 	private ToDoDBHelper toDoDbHelper;
+	private ToDoTask task;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +36,36 @@ public class TaskActivity extends Activity {
 		setListeners();
 
 		toDoDbHelper = new ToDoDBHelper();
-		// Check if edit or create
-		if (savedInstanceState == null) {
-			// updateViews();
-		} else {
-			// Create new task
+
+		task = (ToDoTask) savedInstanceState
+				.getSerializable(MainActivity.KEY_TASK);
+
+		if (task != null) {
+			updateViews();
 		}
 	}
 
+	private void updateTask(){
+		
+		ToDoDBHelper db = new ToDoDBHelper();
+		try {
+			db.update(this, task);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Log.e("Update Task Error","Konnte Task nicht updaten",e);
+		}
+		
+	}
+	
 	// Listener werden definiert
 	private void setListeners() {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				save();
+				if (task != null)
+					updateTask();
+				else
+					save();
 			}
 		});
 
@@ -59,10 +75,6 @@ public class TaskActivity extends Activity {
 				cancel();
 			}
 		});
-
-		Integer[] prioArray = { 1, 2, 3 };
-		// priority.setAdapter(new PrioSpinnerAdapter(this,
-		// R.layout.prio_spinner_std, prioArray));
 	}
 
 	/**
@@ -96,8 +108,9 @@ public class TaskActivity extends Activity {
 
 		Category kategorie = new Category("TestCat");
 		Priority prio = new Priority("Testprioname", 5);
-		
-		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie, datePicker.getYear(), datePicker.getMonth(),
+
+		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie,
+				datePicker.getYear(), datePicker.getMonth(),
 				datePicker.getDayOfMonth());
 
 		try {
@@ -105,7 +118,7 @@ public class TaskActivity extends Activity {
 			toDoDbHelper.insert(this, task);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Log.e("SQL-Error", "Konnte Task nicht ablegen",e);
+			Log.e("SQL-Error", "Konnte Task nicht ablegen", e);
 		}
 
 		finish();
@@ -115,7 +128,6 @@ public class TaskActivity extends Activity {
 	 * Wird nach DetailActivity abbrechen aufgerufen
 	 */
 	private void cancel() {
-		setResult(RESULT_CANCELED);
 		finish();
 	}
 
@@ -131,10 +143,11 @@ public class TaskActivity extends Activity {
 	}
 
 	// Update views with new task
-	private void updateViews(ToDoTask task) {
-		// this.task = task;
+	private void updateViews() {
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
+		datePicker.updateDate(task.getAblaufJahr(), task.getAblaufMonat(),
+				task.getAblaufTag());
 	}
 
 	@Override
