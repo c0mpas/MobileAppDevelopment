@@ -9,5 +9,18 @@
     <string name="detail_cancel">Abbrechen</string>
     <string name="error_title_empty">Geben Sie bitte einen Titel ein!</string>
     <string name="error_description_null">Keine Beschreibung vorhanden!</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_priorities">Prioritäten bearbeiten</string>
+    <string name="action_categories">Kategorien bearbeiten</string>
+    <string name="action_add_task">Task hinzufügen</string>
+    <string name="settings_fontsize_head_title">Schriftgröße Titel</string>
+    <string name="settings_fontsize_tail_title">Schriftgröße Beschreibung</string>
+    <string name="title_activity_group_and_priotity">GroupAndPriotityActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_priority">PriorityActivity</string>
 
 </resources>

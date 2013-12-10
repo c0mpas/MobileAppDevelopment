@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class DetailActivity extends Activity {
+public class TaskActivity extends Activity {
 
 	private static final String SAVE_EDIT_TASK = "SaveEditTask";
 	private EditText title;

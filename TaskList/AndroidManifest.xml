@@ -23,8 +23,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.tasklist.DetailActivity"
-            android:label="@string/app_name" >
+            android:name="com.example.tasklist.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.example.tasklist.GroupActivity"
+            android:label="@string/title_activity_group" >
+        </activity>
+        <activity
+            android:name="com.example.tasklist.TaskActivity"
+            android:label="@string/title_activity_group" >
+        </activity>
+        <activity
+            android:name="com.example.tasklist.PriorityActivity"
+            android:label="@string/title_activity_priority" >
         </activity>
     </application>
 
