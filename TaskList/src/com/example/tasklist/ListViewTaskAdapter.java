@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends ArrayAdapter<ToDoTask> {
+public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	private final Activity context;
 	private final ArrayList<ToDoTask> tasks;
 	private int color;
@@ -34,7 +34,7 @@ public class ListViewAdapter extends ArrayAdapter<ToDoTask> {
 	/**
 	 * Constructor
 	 */
-	public ListViewAdapter(Activity context,  ArrayList<ToDoTask> tasks) {
+	public ListViewTaskAdapter(Activity context,  ArrayList<ToDoTask> tasks) {
 		super(context, R.layout.listview_element_task, tasks);
 		this.context = context;
 		this.tasks = tasks;
