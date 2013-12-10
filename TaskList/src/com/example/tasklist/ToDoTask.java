@@ -1,23 +1,28 @@
-
 package com.example.tasklist;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.io.Serializable;
+
+import android.os.Parcel;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName="task")
-public class ToDoTask implements Comparable<ToDoTask>{
+@DatabaseTable(tableName = "task")
+public class ToDoTask implements Comparable<ToDoTask>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@DatabaseField
 	private String title;
 	@DatabaseField
-	private String description;	
-	@DatabaseField(foreign=true)
-	private Priority priority;
-	@DatabaseField(foreign=true)
-	private Category kategorie;	
-	@DatabaseField(generatedId=true)
+	private String description;
+	@DatabaseField(foreign = true)
+	private transient Priority priority;
+	@DatabaseField(foreign = true)
+	private transient Category kategorie;
+	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
 	private int ablaufJahr;
@@ -25,10 +30,12 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	private int ablaufMonat;
 	@DatabaseField
 	private int ablaufTag;
-	
-	public ToDoTask(){};
-	
-	public ToDoTask(String title, String description, Priority priority, Category kategorie, int ablaufJahr, int ablaufMonat, int ablaufTag) {
+
+	public ToDoTask() {
+	};
+
+	public ToDoTask(String title, String description, Priority priority,
+			Category kategorie, int ablaufJahr, int ablaufMonat, int ablaufTag) {
 		this.kategorie = kategorie;
 		this.title = title;
 		this.description = description;
@@ -38,10 +45,10 @@ public class ToDoTask implements Comparable<ToDoTask>{
 		this.ablaufTag = ablaufTag;
 	}
 
-	public int getID(){
+	public int getID() {
 		return id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -65,14 +72,14 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	/*
 	 * setzt prioritaet
 	 */
-	public void setPriority(Priority priority){
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
-	
+
 	@Override
-	 public int compareTo(ToDoTask task) {
-	        return this.priority.compareTo(task.priority);
-	    }
+	public int compareTo(ToDoTask task) {
+		return this.priority.compareTo(task.priority);
+	}
 
 	/**
 	 * @return the kategorie
@@ -82,7 +89,8 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	}
 
 	/**
-	 * @param kategorie the kategorie to set
+	 * @param kategorie
+	 *            the kategorie to set
 	 */
 	public void setKategorie(Category kategorie) {
 		this.kategorie = kategorie;
@@ -91,9 +99,11 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	@Override
 	public boolean equals(Object o) {
 		ToDoTask task = (ToDoTask) o;
-		
-		if (this.id == task.getID()) return true;
-		else return false;
+
+		if (this.id == task.getID())
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -104,7 +114,8 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	}
 
 	/**
-	 * @param ablaufJahr the ablaufJahr to set
+	 * @param ablaufJahr
+	 *            the ablaufJahr to set
 	 */
 	public void setAblaufJahr(int ablaufJahr) {
 		this.ablaufJahr = ablaufJahr;
@@ -118,7 +129,8 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	}
 
 	/**
-	 * @param ablaufMonat the ablaufMonat to set
+	 * @param ablaufMonat
+	 *            the ablaufMonat to set
 	 */
 	public void setAblaufMonat(int ablaufMonat) {
 		this.ablaufMonat = ablaufMonat;
@@ -132,7 +144,8 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	}
 
 	/**
-	 * @param ablaufTag the ablaufTag to set
+	 * @param ablaufTag
+	 *            the ablaufTag to set
 	 */
 	public void setAblaufTag(int ablaufTag) {
 		this.ablaufTag = ablaufTag;
