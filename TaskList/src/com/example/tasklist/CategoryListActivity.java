@@ -33,6 +33,13 @@ public class CategoryListActivity extends ListActivity {
 	}
 
 	private void showList() {
+		DBHelper db = new DBHelper();
+		try {
+			categoryList = db.getAllCategories(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ListViewCategoryAdapter adapter = new ListViewCategoryAdapter(this, categoryList);
 		setListAdapter(adapter);
 		getListView().setDividerHeight(MainActivity.DIVIDER);

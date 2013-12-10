@@ -1,6 +1,5 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -23,7 +22,8 @@ public class ListViewCategoryAdapter extends ArrayAdapter<Category> {
 	/**
 	 * Constructor
 	 */
-	public ListViewCategoryAdapter(Activity context, List<Category> categories) {
+	public ListViewCategoryAdapter(Activity context,  List<Category> categories) {
+
 		super(context, R.layout.listview_element_category, categories);
 		this.context = context;
 		this.categories = categories;

@@ -36,19 +36,24 @@ public class TaskActivity extends Activity {
 
 		toDoDbHelper = new DBHelper();
 
-		taskID = -1;
+		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK, -1);
 
-		if (getIntent().getExtras().getBoolean(MainActivity.KEY_TASK)) {
-			taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK);
-
+		if (taskID != -1)
 			updateViews();
 
-		}
 	}
 
 	private void updateTask() {
 
 		DBHelper db = new DBHelper();
+		task.setTitle(title.getText().toString());
+		task.setDescription(description.getText().toString());
+		task.setAblaufJahr(datePicker.getYear());
+		task.setAblaufMonat(datePicker.getMonth());
+		task.setAblaufTag(datePicker.getDayOfMonth());
+		
+		//Setze noch Prio und Kategorie
+		
 		try {
 			db.update(this, task);
 		} catch (SQLException e) {
@@ -148,7 +153,7 @@ public class TaskActivity extends Activity {
 		List<Task> list = null;
 		DBHelper db = new DBHelper();
 		try {
-			list =  db.getTaskList(this,"id" , taskID);
+			list = db.getTaskList(this, "id", taskID);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

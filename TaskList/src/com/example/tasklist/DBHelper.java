@@ -71,7 +71,7 @@ public class DBHelper {
 	
 	public void update(Context context, Task task) throws SQLException {
 		Dao<Task, Integer> dao = getHelper(context).createTaskDAO();
-		dao.update(task);
+		dao.createOrUpdate(task);
 	}
 	public void update(Context context, Priority priority) throws SQLException {
 		Dao<Priority, Integer> dao = getHelper(context).createPriorityDAO();
