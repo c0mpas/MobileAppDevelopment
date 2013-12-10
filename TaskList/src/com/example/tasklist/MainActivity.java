@@ -1,6 +1,6 @@
 package com.example.tasklist;
 
-
+import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 
+	private static final int DIVIDER = 2;
+
+	private ArrayList<ToDoTask> taskList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,7 +28,9 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void showList() {
-		// #####
+		ListViewTaskAdapter adapter = new ListViewTaskAdapter(this, taskList);
+		setListAdapter(adapter);
+		getListView().setDividerHeight(DIVIDER);
 	}
 
 	@Override
@@ -47,10 +53,10 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, SettingsActivity.class));
 				break;
 			case R.id.action_priorities:
-				startActivity(new Intent(this, PriorityActivity.class));
+				startActivity(new Intent(this, PriorityListActivity.class));
 				break;
 			case R.id.action_categories:
-				startActivity(new Intent(this, CategoryActivity.class));
+				startActivity(new Intent(this, CategoryListActivity.class));
 				break;
 			case R.id.action_add_task:
 				startActivity(new Intent(this, TaskActivity.class));

@@ -1,26 +1,34 @@
 package com.example.tasklist;
 
+import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 
-public class PriorityActivity extends ListActivity {
+public class CategoryListActivity extends ListActivity {
 
+	private static final int DIVIDER = 2;
+
+	private ArrayList<Category> categoryList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		loadPriorities();
+		loadCategories();
 		showList();
 	}
 
-	private void loadPriorities() {
+	private void loadCategories() {
 		// #####
 	}
 
 	private void showList() {
-		// #####
+		ListViewCategoryAdapter adapter = new ListViewCategoryAdapter(this, categoryList);
+		setListAdapter(adapter);
+		getListView().setDividerHeight(DIVIDER);
 	}
 
 	@Override
@@ -31,7 +39,7 @@ public class PriorityActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.priority, menu);
+		getMenuInflater().inflate(R.menu.category, menu);
 		return true;
 	}
 

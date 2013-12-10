@@ -27,7 +27,7 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="com.example.tasklist.CategoryActivity"
+            android:name="com.example.tasklist.CategoryListActivity"
             android:label="@string/title_activity_category" >
         </activity>
         <activity
@@ -35,7 +35,7 @@
             android:label="@string/title_activity_task" >
         </activity>
         <activity
-            android:name="com.example.tasklist.PriorityActivity"
+            android:name="com.example.tasklist.PriorityListActivity"
             android:label="@string/title_activity_priority" >
         </activity>
     </application>
