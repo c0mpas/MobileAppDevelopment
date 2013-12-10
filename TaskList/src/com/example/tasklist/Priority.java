@@ -14,6 +14,9 @@ public class Priority implements Comparable<Priority> {
 	private int id;
 	@DatabaseField
 	private int value;
+	
+	public Priority(){};
+
 
 
 	public Priority(String name, int value) {

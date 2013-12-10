@@ -10,8 +10,11 @@ public class Category {
 	private String name;
 	@DatabaseField(generatedId=true)
 	private int id;
+	
+	public Category(){};
 
-	Category(String name) {
+
+	public Category(String name) {
 		setName(name);
 	}
 

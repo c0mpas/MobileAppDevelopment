@@ -25,26 +25,19 @@ public class TaskActivity extends Activity {
 	private Button save;
 	private Button cancel;
 	private DatePicker datePicker;
-	private Dao<ToDoTask, Integer> todoDAO;
+	private ToDoDBHelper toDoDbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task);
-		
-		//Get DBHelper
-		OrmDbHelper dbHelper = new OrmDbHelper(this);
-		try {
-			dbHelper.getWritableDatabase();
-			todoDAO = dbHelper.createTodoDAO();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			Log.e("Could not get dao","Dao nicht",e);
-		}
+
+		// Get DBHelper
 		initViews();
 		setListeners();
-		
 
+		toDoDbHelper = new ToDoDBHelper();
+		toDoDbHelper.getHelper(this);
 		// Check if edit or create
 		if (savedInstanceState == null) {
 			// updateViews();
@@ -81,8 +74,6 @@ public class TaskActivity extends Activity {
 	 */
 	private void save() {
 
-		
-
 		String taskTitle;
 		// Save title
 		try {
@@ -93,7 +84,7 @@ public class TaskActivity extends Activity {
 					.show();
 			return;
 		}
-		
+
 		String taskDes;
 		// Save description
 		try {
@@ -104,19 +95,20 @@ public class TaskActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		Category kategorie = new Category("TestCat");
 		Priority prio = new Priority("Testprioname", 5);
-		GregorianCalendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie, calendar);
 		
+		ToDoTask task = new ToDoTask(taskTitle, taskDes, prio, kategorie, datePicker.getYear(), datePicker.getMonth(),
+				datePicker.getDayOfMonth());
+
 		try {
-			todoDAO.create(task);
+
+			toDoDbHelper.insert(this, task);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Log.e("SQL-Error", "Konnte Task nicht ablegen");
+			Log.e("SQL-Error", "Konnte Task nicht ablegen",e);
 		}
-
 
 		finish();
 	}
@@ -137,12 +129,12 @@ public class TaskActivity extends Activity {
 		description = (EditText) findViewById(R.id.edit_description);
 		priority = (Spinner) findViewById(R.id.spinner_priority);
 		datePicker = (DatePicker) findViewById(R.id.datePicker1);
-		
+
 	}
 
 	// Update views with new task
 	private void updateViews(ToDoTask task) {
-		//this.task = task;
+		// this.task = task;
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
 	}

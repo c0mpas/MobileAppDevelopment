@@ -20,14 +20,22 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	@DatabaseField(generatedId=true)
 	private int id;
 	@DatabaseField
-	private GregorianCalendar ablaufDatum;
+	private int ablaufJahr;
+	@DatabaseField
+	private int ablaufMonat;
+	@DatabaseField
+	private int ablaufTag;
 	
-	public ToDoTask(String title, String description, Priority priority, Category kategorie, GregorianCalendar ablaufDatum) {
+	public ToDoTask(){};
+	
+	public ToDoTask(String title, String description, Priority priority, Category kategorie, int ablaufJahr, int ablaufMonat, int ablaufTag) {
 		this.kategorie = kategorie;
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
-		setAblaufDatum(ablaufDatum);
+		this.ablaufJahr = ablaufJahr;
+		this.ablaufMonat = ablaufMonat;
+		this.ablaufTag = ablaufTag;
 	}
 
 	public int getID(){
@@ -89,17 +97,47 @@ public class ToDoTask implements Comparable<ToDoTask>{
 	}
 
 	/**
-	 * @return the ablaufDatum
+	 * @return the ablaufJahr
 	 */
-	public GregorianCalendar getAblaufDatum() {
-		return ablaufDatum;
+	public int getAblaufJahr() {
+		return ablaufJahr;
 	}
 
 	/**
-	 * @param ablaufDatum the ablaufDatum to set
+	 * @param ablaufJahr the ablaufJahr to set
 	 */
-	public void setAblaufDatum(GregorianCalendar ablaufDatum) {
-		this.ablaufDatum = ablaufDatum;
+	public void setAblaufJahr(int ablaufJahr) {
+		this.ablaufJahr = ablaufJahr;
 	}
+
+	/**
+	 * @return the ablaufMonat
+	 */
+	public int getAblaufMonat() {
+		return ablaufMonat;
+	}
+
+	/**
+	 * @param ablaufMonat the ablaufMonat to set
+	 */
+	public void setAblaufMonat(int ablaufMonat) {
+		this.ablaufMonat = ablaufMonat;
+	}
+
+	/**
+	 * @return the ablaufTag
+	 */
+	public int getAblaufTag() {
+		return ablaufTag;
+	}
+
+	/**
+	 * @param ablaufTag the ablaufTag to set
+	 */
+	public void setAblaufTag(int ablaufTag) {
+		this.ablaufTag = ablaufTag;
+	}
+
+
 
 }

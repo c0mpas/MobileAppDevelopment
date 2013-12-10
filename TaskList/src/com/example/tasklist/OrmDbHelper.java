@@ -69,9 +69,11 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		try {
 
 			TableUtils.dropTable(connectionSource, Category.class, true);
+			TableUtils.dropTable(connectionSource, ToDoTask.class, true);
+			TableUtils.dropTable(connectionSource, Priority.class, true);
 			onCreate(db, connectionSource);
 		} catch (SQLException e) {
-			Log.e("fuckit", "error upgrading db " +newVer+ "from ver "
+			Log.e("fuckit", "error upgrading db " + newVer + "from ver "
 					+ oldVer);
 			throw new RuntimeException(e);
 		}
