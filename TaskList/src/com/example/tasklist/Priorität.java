@@ -1,5 +1,7 @@
 package com.example.tasklist;
 
+import java.sql.Date;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -12,11 +14,14 @@ public class Priorität implements Comparable<Priorität> {
 	private int id;
 	@DatabaseField
 	private int value;
+	@DatabaseField
+	private Date ablaufDatum;  
 
-	public Priorität(String name, int id, int value) {
+	public Priorität(String name, int id, int value, Date ablaufDatum) {
 		setName(name);
 		setId(id);
 		setValue(value);
+		setAblaufDatum(ablaufDatum);
 	}
 
 	public String getName() {
@@ -53,6 +58,20 @@ public class Priorität implements Comparable<Priorität> {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+
+	/**
+	 * @return the ablaufDatum
+	 */
+	public Date getAblaufDatum() {
+		return ablaufDatum;
+	}
+
+	/**
+	 * @param ablaufDatum the ablaufDatum to set
+	 */
+	public void setAblaufDatum(Date ablaufDatum) {
+		this.ablaufDatum = ablaufDatum;
 	}
 
 }

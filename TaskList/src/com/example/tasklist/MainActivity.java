@@ -1,5 +1,7 @@
 package com.example.tasklist;
 
+
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,8 +32,14 @@ public class MainActivity extends ListActivity {
 		// #####
 	}
 
+	private void handleTodos() {
+				
+		}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

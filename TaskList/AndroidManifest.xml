@@ -31,6 +31,10 @@
             android:label="@string/title_activity_group" >
         </activity>
         <activity
+            android:name="com.example.tasklist.TaskActivity"
+            android:label="@string/title_activity_group" >
+        </activity>
+        <activity
             android:name="com.example.tasklist.PriorityActivity"
             android:label="@string/title_activity_priority" >
         </activity>

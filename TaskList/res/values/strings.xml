@@ -2,6 +2,13 @@
 <resources>
 
     <string name="app_name">TaskList</string>
+    <string name="detail_title">Titel:</string>
+    <string name="detail_description">Beschreibung:</string>
+    <string name="detail_priority">Priorität:</string>
+    <string name="detail_save">Speichern</string>
+    <string name="detail_cancel">Abbrechen</string>
+    <string name="error_title_empty">Geben Sie bitte einen Titel ein!</string>
+    <string name="error_description_null">Keine Beschreibung vorhanden!</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_priorities">Prioritäten bearbeiten</string>
     <string name="action_categories">Kategorien bearbeiten</string>
