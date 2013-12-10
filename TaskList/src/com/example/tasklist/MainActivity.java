@@ -20,7 +20,7 @@ public class MainActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		loadTasks();
-		showList();
+		//showList();
 	}
 
 	private void loadTasks() {
