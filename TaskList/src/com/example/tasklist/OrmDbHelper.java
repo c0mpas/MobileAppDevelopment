@@ -25,7 +25,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db, ConnectionSource source) {
 		// Registrierung der Klassen beim ORM Framework
-		try {
+		try { 
 			TableUtils.createTable(source, Priorität.class);
 			TableUtils.createTable(source, Kategorie.class);
 			TableUtils.createTable(source, ToDoTask.class);
@@ -44,7 +44,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		}
 		return null;
 	}
-	
+
 	public Dao<Kategorie, Integer> createKategorieDAO() {
 		try {
 			return DaoManager.createDao(connectionSource, Kategorie.class);
@@ -53,7 +53,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 		}
 		return null;
 	}
-	
+
 	public Dao<Priorität, Integer> createPrioritätDAO() {
 		try {
 			return DaoManager.createDao(connectionSource, Priorität.class);
@@ -66,7 +66,6 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, ConnectionSource arg1, int arg2,
 			int arg3) {
-		// TODO Auto-generated method stub
-
+	
 	}
 }
