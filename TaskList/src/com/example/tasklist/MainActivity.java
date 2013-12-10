@@ -17,9 +17,9 @@ public class MainActivity extends ListActivity {
 	public static final String KEY_TASK = "key_task";
 	public static final String KEY_PRIORITY = "key_priority";
 	public static final String KEY_CATEGORY = "key_category";
-	
+
 	private List<Task> taskList;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class MainActivity extends ListActivity {
 
 	private void showList() {
 		DBHelper db = new DBHelper();
-	
+
 		ListViewTaskAdapter adapter;
 		try {
 			taskList = db.getAllTasks(this);
@@ -44,15 +44,16 @@ public class MainActivity extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, View view, int position, long id) {
+	protected void onListItemClick(ListView listView, View view, int position,
+			long id) {
 		editTask(position);
 	}
 
-	//Ruft neue Activity zum bearbeiten auf
+	// Ruft neue Activity zum bearbeiten auf
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, TaskActivity.class);
 		intent.putExtra(KEY_TASK, taskList.get(taskPosition).getID());
@@ -76,22 +77,22 @@ public class MainActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
-			case R.id.action_settings:
-				startActivity(new Intent(this, SettingsActivity.class));
-				break;
-			case R.id.action_priorities:
-				startActivity(new Intent(this, PriorityListActivity.class));
-				break;
-			case R.id.action_categories:
-				startActivity(new Intent(this, CategoryListActivity.class));
-				break;
-			case R.id.action_add_task:
-				startActivity(new Intent(this, TaskActivity.class));
-				break;
-			default:
-				break;
+		case R.id.action_settings:
+			startActivity(new Intent(this, SettingsActivity.class));
+			break;
+		case R.id.action_priorities:
+			startActivity(new Intent(this, PriorityListActivity.class));
+			break;
+		case R.id.action_categories:
+			startActivity(new Intent(this, CategoryListActivity.class));
+			break;
+		case R.id.action_add_task:
+			startActivity(new Intent(this, TaskActivity.class).putExtra(
+					KEY_TASK, false));
+			break;
+		default:
+			break;
 		}
 		return true;
 	}
-
 }
