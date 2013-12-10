@@ -16,8 +16,6 @@ import android.widget.TextView;
 public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	private final Activity context;
 	private final ArrayList<ToDoTask> tasks;
-	private int color;
-	private boolean iconVisibility;
 	
 	// Colors
 	private static final int RED = Color.parseColor("#DF0101");
