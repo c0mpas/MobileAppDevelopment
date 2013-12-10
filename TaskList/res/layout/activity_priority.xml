@@ -48,24 +48,33 @@
         android:ems="10"
         android:inputType="number" />
 
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/detail_button_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:text="Speichern" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/buttonAbort"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonSave"
-        android:layout_alignBottom="@+id/buttonSave"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/margin_medium"
-        android:text="Abbrechen" />
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Speichern" />
+
+        <Button
+            android:id="@+id/buttonAbort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Abbrechen" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Löschen" />
+    </LinearLayout>
 
 </RelativeLayout>
