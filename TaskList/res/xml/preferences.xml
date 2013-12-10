@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:defaultValue="14"
+        android:inputType="number"
+        android:key="fontsize_head"
+        android:order="1"
+        android:title="@string/settings_fontsize_head_title" />
+    <EditTextPreference
+        android:defaultValue="10"
+        android:inputType="number"
+        android:key="fontsize_tail"
+        android:order="2"
+        android:title="@string/settings_fontsize_tail_title" />
+
+</PreferenceScreen>

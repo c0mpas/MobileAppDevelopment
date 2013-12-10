@@ -2,8 +2,23 @@
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_priorities"
+        android:orderInCategory="2"
+        android:showAsAction="never"
+        android:title="@string/action_priorities"/>
+    <item
+        android:id="@+id/action_categories"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="@string/action_categories"/>
+    <item
+        android:id="@+id/action_add_task"
+        android:orderInCategory="4"
+        android:showAsAction="never"
+        android:title="@string/action_add_task"/>
 
 </menu>

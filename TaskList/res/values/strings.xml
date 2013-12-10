@@ -2,7 +2,11 @@
 <resources>
 
     <string name="app_name">TaskList</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_priorities">Prioritäten bearbeiten</string>
+    <string name="action_categories">Kategorien bearbeiten</string>
+    <string name="action_add_task">Task hinzufügen</string>
+    <string name="settings_fontsize_head_title">Schriftgröße Titel</string>
+    <string name="settings_fontsize_tail_title">Schriftgröße Beschreibung</string>
+    
 </resources>
