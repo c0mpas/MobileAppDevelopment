@@ -1,9 +1,16 @@
 package com.example.tasklist;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName="priority")
 public class Priorität implements Comparable<Priorität> {
 
+	@DatabaseField
 	private String name;
+	@DatabaseField(generatedId=true)
 	private int id;
+	@DatabaseField
 	private int value;
 
 	public Priorität(String name, int id, int value) {

@@ -1,13 +1,20 @@
 
 package com.example.tasklist;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName="task")
 public class ToDoTask implements Comparable<ToDoTask>{
-	
+	@DatabaseField
 	private String title;
+	@DatabaseField
 	private String description;	
+	@DatabaseField(foreign=true)
 	private Priorität priority;
-	private Kategorie kategorie;
+	@DatabaseField(foreign=true)
+	private Kategorie kategorie;	
+	@DatabaseField(generatedId=true)
 	private int id;
 	
 	public ToDoTask(String title, String description, Priorität priority, Kategorie kategorie, int id) {
