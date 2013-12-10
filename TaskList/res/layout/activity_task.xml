@@ -28,6 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/detail_cancel" />
+
+        <Button
+            android:id="@+id/detail_bt_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete" />
     </LinearLayout>
 
     <ScrollView
@@ -101,8 +108,8 @@
             <DatePicker
                 android:id="@+id/datePicker1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:layout_below="@+id/spinner_priority"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_priority" />
         </RelativeLayout>
     </ScrollView>
 
