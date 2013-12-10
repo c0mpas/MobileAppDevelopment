@@ -38,7 +38,6 @@ public class TaskActivity extends Activity {
 			dbHelper.getWritableDatabase();
 			todoDAO = dbHelper.createTodoDAO();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			Log.e("Could not get dao","Dao nicht",e);
 		}
 		initViews();
