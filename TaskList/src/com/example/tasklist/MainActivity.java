@@ -58,7 +58,7 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, CategoryActivity.class));
 				break;
 			case R.id.action_add_task:
-				// #####
+				startActivity(new Intent(this, TaskActivity.class));
 				break;
 			default:
 				break;
