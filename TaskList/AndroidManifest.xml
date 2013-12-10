@@ -28,11 +28,11 @@
         </activity>
         <activity
             android:name="com.example.tasklist.CategoryActivity"
-            android:label="@string/title_activity_group" >
+            android:label="@string/title_activity_category" >
         </activity>
         <activity
             android:name="com.example.tasklist.TaskActivity"
-            android:label="@string/title_activity_group" >
+            android:label="@string/title_activity_task" >
         </activity>
         <activity
             android:name="com.example.tasklist.PriorityActivity"
