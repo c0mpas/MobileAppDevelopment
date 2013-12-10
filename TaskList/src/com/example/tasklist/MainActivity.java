@@ -1,6 +1,8 @@
 package com.example.tasklist;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +21,7 @@ public class MainActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		loadTasks();
-		//showList();
+		showList();
 	}
 
 	private void loadTasks() {
@@ -27,9 +29,18 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void showList() {
-		ListViewTaskAdapter adapter = new ListViewTaskAdapter(this, taskList);
-		setListAdapter(adapter);
-		getListView().setDividerHeight(DIVIDER);
+		ToDoDBHelper db = new ToDoDBHelper();
+	
+		ListViewTaskAdapter adapter;
+		try {
+			adapter = new ListViewTaskAdapter(this, db.getAll(this));
+			setListAdapter(adapter);
+			getListView().setDividerHeight(DIVIDER);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

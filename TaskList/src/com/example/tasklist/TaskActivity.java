@@ -36,7 +36,6 @@ public class TaskActivity extends Activity {
 		setListeners();
 
 		toDoDbHelper = new ToDoDBHelper();
-		toDoDbHelper.getHelper(this);
 		// Check if edit or create
 		if (savedInstanceState == null) {
 			// updateViews();

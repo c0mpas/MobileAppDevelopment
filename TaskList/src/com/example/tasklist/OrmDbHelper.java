@@ -34,7 +34,6 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(source, Priority.class);
 			TableUtils.createTable(source, Category.class);
 			TableUtils.createTable(source, ToDoTask.class);
-			TableUtils.createTable(source, TaskBuffer.class);
 		} catch (SQLException ex) {
 			Log.e(LOG, "error creating tables", ex);
 		}
