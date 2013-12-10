@@ -40,24 +40,23 @@ public class ToDoDBHelper {
 		return list;
 	}
 
-	public void insert(Context context, ToDoTask task)
-			throws SQLException {
+	public void insert(Context context, ToDoTask task) throws SQLException {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
 		dao.create(task);
 	}
 	
-	public void update(Context context, ToDoTask task)
-			throws SQLException {
+	public void update(Context context, ToDoTask task) throws SQLException {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
 		dao.update(task);
 	}
 
+	
 	public void delete(Context context, ToDoTask task) throws SQLException {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
 		dao.delete(task);
 	}
 
-	public List<ToDoTask> where(Context context, String column, Object value)
+	public List<ToDoTask> get(Context context, String column, Object value)
 			throws SQLException {
 		Dao<ToDoTask, Integer> dao = getHelper(context).createTodoDAO();
 		List<ToDoTask> tasks = dao.queryBuilder().where()

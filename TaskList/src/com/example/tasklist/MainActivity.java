@@ -55,7 +55,7 @@ public class MainActivity extends ListActivity {
 	//Ruft neue Activity zum bearbeiten auf
 	private void editTask(int taskPosition) {
 		Intent intent = new Intent(this, TaskActivity.class);
-		intent.putExtra(KEY_TASK, taskList.get(taskPosition));
+		intent.putExtra(KEY_TASK, taskList.get(taskPosition).getID());
 		startActivity(intent);
 	}
 
