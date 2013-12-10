@@ -1,10 +1,9 @@
 package com.example.tasklist;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 
 public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	private final Activity context;
-	private final ArrayList<ToDoTask> tasks;
+	private final List<ToDoTask> tasks;
 	
 	static class ViewHolder {
 		public TextView title;
@@ -26,7 +25,7 @@ public class ListViewTaskAdapter extends ArrayAdapter<ToDoTask> {
 	/**
 	 * Constructor
 	 */
-	public ListViewTaskAdapter(Activity context,  ArrayList<ToDoTask> tasks) {
+	public ListViewTaskAdapter(Activity context,  List<ToDoTask> tasks) {
 		super(context, R.layout.listview_element_task, tasks);
 		this.context = context;
 		this.tasks = tasks;
