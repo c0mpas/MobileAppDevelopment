@@ -84,7 +84,7 @@ public class Task implements Comparable<Task>, Serializable{
 	/**
 	 * @return the kategorie
 	 */
-	public Category getKategorie() {
+	public Category getCategory() {
 		return kategorie;
 	}
 
