@@ -31,5 +31,10 @@
     <string name="noCategory">Keine Kategorie vorhanden!</string>
     <string name="detail_category">Kategorie</string>
     <string name="message_delete_priority">Priorität kann nicht gelöscht werden, da sie in Tasks verwendet wird. Entfernen Sie sie aus allen Tasks, dann können Sie die Priorität löschen.</string>
+    <string name="titel">Titel</string>
+    <string name="priority">Priorität</string>
+    <string name="description">Beschreibung</string>
+    <string name="expiredate">Ablaufdatum</string>
+    <string name="categories">Kategorien</string>
 
 </resources>

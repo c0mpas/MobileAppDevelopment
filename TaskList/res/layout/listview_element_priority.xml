@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:paddingTop="@dimen/list_element_padding"
+        android:paddingLeft="@dimen/margin_small"
         android:text="@string/name"
         android:textStyle="bold" />
 
@@ -23,6 +24,7 @@
         android:layout_toRightOf="@+id/listelement_name"
         android:gravity="right"
         android:paddingTop="@dimen/list_element_padding"
+        android:paddingRight="@dimen/margin_small"
         android:text="@string/value"
         android:textStyle="bold" />
 </RelativeLayout>

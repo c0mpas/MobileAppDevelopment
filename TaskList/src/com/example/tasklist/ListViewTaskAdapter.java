@@ -69,6 +69,9 @@ public class ListViewTaskAdapter extends ArrayAdapter<Task> {
 		holder.priority.setText(tasks.get(position).getPriority().getName());
 		holder.categories.setText(tasks.get(position).getCategory().getName());
 		
+		if (tasks.get(position).getPriority().getName() == null) holder.priority.setText("priority");
+		if (tasks.get(position).getCategory().getName() == null) holder.categories.setText("categories");
+		
 		return rowView;
 	}
 }

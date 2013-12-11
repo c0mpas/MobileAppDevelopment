@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Titel"
+        android:text="@string/titel"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_toRightOf="@+id/listelement_title"
         android:gravity="right"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Priorität" />
+        android:text="@string/priority" />
 
     <TextView
         android:id="@+id/listelement_description"
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/listelement_title"
         android:gravity="bottom"
-        android:paddingBottom="@dimen/list_element_padding"
-        android:text="Beschreibung"
+        android:paddingTop="@dimen/list_element_padding"
+        android:text="@string/description"
         android:textColor="@color/listElementText" />
 
     <TextView
@@ -40,18 +40,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/listelement_description"
         android:gravity="bottom"
-        android:paddingBottom="@dimen/list_element_padding"
-        android:text="Ablaufdatum"
+        android:paddingTop="@dimen/list_element_padding"
+        android:text="@string/expiredate"
         android:textColor="@color/listElementText" />
 
     <TextView
         android:id="@+id/listelement_categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listelement_date"
-        android:gravity="bottom"
-        android:paddingBottom="@dimen/list_element_padding"
-        android:text="Kategorien"
+        android:layout_alignBaseline="@+id/listelement_date"
+        android:layout_alignBottom="@+id/listelement_date"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/listelement_date"
+        android:gravity="right"
+        android:paddingTop="@dimen/list_element_padding"
+        android:text="@string/categories"
         android:textColor="@color/listElementText" />
-    
+
 </RelativeLayout>

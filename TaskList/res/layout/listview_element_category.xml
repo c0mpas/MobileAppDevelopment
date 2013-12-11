@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:gravity="left"
         android:paddingTop="@dimen/list_element_padding"
-        android:text="Kategorie_Name"
+        android:paddingLeft="@dimen/margin_small"
+        android:text="@string/name"
         android:textStyle="bold" />
 </RelativeLayout>
