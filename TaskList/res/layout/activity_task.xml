@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/spinner_priority"
-                android:text="@string/detail_priority" />
+                android:text="@string/detail_category" />
 
             <Spinner
                 android:id="@+id/spinner_category"

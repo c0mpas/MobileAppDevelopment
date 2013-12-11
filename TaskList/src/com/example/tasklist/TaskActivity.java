@@ -2,7 +2,9 @@ package com.example.tasklist;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import android.app.Activity;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,15 +41,18 @@ public class TaskActivity extends Activity {
 		initViews();
 		setListeners();
 
+
+
 		dbHelper = new DBHelper();
 
+		loadPrioList();
+		loadCatList();
+		
 		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK, -1);
 
 		if (taskID != -1)
 			updateViews();
 
-		loadPrioList();
-		loadCatList();
 
 	}
 
@@ -60,24 +65,24 @@ public class TaskActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		if(prioList.size()  == 0){
+		if (prioList.size() == 0) {
 			Toast.makeText(this, R.string.noPrio, Toast.LENGTH_SHORT).show();
 			finish();
-		}else{
-			
+		} else {
+
 			String[] array = new String[prioList.size()];
-			
-			for(int i = 0; i < prioList.size(); i++ ){
+
+			for (int i = 0; i < prioList.size(); i++) {
 				array[i] = prioList.get(i).getName();
 			}
-			
-			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,array);
+
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+					this, android.R.layout.simple_spinner_dropdown_item, array);
 
 			prioSpinner.setAdapter(spinnerArrayAdapter);
-			
-			
+
 		}
-		
+
 	}
 
 	private void loadCatList() {
@@ -88,23 +93,24 @@ public class TaskActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(categoryList.size()  == 0){
-			Toast.makeText(this, R.string.noCategory, Toast.LENGTH_SHORT).show();
+
+		if (categoryList.size() == 0) {
+			Toast.makeText(this, R.string.noCategory, Toast.LENGTH_SHORT)
+					.show();
 			finish();
-		}else{
-			
+		} else {
+
 			String[] array = new String[categoryList.size()];
-			
-			for(int i = 0; i < categoryList.size(); i++ ){
+
+			for (int i = 0; i < categoryList.size(); i++) {
 				array[i] = categoryList.get(i).getName();
 			}
-			
-			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,array);
+
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+					this, android.R.layout.simple_spinner_dropdown_item, array);
 
 			categorySpinner.setAdapter(spinnerArrayAdapter);
-			
-			
+
 		}
 
 	}
@@ -195,8 +201,9 @@ public class TaskActivity extends Activity {
 			return;
 		}
 
-		Category kategorie = new Category("TestCat");
-		Priority prio = new Priority("Testprioname", 5);
+		Category kategorie = categoryList.get(categorySpinner
+				.getSelectedItemPosition());
+		Priority prio = prioList.get(prioSpinner.getSelectedItemPosition());
 
 		Task task = new Task(taskTitle, taskDes, prio, kategorie,
 				datePicker.getYear(), datePicker.getMonth(),
@@ -246,6 +253,30 @@ public class TaskActivity extends Activity {
 		}
 
 		task = list.get(0);
+
+		int prioPos = 0;
+
+		for (int i = 0; i < prioList.size(); i++) {
+
+			if (prioList.get(i).getId() == task.getPriority().getId()) {
+				prioPos = i;
+				break;
+			}
+
+		}
+		prioSpinner.setSelection(prioPos);
+
+		int catPos = 0;
+
+		for (int i = 0; i < prioList.size(); i++) {
+
+			if (categoryList.get(i).getId() == task.getKategorie().getId()) {
+				catPos = i;
+				break;
+			}
+
+		}
+		categorySpinner.setSelection(catPos);
 
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
