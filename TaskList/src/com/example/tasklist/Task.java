@@ -18,9 +18,9 @@ public class Task implements Comparable<Task>, Serializable{
 	private String title;
 	@DatabaseField
 	private String description;
-	@DatabaseField(foreign = true)
+	@DatabaseField(foreign = true, foreignAutoRefresh=true)
 	private Priority priority;
-	@DatabaseField(foreign = true)
+	@DatabaseField(foreign = true, foreignAutoRefresh=true)
 	private Category kategorie;
 	@DatabaseField(generatedId = true)
 	private int id;
