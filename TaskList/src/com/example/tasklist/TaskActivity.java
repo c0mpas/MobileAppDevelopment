@@ -172,11 +172,6 @@ public class TaskActivity extends Activity {
 		});
 	}
 
-	/**
-	 * 
-	 * @throws InvalidPrioException
-	 *             wenn Prio nicht zwischen 1 und 3
-	 */
 	private void save() {
 
 		String taskTitle;
