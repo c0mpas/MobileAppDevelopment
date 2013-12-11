@@ -27,5 +27,6 @@
     <string name="delete">Löschen</string>
     <string name="name">Name</string>
     <string name="value">Wert</string>
+    <string name="message_delete_priority">Priorität kann nicht gelöscht werden, da sie in Tasks verwendet wird. Entfernen Sie sie aus allen Tasks, dann können Sie die Priorität löschen.</string>
 
 </resources>

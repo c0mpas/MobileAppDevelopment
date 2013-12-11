@@ -1,6 +1,7 @@
 package com.example.tasklist;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class PriorityActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				save();
+				finish();
 			}
 		});
 
@@ -60,11 +62,13 @@ public class PriorityActivity extends Activity {
 		delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// #####
+				delete();
+				finish();
 			}
 		});
 		
 	}
+	
 	private void save() {
 
 		String priorityName;
@@ -104,10 +108,36 @@ public class PriorityActivity extends Activity {
 				Log.e("SQL-Error", "Konnte Priorität nicht speichern", e);
 			}
 		}
-
-		finish();
 	}
 
+	private void delete() {
+		List<Task> taskList = null;
+		try {
+			taskList = db.getAllTasks(this);
+		} catch (SQLException e) {
+			Log.e("SQL-Error", "Unable to load task list", e);
+		}
+		
+		if (exists(taskList, priority)) {
+			Toast.makeText(this, R.string.message_delete_priority, Toast.LENGTH_LONG).show();
+		} else {
+			try {
+				db.delete(this, priority);
+			} catch (SQLException e) {
+				Log.e("SQL-Error", "Unable to delete priority", e);
+			}
+		}
+	}
+	
+	private Boolean exists(List<Task> taskList, Priority priority) {
+		if (taskList==null || priority==null) return false;
+		int priorityID = priority.getId();
+		for (Task task : taskList) {
+			if (task.getPriority().getId()==priorityID) return true;
+		}
+		return false;
+	}
+	
 	private void initFields() {
 		int priorityID = getIntent().getExtras().getInt(MainActivity.KEY_PRIORITY, -1);
 		if (priorityID < 0) {
