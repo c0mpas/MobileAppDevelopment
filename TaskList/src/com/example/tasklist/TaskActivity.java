@@ -270,7 +270,7 @@ public class TaskActivity extends Activity {
 
 		for (int i = 0; i < categoryList.size(); i++) {
 
-			if (categoryList.get(i).getId() == task.getKategorie().getId()) {
+			if (categoryList.get(i).getId() == task.getCategory().getId()) {
 				catPos = i;
 				break;
 			}
