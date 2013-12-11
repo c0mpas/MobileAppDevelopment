@@ -1,6 +1,7 @@
 package com.example.tasklist;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CategoryActivity extends Activity {
 
@@ -26,6 +28,7 @@ public class CategoryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_category);
+		db = new DBHelper();
 
 		referenceViews();
 		setListeners();
@@ -49,7 +52,6 @@ public class CategoryActivity extends Activity {
 						category = new Category(name.getText().toString());
 						db.insert(getApplicationContext(), category);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} else {
@@ -58,7 +60,6 @@ public class CategoryActivity extends Activity {
 						category.setName(name.getText().toString());
 						db.update(getApplicationContext(), category);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -78,30 +79,47 @@ public class CategoryActivity extends Activity {
 		delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DBHelper db = new DBHelper();
-				try {
-					db.delete(getApplicationContext(), category);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				delete();
 				finish();
 			}
 		});
 
 	}
 
+	private void delete() {
+		List<Task> taskList = null;
+		try {
+			taskList = db.getAllTasks(this);
+		} catch (SQLException e) {
+			Log.e("SQL-Error", "Unable to load task list", e);
+		}
+		
+		if (exists(taskList, category)) {
+			Toast.makeText(this, R.string.message_delete_category, Toast.LENGTH_LONG).show();
+		} else {
+			try {
+				db.delete(getApplicationContext(), category);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
+	private Boolean exists(List<Task> taskList, Category category) {
+		if (taskList==null || category==null) return false;
+		int categoryID = category.getId();
+		for (Task task : taskList) {
+			if (task.getCategory().getId()==categoryID) return true;
+		}
+		return false;
+	}
+	
 	private void tryLoadingEdit() {
-		categoryID = getIntent().getExtras().getInt(MainActivity.KEY_CATEGORY,
-				-1);
+		categoryID = getIntent().getExtras().getInt(MainActivity.KEY_CATEGORY, -1);
 		if (categoryID != -1) {
-
-			DBHelper db = new DBHelper();
 			try {
 				category = db.getCategoryList(this, "id", categoryID).get(0);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			newItem = false;
