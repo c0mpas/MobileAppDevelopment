@@ -268,7 +268,7 @@ public class TaskActivity extends Activity {
 
 		int catPos = 0;
 
-		for (int i = 0; i < prioList.size(); i++) {
+		for (int i = 0; i < categoryList.size(); i++) {
 
 			if (categoryList.get(i).getId() == task.getKategorie().getId()) {
 				catPos = i;
