@@ -27,5 +27,8 @@
     <string name="delete">Löschen</string>
     <string name="name">Name</string>
     <string name="value">Wert</string>
+    <string name="noPrio">Keine Priorität angelegt!</string>
+    <string name="noCategory">Keine Kategorie vorhanden!</string>
+    <string name="detail_category">Kategorie</string>
 
 </resources>
