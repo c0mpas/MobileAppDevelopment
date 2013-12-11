@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.app.Activity;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,12 +20,16 @@ public class TaskActivity extends Activity {
 
 	private EditText title;
 	private EditText description;
-	private Spinner priority;
+	private Spinner prioSpinner;
+	private Spinner categorySpinner;
 	private Button save;
 	private Button cancel;
 	private Button delete;
 	private DatePicker datePicker;
-	private DBHelper toDoDbHelper;
+	private DBHelper dbHelper;
+
+	private List<Priority> prioList;
+	private List<Category> categoryList;
 	private int taskID;
 	private Task task;
 
@@ -35,12 +41,77 @@ public class TaskActivity extends Activity {
 		initViews();
 		setListeners();
 
-		toDoDbHelper = new DBHelper();
 
+
+		dbHelper = new DBHelper();
+
+		loadPrioList();
+		loadCatList();
+		
 		taskID = getIntent().getExtras().getInt(MainActivity.KEY_TASK, -1);
 
 		if (taskID != -1)
 			updateViews();
+
+
+	}
+
+	private void loadPrioList() {
+
+		try {
+			prioList = dbHelper.getAllPriorities(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (prioList.size() == 0) {
+			Toast.makeText(this, R.string.noPrio, Toast.LENGTH_SHORT).show();
+			finish();
+		} else {
+
+			String[] array = new String[prioList.size()];
+
+			for (int i = 0; i < prioList.size(); i++) {
+				array[i] = prioList.get(i).getName();
+			}
+
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+					this, android.R.layout.simple_spinner_dropdown_item, array);
+
+			prioSpinner.setAdapter(spinnerArrayAdapter);
+
+		}
+
+	}
+
+	private void loadCatList() {
+
+		try {
+			categoryList = dbHelper.getAllCategories(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (categoryList.size() == 0) {
+			Toast.makeText(this, R.string.noCategory, Toast.LENGTH_SHORT)
+					.show();
+			finish();
+		} else {
+
+			String[] array = new String[categoryList.size()];
+
+			for (int i = 0; i < categoryList.size(); i++) {
+				array[i] = categoryList.get(i).getName();
+			}
+
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+					this, android.R.layout.simple_spinner_dropdown_item, array);
+
+			categorySpinner.setAdapter(spinnerArrayAdapter);
+
+		}
 
 	}
 
@@ -52,9 +123,9 @@ public class TaskActivity extends Activity {
 		task.setAblaufJahr(datePicker.getYear());
 		task.setAblaufMonat(datePicker.getMonth());
 		task.setAblaufTag(datePicker.getDayOfMonth());
-		
-		//Setze noch Prio und Kategorie
-		
+
+		// Setze noch Prio und Kategorie
+
 		try {
 			db.update(this, task);
 		} catch (SQLException e) {
@@ -66,12 +137,12 @@ public class TaskActivity extends Activity {
 
 	// Listener werden definiert
 	private void setListeners() {
-		
+
 		delete.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
-			public void onClick(View v) {	
-				
+			public void onClick(View v) {
+
 				DBHelper db = new DBHelper();
 				try {
 					db.delete(getApplicationContext(), task);
@@ -82,8 +153,7 @@ public class TaskActivity extends Activity {
 				finish();
 			}
 		});
-		
-		
+
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -131,8 +201,9 @@ public class TaskActivity extends Activity {
 			return;
 		}
 
-		Category kategorie = new Category("TestCat");
-		Priority prio = new Priority("Testprioname", 5);
+		Category kategorie = categoryList.get(categorySpinner
+				.getSelectedItemPosition());
+		Priority prio = prioList.get(prioSpinner.getSelectedItemPosition());
 
 		Task task = new Task(taskTitle, taskDes, prio, kategorie,
 				datePicker.getYear(), datePicker.getMonth(),
@@ -140,7 +211,7 @@ public class TaskActivity extends Activity {
 
 		try {
 
-			toDoDbHelper.insert(this, task);
+			dbHelper.insert(this, task);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			Log.e("SQL-Error", "Konnte Task nicht ablegen", e);
@@ -162,9 +233,10 @@ public class TaskActivity extends Activity {
 		cancel = (Button) findViewById(R.id.detail_bt_cancel);
 		title = (EditText) findViewById(R.id.edit_title);
 		description = (EditText) findViewById(R.id.edit_description);
-		priority = (Spinner) findViewById(R.id.spinner_priority);
+		prioSpinner = (Spinner) findViewById(R.id.spinner_priority);
+		categorySpinner = (Spinner) findViewById(R.id.spinner_category);
 		datePicker = (DatePicker) findViewById(R.id.datePicker1);
-		delete = (Button)findViewById(R.id.detail_bt_delete);
+		delete = (Button) findViewById(R.id.detail_bt_delete);
 
 	}
 
@@ -179,7 +251,32 @@ public class TaskActivity extends Activity {
 			// TODO Auto-generated catch block
 			Log.e("Could not get Single Task", "Bam", e);
 		}
+
 		task = list.get(0);
+
+		int prioPos = 0;
+
+		for (int i = 0; i < prioList.size(); i++) {
+
+			if (prioList.get(i).getId() == task.getPriority().getId()) {
+				prioPos = i;
+				break;
+			}
+
+		}
+		prioSpinner.setSelection(prioPos);
+
+		int catPos = 0;
+
+		for (int i = 0; i < categoryList.size(); i++) {
+
+			if (categoryList.get(i).getId() == task.getKategorie().getId()) {
+				catPos = i;
+				break;
+			}
+
+		}
+		categorySpinner.setSelection(catPos);
 
 		title.setText(task.getTitle());
 		description.setText(task.getDescription());
