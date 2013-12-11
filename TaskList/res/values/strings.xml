@@ -30,5 +30,6 @@
     <string name="noPrio">Keine Priorität angelegt!</string>
     <string name="noCategory">Keine Kategorie vorhanden!</string>
     <string name="detail_category">Kategorie</string>
+    <string name="message_delete_priority">Priorität kann nicht gelöscht werden, da sie in Tasks verwendet wird. Entfernen Sie sie aus allen Tasks, dann können Sie die Priorität löschen.</string>
 
 </resources>
