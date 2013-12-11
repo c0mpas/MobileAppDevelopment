@@ -118,6 +118,8 @@ public class TaskActivity extends Activity {
 	private void updateTask() {
 
 		DBHelper db = new DBHelper();
+		task.setPriority(prioList.get(prioSpinner.getSelectedItemPosition()));
+		task.setKategorie(categoryList.get(categorySpinner.getSelectedItemPosition()));
 		task.setTitle(title.getText().toString());
 		task.setDescription(description.getText().toString());
 		task.setAblaufJahr(datePicker.getYear());
@@ -196,11 +198,11 @@ public class TaskActivity extends Activity {
 			return;
 		}
 
-		Category kategorie = categoryList.get(categorySpinner
+		Category category = categoryList.get(categorySpinner
 				.getSelectedItemPosition());
 		Priority prio = prioList.get(prioSpinner.getSelectedItemPosition());
 
-		Task task = new Task(taskTitle, taskDes, prio, kategorie,
+		Task task = new Task(taskTitle, taskDes, prio, category,
 				datePicker.getYear(), datePicker.getMonth(),
 				datePicker.getDayOfMonth());
 
