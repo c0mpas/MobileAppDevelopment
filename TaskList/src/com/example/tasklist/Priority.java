@@ -8,11 +8,11 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName="priority")
 public class Priority implements Serializable, Comparable<Priority>  {
 
-	@DatabaseField
+	@DatabaseField(columnName="name")
 	private String name;
-	@DatabaseField(generatedId=true)
+	@DatabaseField(generatedId=true, columnName="_id")
 	private int id;
-	@DatabaseField
+	@DatabaseField(columnName="value")
 	private int value;
 	
 	public Priority(){};

@@ -7,28 +7,37 @@ import android.os.Parcel;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "task")
+@DatabaseTable(tableName = Task.TABLE_NAME)
 public class Task implements Comparable<Task>, Serializable{
 
+	static final String TABLE_NAME = "task";
+	public static final String COLUMN_DAY = "day";
+	public static final String COLUMN_MONTH = "month";
+	public static final String COLUMN_YEAR = "year";
+	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_CATEGORY_ID = "category_id";
+	public static final String COLUMN_PRIORITY = "priority_id";
+	public static final String COLUMN_DESCRIPTION = "description";
+	public static final String COLUMN_TITLE = "title";
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@DatabaseField
+	@DatabaseField(columnName=COLUMN_TITLE)
 	private String title;
-	@DatabaseField
+	@DatabaseField(columnName=COLUMN_DESCRIPTION)
 	private String description;
-	@DatabaseField(foreign = true, foreignAutoRefresh=true)
+	@DatabaseField(foreign = true, foreignAutoRefresh=true, columnName=COLUMN_PRIORITY)
 	private Priority priority;
-	@DatabaseField(foreign = true, foreignAutoRefresh=true)
+	@DatabaseField(foreign = true, foreignAutoRefresh=true, columnName=COLUMN_CATEGORY_ID)
 	private Category kategorie;
-	@DatabaseField(generatedId = true)
+	@DatabaseField(generatedId = true, columnName=COLUMN_ID)
 	private int id;
-	@DatabaseField
+	@DatabaseField(columnName=COLUMN_YEAR)
 	private int ablaufJahr;
-	@DatabaseField
+	@DatabaseField(columnName=COLUMN_MONTH)
 	private int ablaufMonat;
-	@DatabaseField
+	@DatabaseField(columnName=COLUMN_DAY)
 	private int ablaufTag;
 
 	public Task() {

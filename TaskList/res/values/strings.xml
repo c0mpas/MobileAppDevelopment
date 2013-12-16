@@ -37,5 +37,6 @@
     <string name="description">Beschreibung</string>
     <string name="expiredate">Ablaufdatum</string>
     <string name="categories">Kategorien</string>
+    <string name="unknown_columns_in_projection">Unknown columns in projection</string>
 
 </resources>
