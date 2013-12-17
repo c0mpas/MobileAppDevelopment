@@ -3,15 +3,13 @@ package com.example.tasklist;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-
 import android.content.ContentProvider;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -23,8 +21,10 @@ public class ToDoContentProvider extends ContentProvider {
 	// used for the UriMacher
 	private static final int TASK = 10;
 	private static final int TASK_ID = 20;
+	private static final int PRIORITY = 30;
+	private static final int PRIORITY_ID = 40;
 
-	private static final String AUTHORITY = "de.vogella.android.todos.contentprovider";
+	private static final String AUTHORITY = "de.htwds.mada.todo";
 
 	private static final String BASE_PATH = "todos";
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
@@ -40,6 +40,8 @@ public class ToDoContentProvider extends ContentProvider {
 	static {
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH, TASK);
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", TASK_ID);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH, PRIORITY);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", PRIORITY_ID);
 	}
 
 	@Override
@@ -52,31 +54,42 @@ public class ToDoContentProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 
-		
 		Cursor cursor = null;
-		SQLiteDatabase db = database.getWritableDatabase();
-		
-		// Uisng SQLiteQueryBuilder instead of query() method
-		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+		SQLiteDatabase db = database.getReadableDatabase();
 
 		// check if the caller has requested a column which does not exists
-		checkColumns(projection);
+		checkColumns(projection, uri);
 
-		// Set the table
+		String selCommand;
 
 		int uriType = sURIMatcher.match(uri);
 		switch (uriType) {
 		case TASK:
-			cursor = db.query(Task.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+			cursor = db.query(Task.TABLE_NAME, projection, selection,
+					selectionArgs, null, null, sortOrder);
 			break;
 		case TASK_ID:
-			//Task für id
+			selCommand = Task.COLUMN_ID + "=" + ContentUris.parseId(uri);
+			if (!selection.isEmpty())
+				selCommand += " AND " + selection;
+			cursor = db.query(Task.TABLE_NAME, projection, selCommand,
+					selectionArgs, null, null, sortOrder);
+			break;
+		case PRIORITY:
+			cursor = db.query(Priority.TABLE_NAME, projection, selection,
+					selectionArgs, null, null, sortOrder);
+			break;
+		case PRIORITY_ID:
+			selCommand = Task.COLUMN_ID + "=" + ContentUris.parseId(uri);
+			if (!selection.isEmpty())
+				selCommand += " AND " + selection;
+			cursor = db.query(Priority.TABLE_NAME, projection, selCommand,
+					selectionArgs, null, null, sortOrder);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
 
-	
 		// make sure that potential listeners are getting notified
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
@@ -92,11 +105,13 @@ public class ToDoContentProvider extends ContentProvider {
 	public Uri insert(Uri uri, ContentValues values) {
 		int uriType = sURIMatcher.match(uri);
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
-		int rowsDeleted = 0;
-		long id = 0;
+		long id = -1;
 		switch (uriType) {
 		case TASK:
-			id = sqlDB.insert(TodoTable.TABLE_TODO, null, values);
+			id = sqlDB.insert(Task.TABLE_NAME, null, values);
+			break;
+		case PRIORITY:
+			id = sqlDB.insert(Priority.TABLE_NAME, null, values);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -110,19 +125,34 @@ public class ToDoContentProvider extends ContentProvider {
 		int uriType = sURIMatcher.match(uri);
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
 		int rowsDeleted = 0;
+		String id;
 		switch (uriType) {
 		case TASK:
-			rowsDeleted = sqlDB.delete(TodoTable.TABLE_TODO, selection,
+			rowsDeleted = sqlDB.delete(Task.TABLE_NAME, selection,
 					selectionArgs);
 			break;
 		case TASK_ID:
-			String id = uri.getLastPathSegment();
+			id = uri.getLastPathSegment();
 			if (TextUtils.isEmpty(selection)) {
-				rowsDeleted = sqlDB.delete(TodoTable.TABLE_TODO,
-						TodoTable.COLUMN_ID + "=" + id, null);
+				rowsDeleted = sqlDB.delete(Task.TABLE_NAME, Task.TABLE_NAME
+						+ "=" + id, null);
 			} else {
-				rowsDeleted = sqlDB.delete(TodoTable.TABLE_TODO,
-						TodoTable.COLUMN_ID + "=" + id + " and " + selection,
+				rowsDeleted = sqlDB.delete(Task.TABLE_NAME, Task.TABLE_NAME
+						+ "=" + id + " and " + selection, selectionArgs);
+			}
+			break;
+		case PRIORITY:
+			rowsDeleted = sqlDB.delete(Priority.TABLE_NAME, selection,
+					selectionArgs);
+			break;
+		case PRIORITY_ID:
+			id = uri.getLastPathSegment();
+			if (TextUtils.isEmpty(selection)) {
+				rowsDeleted = sqlDB.delete(Priority.TABLE_NAME,
+						Priority.TABLE_NAME + "=" + id, null);
+			} else {
+				rowsDeleted = sqlDB.delete(Priority.TABLE_NAME,
+						Priority.TABLE_NAME + "=" + id + " and " + selection,
 						selectionArgs);
 			}
 			break;
@@ -140,19 +170,35 @@ public class ToDoContentProvider extends ContentProvider {
 		int uriType = sURIMatcher.match(uri);
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
 		int rowsUpdated = 0;
+		String id;
 		switch (uriType) {
 		case TASK:
-			rowsUpdated = sqlDB.update(TodoTable.TABLE_TODO, values, selection,
+			rowsUpdated = sqlDB.update(Task.TABLE_NAME, values, selection,
 					selectionArgs);
 			break;
 		case TASK_ID:
-			String id = uri.getLastPathSegment();
+			id = uri.getLastPathSegment();
 			if (TextUtils.isEmpty(selection)) {
-				rowsUpdated = sqlDB.update(TodoTable.TABLE_TODO, values,
-						TodoTable.COLUMN_ID + "=" + id, null);
+				rowsUpdated = sqlDB.update(Task.TABLE_NAME, values,
+						Task.TABLE_NAME + "=" + id, null);
 			} else {
-				rowsUpdated = sqlDB.update(TodoTable.TABLE_TODO, values,
-						TodoTable.COLUMN_ID + "=" + id + " and " + selection,
+				rowsUpdated = sqlDB.update(Task.TABLE_NAME, values,
+						Task.TABLE_NAME + "=" + id + " and " + selection,
+						selectionArgs);
+			}
+			break;
+		case PRIORITY:
+			rowsUpdated = sqlDB.update(Priority.TABLE_NAME, values, selection,
+					selectionArgs);
+			break;
+		case PRIORITY_ID:
+			id = uri.getLastPathSegment();
+			if (TextUtils.isEmpty(selection)) {
+				rowsUpdated = sqlDB.update(Priority.TABLE_NAME, values,
+						Priority.TABLE_NAME + "=" + id, null);
+			} else {
+				rowsUpdated = sqlDB.update(Task.TABLE_NAME, values,
+						Priority.TABLE_NAME + "=" + id + " and " + selection,
 						selectionArgs);
 			}
 			break;
@@ -163,10 +209,38 @@ public class ToDoContentProvider extends ContentProvider {
 		return rowsUpdated;
 	}
 
-	private void checkColumns(String[] projection) {
-		String[] available = { Task.COLUMN_DAY, Task.COLUMN_DESCRIPTION,
-				Task.COLUMN_ID, Task.COLUMN_MONTH, Task.COLUMN_PRIORITY,
-				Task.COLUMN_TITLE, Task.COLUMN_YEAR };
+	private void checkColumns(String[] projection, Uri uri) {
+
+		int uriType = sURIMatcher.match(uri);
+		String[] available = {"Shit happens"};;
+
+		switch (uriType) {
+		case TASK:
+			String[] temp1 = { Task.COLUMN_DAY, Task.COLUMN_DESCRIPTION,
+					Task.COLUMN_ID, Task.COLUMN_MONTH, Task.COLUMN_PRIORITY,
+					Task.COLUMN_TITLE, Task.COLUMN_YEAR };
+			available = temp1;
+			break;
+		case TASK_ID:
+			String[] temp2 = { Task.COLUMN_DAY, Task.COLUMN_DESCRIPTION,
+					Task.COLUMN_ID, Task.COLUMN_MONTH, Task.COLUMN_PRIORITY,
+					Task.COLUMN_TITLE, Task.COLUMN_YEAR };
+			available = temp2;
+			break;
+		case PRIORITY:
+			String[] temp3 = { Priority.COLUMN_NAME, Priority.COLUMN_ID,
+					Priority.COLUMN_VALUE };
+			available = temp3;
+			break;
+		case PRIORITY_ID:
+			String[] temp4 = { Priority.COLUMN_NAME, Priority.COLUMN_ID,
+					Priority.COLUMN_VALUE };
+			available = temp4;
+			break;
+		default:
+			break;
+		}
+
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(
 					Arrays.asList(projection));
@@ -174,9 +248,8 @@ public class ToDoContentProvider extends ContentProvider {
 					Arrays.asList(available));
 			// check if all columns which are requested are available
 			if (!availableColumns.containsAll(requestedColumns)) {
-				throw new IllegalArgumentException(
-						getContext().getString(
-								R.string.unknown_columns_in_projection));
+				throw new IllegalArgumentException(getContext().getString(
+						R.string.unknown_columns_in_projection));
 			}
 		}
 	}

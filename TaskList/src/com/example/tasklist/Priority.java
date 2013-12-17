@@ -5,17 +5,23 @@ import java.io.Serializable;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName="priority")
-public class Priority implements Serializable, Comparable<Priority>  {
+@DatabaseTable(tableName = Priority.TABLE_NAME)
+public class Priority implements Serializable, Comparable<Priority> {
 
-	@DatabaseField(columnName="name")
+	public static final String COLUMN_VALUE = "value";
+	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_NAME = "name";
+	public static final String TABLE_NAME = "priority";
+
+	@DatabaseField(columnName = COLUMN_NAME)
 	private String name;
-	@DatabaseField(generatedId=true, columnName="_id")
+	@DatabaseField(generatedId = true, columnName = COLUMN_ID)
 	private int id;
-	@DatabaseField(columnName="value")
+	@DatabaseField(columnName = COLUMN_VALUE)
 	private int value;
-	
-	public Priority(){};
+
+	public Priority() {
+	};
 
 	public Priority(String name, int value) {
 		setName(name);
@@ -40,7 +46,7 @@ public class Priority implements Serializable, Comparable<Priority>  {
 
 	@Override
 	public int compareTo(Priority prio) {
-		
+
 		if (this.value == prio.getValue()) {
 			return 0;
 		} else if (this.value > prio.getValue()) {
@@ -57,6 +63,5 @@ public class Priority implements Serializable, Comparable<Priority>  {
 	public void setValue(int value) {
 		this.value = value;
 	}
-
 
 }
