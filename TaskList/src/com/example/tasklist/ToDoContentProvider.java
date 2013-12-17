@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.text.TextUtils;
 
 public class ToDoContentProvider extends ContentProvider {
@@ -30,10 +30,6 @@ public class ToDoContentProvider extends ContentProvider {
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
 			+ "/" + BASE_PATH);
 
-	public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-			+ "/todos";
-	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-			+ "/todo";
 
 	private static final UriMatcher sURIMatcher = new UriMatcher(
 			UriMatcher.NO_MATCH);
@@ -42,6 +38,19 @@ public class ToDoContentProvider extends ContentProvider {
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", TASK_ID);
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH, PRIORITY);
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", PRIORITY_ID);
+	}
+
+	/* Contract Klasse für die Todo Tabelle */
+	public static final class Todos implements BaseColumns {
+		// Erweiterung der Contract Klasse um MIME Type Konstanten "
+		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.de.htwds.mada.todo";
+		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.de.htwds.mada.todo";
+
+	}
+
+	public static final class Priorityies implements BaseColumns {
+		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.de.htwds.mada.priority";
+		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.de.htwds.mada.priority";
 	}
 
 	@Override
@@ -98,7 +107,22 @@ public class ToDoContentProvider extends ContentProvider {
 
 	@Override
 	public String getType(Uri uri) {
-		return null;
+		// URI Muster auswerten"
+		int uriCode = sURIMatcher.match(uri);
+		// entsprechend dem URI MIME type zurückgeben"
+		switch (uriCode) {
+		case TASK:
+			return Todos.CONTENT_TYPE;
+		case TASK_ID:
+			return Todos.CONTENT_ITEM_TYPE;
+		case PRIORITY:
+			return Priorityies.CONTENT_TYPE;
+		case PRIORITY_ID:
+			return Priorityies.CONTENT_ITEM_TYPE;
+		default:
+			return null;
+		}
+
 	}
 
 	@Override
@@ -212,7 +236,8 @@ public class ToDoContentProvider extends ContentProvider {
 	private void checkColumns(String[] projection, Uri uri) {
 
 		int uriType = sURIMatcher.match(uri);
-		String[] available = {"Shit happens"};;
+		String[] available = { "Shit happens" };
+		;
 
 		switch (uriType) {
 		case TASK:
