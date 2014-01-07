@@ -1,5 +1,5 @@
 
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.sql.SQLException;
 import java.util.List;

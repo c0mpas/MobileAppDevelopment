@@ -1,7 +1,9 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import com.example.tasklist.R;
 
 import android.app.Activity;
 import android.hardware.Camera.Size;
@@ -242,7 +244,7 @@ public class TaskActivity extends Activity {
 		List<Task> list = null;
 		DBHelper db = new DBHelper();
 		try {
-			list = db.getTaskList(this, "id", taskID);
+			list = db.getTaskList(this, Task.COLUMN_ID, taskID);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

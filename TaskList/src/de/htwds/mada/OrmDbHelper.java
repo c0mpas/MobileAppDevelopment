@@ -1,4 +1,4 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.sql.SQLException;
 
@@ -16,7 +16,7 @@ public class OrmDbHelper extends OrmLiteSqliteOpenHelper {
 
 	public static final String LOG = OrmDbHelper.class.getName();
 	public static final String DB_NAME = "todo.db";
-	public static final int DB_VERSION = 1;
+	public static final int DB_VERSION = 3;
 
 	private Dao<Category, Integer> categoryDao = null;
 	private Dao<Task, Integer> toDoDao = null;

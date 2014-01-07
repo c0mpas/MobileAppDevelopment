@@ -1,6 +1,8 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.util.List;
+
+import com.example.tasklist.R;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

@@ -1,7 +1,9 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+import com.example.tasklist.R;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -12,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class ToDoContentProvider extends ContentProvider {
 
@@ -26,18 +29,23 @@ public class ToDoContentProvider extends ContentProvider {
 
 	private static final String AUTHORITY = "de.htwds.mada.todo";
 
-	private static final String BASE_PATH = "todos";
-	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
-			+ "/" + BASE_PATH);
+	private static final String BASE_PATH_TODO = "todos";
+	private static final String BASE_PATH_PRIO = "priorities";
+
+	
+	public static final Uri CONTENT_URI_TODO = Uri.parse("content://" + AUTHORITY
+			+ "/" + BASE_PATH_TODO);
+	public static final Uri CONTENT_URI_PRIO = Uri.parse("content://" + AUTHORITY
+			+ "/" + BASE_PATH_PRIO);
 
 
-	private static final UriMatcher sURIMatcher = new UriMatcher(
-			UriMatcher.NO_MATCH);
+	private static UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+	
 	static {
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH, TASK);
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", TASK_ID);
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH, PRIORITY);
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", PRIORITY_ID);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH_PRIO + "/#", PRIORITY_ID);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH_PRIO, PRIORITY);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH_TODO + "/#", TASK_ID);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH_TODO, TASK);
 	}
 
 	/* Contract Klasse für die Todo Tabelle */
@@ -62,7 +70,7 @@ public class ToDoContentProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
-
+		
 		Cursor cursor = null;
 		SQLiteDatabase db = database.getReadableDatabase();
 
@@ -72,6 +80,9 @@ public class ToDoContentProvider extends ContentProvider {
 		String selCommand;
 
 		int uriType = sURIMatcher.match(uri);
+		
+		Log.d("TEST", "query():uriType:"+String.valueOf(uriType));
+		
 		switch (uriType) {
 		case TASK:
 			cursor = db.query(Task.TABLE_NAME, projection, selection,
@@ -79,7 +90,7 @@ public class ToDoContentProvider extends ContentProvider {
 			break;
 		case TASK_ID:
 			selCommand = Task.COLUMN_ID + "=" + ContentUris.parseId(uri);
-			if (!selection.isEmpty())
+			if (selection != null)
 				selCommand += " AND " + selection;
 			cursor = db.query(Task.TABLE_NAME, projection, selCommand,
 					selectionArgs, null, null, sortOrder);
@@ -89,11 +100,15 @@ public class ToDoContentProvider extends ContentProvider {
 					selectionArgs, null, null, sortOrder);
 			break;
 		case PRIORITY_ID:
+			
+			Log.d("TEST","URI-Id: "+ String.valueOf(ContentUris.parseId(uri)));
 			selCommand = Task.COLUMN_ID + "=" + ContentUris.parseId(uri);
-			if (!selection.isEmpty())
+			if (selection != null)
 				selCommand += " AND " + selection;
 			cursor = db.query(Priority.TABLE_NAME, projection, selCommand,
 					selectionArgs, null, null, sortOrder);
+			Log.d("TEST","CURSER-ID: "+ cursor.toString());
+
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -109,6 +124,9 @@ public class ToDoContentProvider extends ContentProvider {
 	public String getType(Uri uri) {
 		// URI Muster auswerten"
 		int uriCode = sURIMatcher.match(uri);
+		
+		Log.d("TEST", "getType():uriCode:"+String.valueOf(uriCode));
+		
 		// entsprechend dem URI MIME type zurückgeben"
 		switch (uriCode) {
 		case TASK:
@@ -129,19 +147,23 @@ public class ToDoContentProvider extends ContentProvider {
 	public Uri insert(Uri uri, ContentValues values) {
 		int uriType = sURIMatcher.match(uri);
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
+		String basePath = "failure";
 		long id = -1;
 		switch (uriType) {
 		case TASK:
 			id = sqlDB.insert(Task.TABLE_NAME, null, values);
+			basePath = BASE_PATH_TODO;
 			break;
 		case PRIORITY:
 			id = sqlDB.insert(Priority.TABLE_NAME, null, values);
+			basePath = BASE_PATH_PRIO;
+
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
 		getContext().getContentResolver().notifyChange(uri, null);
-		return Uri.parse(BASE_PATH + "/" + id);
+		return Uri.parse(basePath + "/" + id);
 	}
 
 	@Override
@@ -237,7 +259,9 @@ public class ToDoContentProvider extends ContentProvider {
 
 		int uriType = sURIMatcher.match(uri);
 		String[] available = { "Shit happens" };
-		;
+		
+		Log.d("TEST", "checkColumns():uri:"+uri.toString());
+		Log.d("TEST", "checkColumns():uriType:"+String.valueOf(uriType));
 
 		switch (uriType) {
 		case TASK:

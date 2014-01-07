@@ -1,4 +1,4 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.io.Serializable;
 
@@ -8,9 +8,11 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName="category")
 public class Category implements Serializable {
 
-	@DatabaseField
+	public static final String COLUMN_NAME = "name";
+	public static final String COLUMN_ID = "_id";
+	@DatabaseField(columnName=COLUMN_NAME)
 	private String name;
-	@DatabaseField(generatedId=true)
+	@DatabaseField(generatedId=true, columnName=COLUMN_ID)
 	private int id;
 	
 	public Category(){};

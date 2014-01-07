@@ -1,4 +1,4 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.io.Serializable;
 

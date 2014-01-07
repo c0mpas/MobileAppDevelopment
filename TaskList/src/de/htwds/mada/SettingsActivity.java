@@ -1,4 +1,6 @@
-package com.example.tasklist;
+package de.htwds.mada;
+
+import com.example.tasklist.R;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;

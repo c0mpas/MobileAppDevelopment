@@ -1,7 +1,9 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import com.example.tasklist.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -144,7 +146,7 @@ public class PriorityActivity extends Activity {
 			newItem = true;
 		} else {
 			try {
-				priority = db.getPriorityList(this, "id", priorityID).get(0);
+				priority = db.getPriorityList(this, Priority.COLUMN_ID, priorityID).get(0);
 			} catch (SQLException e) {
 				Log.e("PriorityActivity.initFields", e.toString());
 			}

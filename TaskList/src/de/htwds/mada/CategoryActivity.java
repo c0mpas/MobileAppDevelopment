@@ -1,7 +1,9 @@
-package com.example.tasklist;
+package de.htwds.mada;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import com.example.tasklist.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -118,7 +120,7 @@ public class CategoryActivity extends Activity {
 		categoryID = getIntent().getExtras().getInt(MainActivity.KEY_CATEGORY, -1);
 		if (categoryID != -1) {
 			try {
-				category = db.getCategoryList(this, "id", categoryID).get(0);
+				category = db.getCategoryList(this, Category.COLUMN_ID, categoryID).get(0);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
